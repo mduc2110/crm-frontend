@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+
+.input__control {
+   label {
+   }
+   input {
+      outline: none;
+      width: 100%;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid $main-color;
+      margin-top: 20px;
+      transition: all 0.1s ease-in;
+
+      &::-webkit-input-placeholder {
+         font-style: italic;
+         color: $gray-color;
+      }
+      &::-moz-placeholder {
+         font-style: italic;
+         color: $gray-color;
+      }
+
+      &:-ms-input-placeholder {
+         font-style: italic;
+         color: $gray-color;
+      }
+
+      &::-webkit-input-placeholder {
+         font-style: italic;
+         color: $gray-color;
+      }
+
+      &::placeholder {
+         font-style: italic;
+         color: $gray-color;
+      }
+      &:focus {
+         border: 1px solid #7079ae;
+         box-shadow: 1px 1px 4px 3px #adb4db;
+      }
+   }
+}

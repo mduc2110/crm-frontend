@@ -1,0 +1,18 @@
+.mainButton {
+  width: 100%;
+  background-color: #3e4a92;
+  outline: none;
+  border: #3e4a92;
+  padding: 15px;
+  color: #f5f6fb;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mainButton:hover {
+  background-color: #44529d;
+}
+/*# sourceMappingURL=button.module.css.map */

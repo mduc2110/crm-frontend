@@ -1,0 +1,32 @@
+#wheel-1 {
+   animation: 300s linear rotate infinite;
+   transform-origin: center;
+   transform-box: fill-box;
+}
+#wheel-2 {
+   animation: 300s linear rotateReverse infinite;
+   transform-origin: center;
+   transform-box: fill-box;
+}
+#wheel3 {
+   animation: 100s linear rotate infinite;
+   transform-origin: center;
+   transform-box: fill-box;
+}
+
+@keyframes rotate {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}
+@keyframes rotateReverse {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(-360deg);
+   }
+}

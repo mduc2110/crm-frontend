@@ -1,0 +1,18 @@
+@import "../../styles/variables";
+
+.mainButton {
+   width: 100%;
+   background-color: $main-color;
+   outline: none;
+   border: $main-color;
+   padding: 15px;
+   color: $light-color;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-top: 20px;
+   text-transform: uppercase;
+   font-weight: 500;
+   &:hover {
+      background-color: $main-color--hover;
+   }
+}

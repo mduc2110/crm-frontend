@@ -1,0 +1,42 @@
+.input__control input {
+  outline: none;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #3e4a92;
+  margin-top: 20px;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+}
+
+.input__control input::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.input__control input:-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.input__control input::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.input__control input::-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.input__control input::placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.input__control input:focus {
+  border: 1px solid #7079ae;
+  -webkit-box-shadow: 1px 1px 4px 3px #adb4db;
+          box-shadow: 1px 1px 4px 3px #adb4db;
+}
+/*# sourceMappingURL=input.module.css.map */
