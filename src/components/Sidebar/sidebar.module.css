@@ -1,0 +1,46 @@
+.sidebar {
+  background-color: #fff;
+  width: 30vh;
+  position: fixed;
+  left: 0;
+  height: 100vh;
+}
+
+.sidebar ul {
+  margin-top: 50px;
+}
+
+.sidebar ul li {
+  padding: 10px 20px;
+  margin: 5px 40px;
+  border-radius: 8px;
+}
+
+.sidebar ul li:hover {
+  background-color: #e5e9fb;
+  cursor: pointer;
+  color: #3e4a92;
+}
+
+.sidebar ul li:hover a {
+  color: #3e4a92;
+}
+
+.sidebar ul li svg {
+  vertical-align: middle;
+}
+
+.sidebar ul li a {
+  margin-left: 10px;
+}
+
+.sidebar .modal {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin: auto;
+  background-color: #fff;
+  -webkit-box-shadow: 2px 5px 23px #e4e4e4;
+          box-shadow: 2px 5px 23px #e4e4e4;
+}
+/*# sourceMappingURL=sidebar.module.css.map */

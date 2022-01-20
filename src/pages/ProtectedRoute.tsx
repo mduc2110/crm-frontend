@@ -8,7 +8,13 @@ export type ProtectedRouteProps = {
    component: any;
 } & RouteProps;
 
-const ProtectedRoute = ({ children, isAuthenticated, authenticationPath, redirectPath, ...routeProps }: ProtectedRouteProps) => {
+const ProtectedRoute = ({
+   children,
+   isAuthenticated,
+   authenticationPath,
+   redirectPath,
+   ...routeProps
+}: ProtectedRouteProps) => {
    // const currentLocation = useLocation();
 
    // return <Route {...routeProps} element={children} />;

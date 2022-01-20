@@ -1,8 +1,10 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAEA,AAAA,SAAS,CAAC;EACP,gBAAgB,ECIL,OAAO;EDHlB,MAAM,EAAE,KAAK;CACf",
     "sources": [
-        "homePage.module.scss"
+        "homePage.module.scss",
+        "../../styles/_variables.scss",
+        "../../styles/_mixins.scss"
     ],
     "names": [],
     "file": "homePage.module.css"

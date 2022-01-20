@@ -15,7 +15,6 @@ export const auth = (data: { username: string; password: string }) => async (dis
          type: SIGN_IN,
          payload: response.data,
       });
-      console.log(response);
    } catch (error) {
       console.log(error);
    }

@@ -16,8 +16,8 @@ function App() {
    //    navigate("/");
    // }
    useEffect(() => {
-      if (authState.isAuthenticated) {
-         navigate("/dashboard");
+      if (!authState.isAuthenticated) {
+         navigate("/login");
       }
    }, [authState.isAuthenticated, navigate]);
    // const auth : AuthState = useSelector(state => state.auth);
@@ -36,9 +36,12 @@ function App() {
                   />
                }
             >
+               <Route path="/" element={<Navigate to="/dashboard" />} />
                <Route path="/*" element={<HomePage />} />
+               {/* <Route path="/customer" element={<div>Customer</div>} /> */}
             </Route>
-            {/* <Route path="/" element={<HomePage />} /> */}
+            {/* <Route path="/" element={<HomePage />} />
+            <Route path="/customer" element={<div>Customer</div>} /> */}
 
             <Route path="/login" element={<LoginPage />} />
          </Routes>

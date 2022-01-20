@@ -1,0 +1,40 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.sidebar {
+   background-color: $white-color;
+   width: 30vh;
+   position: fixed;
+   left: 0;
+   height: 100vh;
+   ul {
+      margin-top: 50px;
+      li {
+         padding: 10px 20px;
+         margin: 5px 40px;
+         border-radius: 8px;
+         &:hover {
+            background-color: $light-main-color-2;
+            cursor: pointer;
+            color: $main-color;
+            a {
+               color: $main-color;
+            }
+         }
+         svg {
+            vertical-align: middle;
+         }
+         a {
+            margin-left: 10px;
+         }
+      }
+   }
+   .modal {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      margin: auto;
+      background-color: $white-color;
+      box-shadow: 2px 5px 23px #e4e4e4;
+   }
+}
