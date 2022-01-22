@@ -11,27 +11,29 @@
 }
 
 .sidebar ul li {
-  padding: 10px 20px;
   margin: 5px 40px;
-  border-radius: 8px;
-}
-
-.sidebar ul li:hover {
-  background-color: #e5e9fb;
-  cursor: pointer;
-  color: #3e4a92;
-}
-
-.sidebar ul li:hover a {
-  color: #3e4a92;
 }
 
 .sidebar ul li svg {
   vertical-align: middle;
+  margin-right: 15px;
 }
 
 .sidebar ul li a {
-  margin-left: 10px;
+  padding: 10px 20px;
+  display: block;
+  border-radius: 8px;
+}
+
+.sidebar ul li a.active {
+  color: #3e4a92;
+  background-color: #e5e9fb;
+}
+
+.sidebar ul li a:hover {
+  cursor: pointer;
+  color: #3e4a92;
+  background-color: #e5e9fb;
 }
 
 .sidebar .modal {

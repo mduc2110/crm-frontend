@@ -10,22 +10,33 @@
    ul {
       margin-top: 50px;
       li {
-         padding: 10px 20px;
+         // padding: 10px 20px;
          margin: 5px 40px;
-         border-radius: 8px;
-         &:hover {
-            background-color: $light-main-color-2;
-            cursor: pointer;
-            color: $main-color;
-            a {
-               color: $main-color;
-            }
-         }
+         // &:hover {
+
+         //    color: $main-color;
+         //    a {
+
+         //    }
+         // }
+
          svg {
             vertical-align: middle;
+            margin-right: 15px;
          }
          a {
-            margin-left: 10px;
+            padding: 10px 20px;
+            display: block;
+            border-radius: 8px;
+            &.active {
+               color: $main-color;
+               background-color: $light-main-color-2;
+            }
+            &:hover {
+               cursor: pointer;
+               color: $main-color;
+               background-color: $light-main-color-2;
+            }
          }
       }
    }
