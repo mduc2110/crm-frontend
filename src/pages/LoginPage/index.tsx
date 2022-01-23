@@ -8,11 +8,12 @@ import { useDispatch } from "react-redux";
 import { auth } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthState } from "../../store/types";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 const LoginPage = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const dispatch = useDispatch();
+   // const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
    const authState: AuthState = useAppSelector((state) => state.auth);

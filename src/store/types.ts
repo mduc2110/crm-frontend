@@ -7,11 +7,20 @@ export interface AuthState {
    token: string | undefined | null;
    isAuthenticated: boolean;
    errorMessage?: null;
+   permissions: [];
 }
 
 interface SignInAction {
    type: typeof SIGN_IN;
-   payload: { token?: string };
+   payload: {
+      token?: string;
+      token_expire: string;
+      user: {
+         permissions?: [];
+         id: number;
+         name: number;
+      };
+   };
    error?: string;
 }
 

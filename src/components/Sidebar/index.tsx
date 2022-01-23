@@ -1,9 +1,26 @@
 import React from "react";
-import { AiOutlineAppstore, AiOutlineMail, AiOutlineStock, AiOutlineUser } from "react-icons/ai";
+import {
+   AiOutlineAppstore,
+   AiOutlineLogout,
+   AiOutlineMail,
+   AiOutlineStock,
+   AiOutlineUser,
+} from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { logout } from "../../actions/auth";
+import { useAppDispatch } from "../../store";
 import classes from "./sidebar.module.css";
 const Sidebar = () => {
+   const dispatch = useDispatch();
+   // const {} = bindActionCreators( , dispatch);
+   const logoutHandler = () => {
+      // dispatch(logout());
+      // useAppDispatch(logout());
+      dispatch(logout());
+   };
    return (
       <div className={classes.sidebar}>
          <ul>
@@ -35,6 +52,9 @@ const Sidebar = () => {
             </li>
          </ul>
          <div className={classes.modal}></div>
+         <button onClick={logoutHandler}>
+            <AiOutlineLogout /> Đăng xuất
+         </button>
       </div>
    );
 };
