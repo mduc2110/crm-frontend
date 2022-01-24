@@ -8,6 +8,7 @@ export interface AuthState {
    isAuthenticated: boolean;
    errorMessage?: null;
    permissions: [];
+   token_expire: number | undefined | null;
 }
 
 interface SignInAction {
