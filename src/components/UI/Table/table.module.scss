@@ -1,0 +1,36 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.table {
+  width: 100%;
+  border-spacing: 1.2rem;
+  border-collapse: collapse;
+  thead {
+    border-bottom: 1px solid $light-main-color-2;
+    color: $main-color;
+    th {
+      text-align: left;
+      padding: 1rem;
+      &:nth-child(2) {
+        width: 10px;
+      }
+    }
+  }
+  tbody {
+    tr {
+      //   margin: 10px 0;
+      td {
+        padding: 1rem;
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+    a {
+      color: $main-color;
+      margin: 0 3px;
+      font-size: 20px;
+    }
+  }
+}

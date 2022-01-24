@@ -2,4 +2,9 @@
   background-color: #f5f6fb;
   height: 200vh;
 }
+
+.homePage .contents {
+  margin-left: 30vh;
+  padding: 2rem;
+}
 /*# sourceMappingURL=homePage.module.css.map */

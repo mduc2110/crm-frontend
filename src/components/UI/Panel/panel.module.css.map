@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,MAAM,CAAC;EAGL,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,MAAM;EACf,gBAAgB,ECCJ,IAAI;EDAhB,UAAU,EAAE,oBAAoB;CACjC",
+    "sources": [
+        "panel.module.scss",
+        "../../../styles/_variables.scss",
+        "../../../styles/_mixins.scss"
+    ],
+    "names": [],
+    "file": "panel.module.css"
+}
