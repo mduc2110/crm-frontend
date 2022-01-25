@@ -1,0 +1,62 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.customerPage {
+   form {
+      &.searchForm {
+         display: flex;
+      }
+   }
+   .header {
+      @include flex;
+
+      .actions {
+         display: flex;
+         button {
+            text-transform: inherit;
+            font-size: 0.9rem;
+            width: initial;
+            margin-top: 0;
+            padding: 10px;
+         }
+
+         .actionDropdown {
+            position: relative;
+
+            .dropbox {
+               width: max-content;
+               position: absolute;
+               right: 0;
+               top: 70%;
+               background-color: $white-color;
+               border: 1px solid $light-main-color;
+               border-radius: 5px;
+               overflow: hidden;
+               display: none;
+               ul {
+                  li {
+                     &:hover {
+                        background-color: $light-main-color-2;
+                     }
+                     button {
+                        padding: 10px 20px;
+                        width: 100%;
+                        text-align: left;
+                        margin: 0;
+                     }
+                  }
+               }
+               &:hover {
+                  display: block;
+               }
+            }
+
+            button {
+               &:hover + .dropbox {
+                  display: block;
+               }
+            }
+         }
+      }
+   }
+}

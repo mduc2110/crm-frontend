@@ -47,14 +47,12 @@ const Sidebar = () => {
                   Thống kê
                </NavLink>
             </li>
-            <li>
-               <AiOutlineMail />{" "}
-            </li>
+            <li>{/* <AiOutlineMail />{" "} */}</li>
          </ul>
-         <div className={classes.modal}></div>
-         <button onClick={logoutHandler}>
+         {/* <div className={classes.modal}></div> */}
+         {/* <button onClick={logoutHandler}>
             <AiOutlineLogout /> Đăng xuất
-         </button>
+         </button> */}
       </div>
    );
 };

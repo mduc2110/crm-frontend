@@ -1,0 +1,69 @@
+.customerPage form.searchForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.customerPage .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.customerPage .header .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.customerPage .header .actions button {
+  text-transform: inherit;
+  font-size: 0.9rem;
+  width: initial;
+  margin-top: 0;
+  padding: 10px;
+}
+
+.customerPage .header .actions .actionDropdown {
+  position: relative;
+}
+
+.customerPage .header .actions .actionDropdown .dropbox {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  right: 0;
+  top: 70%;
+  background-color: #fff;
+  border: 1px solid #b4beff;
+  border-radius: 5px;
+  overflow: hidden;
+  display: none;
+}
+
+.customerPage .header .actions .actionDropdown .dropbox ul li:hover {
+  background-color: #e5e9fb;
+}
+
+.customerPage .header .actions .actionDropdown .dropbox ul li button {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  margin: 0;
+}
+
+.customerPage .header .actions .actionDropdown .dropbox:hover {
+  display: block;
+}
+
+.customerPage .header .actions .actionDropdown button:hover + .dropbox {
+  display: block;
+}
+/*# sourceMappingURL=customerPage.module.css.map */

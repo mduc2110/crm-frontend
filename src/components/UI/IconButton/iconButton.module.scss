@@ -1,0 +1,16 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+button {
+   color: $main-color;
+   margin: 0 3px;
+   font-size: 20px;
+   outline: none;
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+
+   &.delete {
+      color: red;
+   }
+}

@@ -1,0 +1,17 @@
+.searchBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.searchBar input {
+  padding: 10px;
+}
+
+.searchBar button {
+  background-color: #3e4a92;
+  color: #f5f6fb;
+  width: 50px;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=searchBar.module.css.map */

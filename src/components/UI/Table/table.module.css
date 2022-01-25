@@ -15,20 +15,98 @@
 }
 
 .table thead th:nth-child(2) {
-  width: 10px;
+  width: 1rem;
+}
+
+.table thead th:last-child {
+  text-align: center;
+}
+
+.table tbody {
+  padding-top: 10px;
 }
 
 .table tbody tr td {
-  padding: 1rem;
+  padding: 1.3rem 1rem 0 1rem;
+}
+
+.table tbody tr td:nth-child(2) {
+  text-align: center;
+}
+
+.table tbody tr td:last-child {
+  text-align: center;
+}
+
+.table input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
 }
 
 .table .actions {
   text-align: center;
 }
 
-.table .actions a {
+.table .actions button {
   color: #3e4a92;
   margin: 0 3px;
-  font-size: 20px;
+  font-size: 1rem;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.table .actions button.delete {
+  color: red;
+}
+
+.pagination {
+  margin-top: 3rem;
+}
+
+.pagination select {
+  outline: none;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #3e4a92;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+}
+
+.pagination select::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.pagination select:-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.pagination select::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.pagination select::-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.pagination select::placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.pagination select:focus {
+  border: 1px solid #939edd;
+  -webkit-box-shadow: 1px 1px 5px 1px #adb4db;
+          box-shadow: 1px 1px 5px 1px #adb4db;
 }
 /*# sourceMappingURL=table.module.css.map */

@@ -2,35 +2,68 @@
 @import "../../../styles/mixins";
 
 .table {
-  width: 100%;
-  border-spacing: 1.2rem;
-  border-collapse: collapse;
-  thead {
-    border-bottom: 1px solid $light-main-color-2;
-    color: $main-color;
-    th {
-      text-align: left;
-      padding: 1rem;
-      &:nth-child(2) {
-        width: 10px;
-      }
-    }
-  }
-  tbody {
-    tr {
-      //   margin: 10px 0;
-      td {
-        padding: 1rem;
-      }
-    }
-  }
-
-  .actions {
-    text-align: center;
-    a {
+   width: 100%;
+   border-spacing: 1.2rem;
+   border-collapse: collapse;
+   thead {
+      border-bottom: 1px solid $light-main-color-2;
       color: $main-color;
-      margin: 0 3px;
-      font-size: 20px;
-    }
-  }
+      th {
+         text-align: left;
+         padding: 1rem;
+         &:nth-child(2) {
+            width: 1rem;
+         }
+         &:last-child {
+            text-align: center;
+         }
+      }
+   }
+   tbody {
+      padding-top: 10px;
+      tr {
+         //   margin: 10px 0;
+         td {
+            padding: 1.3rem 1rem 0 1rem;
+            &:nth-child(2) {
+               text-align: center;
+            }
+            &:last-child {
+               text-align: center;
+            }
+         }
+      }
+   }
+   input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+   }
+   .actions {
+      text-align: center;
+      button {
+         color: $main-color;
+         margin: 0 3px;
+         font-size: 1rem;
+         outline: none;
+         background-color: transparent;
+         border: none;
+         cursor: pointer;
+
+         &.delete {
+            color: red;
+         }
+      }
+   }
+}
+
+.pagination {
+   // border-top: 1px solid $main-color;
+   // padding-top: 2rem;
+   margin-top: 3rem;
+
+   select {
+      @include inputStyle;
+      width: fit-content;
+      padding: 5px;
+   }
 }

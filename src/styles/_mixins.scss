@@ -3,3 +3,48 @@
    justify-content: space-between;
    align-items: center;
 }
+
+@mixin inputStyle {
+   outline: none;
+   width: 100%;
+   padding: 15px;
+   border-radius: 5px;
+   border: 1px solid $main-color;
+   // margin-top: 20px;
+   transition: all 0.1s ease-in;
+
+   &::-webkit-input-placeholder {
+      font-style: italic;
+      color: $gray-color;
+   }
+   &::-moz-placeholder {
+      font-style: italic;
+      color: $gray-color;
+   }
+
+   &:-ms-input-placeholder {
+      font-style: italic;
+      color: $gray-color;
+   }
+
+   &::-webkit-input-placeholder {
+      font-style: italic;
+      color: $gray-color;
+   }
+
+   &::placeholder {
+      font-style: italic;
+      color: $gray-color;
+   }
+   &:focus {
+      border: 1px solid #939edd;
+      box-shadow: 1px 1px 5px 1px #adb4db;
+   }
+}
+
+@mixin icoButton {
+   background-color: $main-color;
+   color: $light-color;
+   width: 50px;
+   border-radius: 5px;
+}
