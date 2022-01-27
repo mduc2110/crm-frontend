@@ -1,0 +1,41 @@
+.select {
+  outline: none;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #3e4a92;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+}
+
+.select::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.select:-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.select::-webkit-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.select::-ms-input-placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.select::placeholder {
+  font-style: italic;
+  color: #bcbcbc;
+}
+
+.select:focus {
+  border: 1px solid #939edd;
+  -webkit-box-shadow: 1px 1px 5px 1px #adb4db;
+          box-shadow: 1px 1px 5px 1px #adb4db;
+}
+/*# sourceMappingURL=select.module.css.map */

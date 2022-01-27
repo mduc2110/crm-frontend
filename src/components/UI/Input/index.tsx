@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./input.module.css";
+
 const Input: React.FC<{
    labelName?: string;
    inputId?: string;
@@ -10,8 +11,14 @@ const Input: React.FC<{
 }> = (props) => {
    return (
       <div className={classes.input__control}>
-         {props.labelName ?? <label htmlFor={props.inputId}></label>}
-         <input type={props.type ? props.type : "text"} placeholder={props.placeholder || ""} value={props.value} onChange={props.onChange} />
+         {props.labelName ?? <span>{props.labelName}</span>}
+         {/* <span>{props.labelName}</span> */}
+         <input
+            type={props.type ? props.type : "text"}
+            placeholder={props.placeholder || ""}
+            value={props.value}
+            onChange={props.onChange}
+         />
       </div>
    );
 };

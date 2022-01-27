@@ -1,8 +1,10 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAGA,AAAA,MAAM,CAAC;EACJ,UAAU,ECKC,IAAI;EDJf,QAAQ,EAAE,KAAK;EACf,GAAG,EAAE,GAAG;EACR,IAAI,EAAE,GAAG;EACT,SAAS,EAAE,qBAAqB;EAChC,KAAK,EAAE,KAAK;EAEZ,OAAO,EAAE,KAAK;EACd,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,IAAI;CACf;;AAED,AAAA,SAAS,CAAC;EACP,UAAU,EAAE,kBAAkB;EAC9B,QAAQ,EAAE,KAAK;EACf,GAAG,EAAE,CAAC;EACN,IAAI,EAAE,CAAC;EACP,KAAK,EAAE,CAAC;EACR,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,GAAG;CACd",
     "sources": [
-        "modal.module.scss"
+        "modal.module.scss",
+        "../../../styles/_variables.scss",
+        "../../../styles/_mixins.scss"
     ],
     "names": [],
     "file": "modal.module.css"

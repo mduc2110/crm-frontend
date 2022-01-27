@@ -1,47 +1,10 @@
+@import "../../../styles/mixins";
 @import "../../../styles/variables";
-// @import "../../styles/";
 
 .input__control {
    label {
    }
-   .input {
+   input {
       @include inputStyle;
    }
-   // input {
-   //    outline: none;
-   //    width: 100%;
-   //    padding: 15px;
-   //    border-radius: 5px;
-   //    border: 1px solid $main-color;
-   //    // margin-top: 20px;
-   //    transition: all 0.1s ease-in;
-
-   //    &::-webkit-input-placeholder {
-   //       font-style: italic;
-   //       color: $gray-color;
-   //    }
-   //    &::-moz-placeholder {
-   //       font-style: italic;
-   //       color: $gray-color;
-   //    }
-
-   //    &:-ms-input-placeholder {
-   //       font-style: italic;
-   //       color: $gray-color;
-   //    }
-
-   //    &::-webkit-input-placeholder {
-   //       font-style: italic;
-   //       color: $gray-color;
-   //    }
-
-   //    &::placeholder {
-   //       font-style: italic;
-   //       color: $gray-color;
-   //    }
-   //    &:focus {
-   //       border: 1px solid #939edd;
-   //       box-shadow: 1px 1px 5px 1px #adb4db;
-   //    }
-   // }
 }

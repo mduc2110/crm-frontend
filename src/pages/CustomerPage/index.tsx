@@ -6,6 +6,7 @@ import {
    AiOutlineUpload,
 } from "react-icons/ai";
 import CustomerList from "../../components/CustomerList";
+import CustomerModal from "../../components/Modals/CustomerModal";
 import Button from "../../components/UI/Button";
 import IconButton from "../../components/UI/IconButton";
 import Input from "../../components/UI/Input";
@@ -18,8 +19,21 @@ import classes from "./customerPage.module.css";
 const CustomerPage = () => {
    const [searchText, setSearchText] = useState<string>("");
    const searchCustomerHandler = () => {};
+   const [cartIsShown, setCartIsShown] = useState<boolean>(false);
+
+   const showCartHandler = () => {};
+
+   const hideCartHandler = () => {
+      setCartIsShown(false);
+   };
+
+   const addCustomerHandler = () => {
+      setCartIsShown(true);
+   };
    return (
       <div className={classes.customerPage}>
+         {cartIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideCartHandler} />}
+
          <Panel>
             <div className={classes.header}>
                <SearchBar />
@@ -27,7 +41,7 @@ const CustomerPage = () => {
                   <Button>
                      <AiOutlineUpload /> Tải lên
                   </Button>
-                  <Button>
+                  <Button onClick={addCustomerHandler}>
                      <AiOutlinePlusCircle /> Thêm khách hàng
                   </Button>
                   <div className={classes.actionDropdown}>
