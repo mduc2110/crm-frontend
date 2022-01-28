@@ -4,6 +4,9 @@ import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
 import Select from "../../UI/Select";
 
+import provinceData from "../../../assets/address/province.json";
+import districtData from "../../../assets/address/district.json";
+import wardData from "../../../assets/address/ward.json";
 interface Customer {
    customerName: string;
    phone: string;
@@ -17,6 +20,10 @@ interface Customer {
 //    id: number;
 //    tagName: string;
 // }
+interface SelectType {
+   id: string;
+   name: string;
+}
 
 const CustomerModal: React.FC<{
    onClose: () => void;
@@ -37,6 +44,11 @@ const CustomerModal: React.FC<{
       detailAddress: "",
    });
    const [tag, setTag] = useState<Tag[]>([]);
+
+   const [provinceList, setProvinceList] = useState<SelectType[]>([]);
+   const [districtList, setdDistrictList] = useState<SelectType[]>([]);
+   const [ward, setWard] = useState([]);
+
    const changeInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
       console.log(e.currentTarget.value);
 
@@ -65,8 +77,6 @@ const CustomerModal: React.FC<{
       //    };
       // });
    };
-   console.log(customerField);
-
    useEffect(() => {
       const fetchTag = async () => {
          setTag([
@@ -82,7 +92,19 @@ const CustomerModal: React.FC<{
       };
 
       fetchTag();
+
+      const data: SelectType[] = provinceData.province[0].map((province) => {
+         return { id: province.code, name: province.name };
+      });
+      setProvinceList(data);
+      const e1 = data[0].id;
+      const specDistrictId = customerField.idProvince || "thanh-pho-ha-noi";
+      const dist: SelectType[] = districtData.district["thanh-pho-ha-noi"].map((district) => {
+         return { id: district.code, name: district.name };
+      });
+      setdDistrictList(dist);
    }, []);
+   console.log(provinceList);
 
    return (
       <Modal onClose={props.onClose}>
@@ -115,11 +137,7 @@ const CustomerModal: React.FC<{
                   })
                }
             />
-            <Input
-               value={customerField.email}
-               labelName={"Địa chỉ chi tiết"}
-               onChange={changeInputHandler}
-            />
+            <Input value={customerField.email} labelName={"Địa chỉ chi tiết"} onChange={changeInputHandler} />
             {/* <Input
                value={customerField.customerName}
                labelName={"Tên khách hàng"}
@@ -147,6 +165,26 @@ const CustomerModal: React.FC<{
                onChange={(e) =>
                   setCustomerField((prev) => {
                      return { ...prev, idStatus: e.target.value };
+                  })
+               }
+            />
+            <Select
+               options={provinceList}
+               value={customerField.idProvince}
+               labelName={"Thành phố"}
+               onChange={(e) =>
+                  setCustomerField((prev) => {
+                     return { ...prev, idProvince: e.target.value };
+                  })
+               }
+            />
+            <Select
+               options={districtList}
+               value={customerField.idDistrict}
+               labelName={"Quận"}
+               onChange={(e) =>
+                  setCustomerField((prev) => {
+                     return { ...prev, idDistrict: e.target.value };
                   })
                }
             />
