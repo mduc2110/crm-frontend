@@ -5,12 +5,14 @@ const IconButton: React.FC<{
    color?: string | undefined;
    type?: "button" | "submit";
    background?: string | undefined;
+   onClick?: () => void;
 }> = (props) => {
    return (
       <button
          className={classes.button}
          style={{ color: props.color, background: props.background }}
          type={props.type}
+         onClick={props.onClick}
       >
          {props.iconComponent}
       </button>
