@@ -2,7 +2,7 @@ import axios from "axios";
 // import { getToken } from '../utils/Common';
 
 const axiosClient = axios.create({
-   baseURL: "http://localhost:5555",
+   baseURL: process.env.REACT_APP_API_ENDPOINT,
    headers: {
       // "content-type": "application/json",
       //   'access-token' : getToken()

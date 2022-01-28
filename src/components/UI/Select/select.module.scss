@@ -2,5 +2,11 @@
 @import "../../../styles/variables";
 
 .select {
-   @include inputStyle;
+   margin-top: 10px;
+   .label {
+      @include labelStyle;
+   }
+   select {
+      @include inputStyle;
+   }
 }

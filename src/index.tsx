@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 // import { configureStore } from "./store";
 import store from "./store";
 // const store = configureStore();
-
+// require("dotenv").config();
 ReactDOM.render(
    <React.StrictMode>
       <BrowserRouter>

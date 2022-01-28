@@ -1,0 +1,43 @@
+.form-customer form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.form-customer form .inputArea {
+  width: 48%;
+}
+
+.form-customer form .genderArea {
+  margin-top: 10px;
+}
+
+.form-customer form .genderArea span {
+  font-size: 0.8rem;
+}
+
+.form-customer form .genderArea .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.form-customer form .addressArea {
+  width: 100%;
+}
+
+.form-customer form .addressArea * {
+  width: 100%;
+}
+/*# sourceMappingURL=customerModal.module.css.map */

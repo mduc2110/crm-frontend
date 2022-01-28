@@ -1,12 +1,17 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import moment from "moment";
 import { Tag } from "../../../types";
 import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
 import Select from "../../UI/Select";
+import Button from "../../UI/Button";
 
 import provinceData from "../../../assets/address/province.json";
 import districtData from "../../../assets/address/district.json";
 import wardData from "../../../assets/address/ward.json";
+
+import classes from "./customerModal.module.css";
+import customerApi from "../../../api/customerApi";
 interface Customer {
    customerName: string;
    phone: string;
@@ -14,12 +19,14 @@ interface Customer {
    birthday: string;
    gender: string;
    personalID: string;
+   idStatus: string;
+   idTag: string;
+   idProvince: string;
+   idDistrict: string;
+   idWard: string;
+   detailAddress: string;
 }
 
-// interface Tag {
-//    id: number;
-//    tagName: string;
-// }
 interface SelectType {
    id: string;
    name: string;
@@ -29,12 +36,12 @@ const CustomerModal: React.FC<{
    onClose: () => void;
    title: string;
 }> = (props) => {
-   const [customerField, setCustomerField] = useState({
+   const [customerField, setCustomerField] = useState<Customer>({
       customerName: "",
       phone: "",
       email: "",
-      birthday: "",
-      gender: "",
+      birthday: moment(new Date()).format("yyyy-MM-DD"),
+      gender: "Nam",
       personalID: "",
       idStatus: "",
       idTag: "",
@@ -46,37 +53,21 @@ const CustomerModal: React.FC<{
    const [tag, setTag] = useState<Tag[]>([]);
 
    const [provinceList, setProvinceList] = useState<SelectType[]>([]);
-   const [districtList, setdDistrictList] = useState<SelectType[]>([]);
-   const [ward, setWard] = useState([]);
+   const [districtList, setDistrictList] = useState<SelectType[]>([]);
+   const [wardList, setWardList] = useState<SelectType[]>([]);
+   console.log(process.env);
 
-   const changeInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
-      console.log(e.currentTarget.value);
+   const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      // console.log(e.target.value);
 
-      // HTMLInputElement
-      // e.preventDefault();
       setCustomerField((prev) => {
          return {
             ...prev,
-            detailAddress: e.currentTarget.value,
+            detailAddress: e.target.value,
          };
       });
    };
-   // const [id, setId] = useState({
-   //    id1: "",
-   //    id2: "",
-   // });
-   const [id, setId] = useState("");
-   const changeTagHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      // console.log(event.target.value);
-      // console.log(typeof event.currentTarget.value);
-      setId(event.currentTarget.value);
-      // setId((prev) => {
-      //    return {
-      //       ...prev,
-      //       id2: event.currentTarget.value,
-      //    };
-      // });
-   };
+
    useEffect(() => {
       const fetchTag = async () => {
          setTag([
@@ -90,104 +81,209 @@ const CustomerModal: React.FC<{
             },
          ]);
       };
-
+      const fetchCustomer = async () => {
+         const data = await customerApi.getAll();
+         console.log(data);
+      };
       fetchTag();
+      fetchCustomer();
+   }, []);
 
-      const data: SelectType[] = provinceData.province[0].map((province) => {
+   useEffect(() => {
+      const province: SelectType[] = provinceData.province[0].map((province) => {
          return { id: province.code, name: province.name };
       });
-      setProvinceList(data);
-      const e1 = data[0].id;
-      const specDistrictId = customerField.idProvince || "thanh-pho-ha-noi";
-      const dist: SelectType[] = districtData.district["thanh-pho-ha-noi"].map((district) => {
-         return { id: district.code, name: district.name };
-      });
-      setdDistrictList(dist);
-   }, []);
-   console.log(provinceList);
+      setProvinceList(province);
 
+      const district: SelectType[] = customerField.idProvince
+         ? (districtData.district as { [key: string]: any })[customerField.idProvince as any].map(
+              (district: any) => {
+                 return { id: district.code, name: district.name };
+              }
+           )
+         : [];
+      setDistrictList(district);
+
+      const ward: SelectType[] = customerField.idDistrict
+         ? (wardData.ward as { [key: string]: any })[customerField.idDistrict as any].map(
+              (ward: any) => {
+                 return { id: ward.code, name: ward.name };
+              }
+           )
+         : [];
+      setWardList(ward);
+   }, [customerField.idProvince, customerField.idDistrict]);
+   const onSubmitCustomerHandler = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log(customerField);
+   };
    return (
       <Modal onClose={props.onClose}>
          <h2>{props.title}</h2>
-         <div className="inner">
-            <Input
-               value={customerField.customerName}
-               labelName={"Tên khách hàng"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, customerName: e.target.value };
-                  })
-               }
-            />
-            <Input
-               value={customerField.phone}
-               labelName={"Số điện thoại"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, phone: e.target.value };
-                  })
-               }
-            />
-            <Input
-               value={customerField.email}
-               labelName={"Email"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, email: e.target.value };
-                  })
-               }
-            />
-            <Input value={customerField.email} labelName={"Địa chỉ chi tiết"} onChange={changeInputHandler} />
-            {/* <Input
-               value={customerField.customerName}
-               labelName={"Tên khách hàng"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, customerName: e.target.value };
-                  })
-               }
-            /> */}
+         <div className={classes["form-customer"]}>
+            <form onSubmit={(e) => onSubmitCustomerHandler(e)}>
+               <Input
+                  value={customerField.customerName}
+                  className={classes.inputArea}
+                  labelName={"Tên khách hàng"}
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, customerName: e.target.value };
+                     })
+                  }
+               />
+               <Input
+                  value={customerField.phone}
+                  className={classes.inputArea}
+                  labelName={"Số điện thoại"}
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, phone: e.target.value };
+                     })
+                  }
+               />
+               <Input
+                  value={customerField.email}
+                  className={classes.inputArea}
+                  labelName={"Email"}
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, email: e.target.value };
+                     })
+                  }
+               />
 
-            <Select
-               options={tag}
-               value={customerField.idTag}
-               labelName={"Tag"}
-               onChange={(e) =>
+               <Select
+                  options={tag}
+                  value={customerField.idTag}
+                  className={classes.inputArea}
+                  labelName={"Tag"}
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, idTag: e.target.value };
+                     })
+                  }
+               />
+               <Select
+                  options={tag}
+                  value={customerField.idStatus}
+                  className={classes.inputArea}
+                  labelName={"Trạng thái khách hàng"}
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, idStatus: e.target.value };
+                     })
+                  }
+               />
+
+               <Input
+                  type="date"
+                  value={customerField.birthday}
+                  className={classes.inputArea}
+                  labelName={"Ngày sinh"}
+                  pattern="\d{4}-\d{2}-\d{2}"
+                  onChange={(e) =>
+                     setCustomerField((prev) => {
+                        return { ...prev, birthday: e.target.value };
+                     })
+                  }
+               />
+               <div className={classes.genderArea}>
+                  <span>Giới tính</span>
+                  <div className={classes.inner}>
+                     <Input
+                        labelName="Nam"
+                        value={"Nam"}
+                        type="radio"
+                        name="gender"
+                        checked={customerField.gender === "Nam"}
+                        onChange={(e) =>
+                           setCustomerField((prev) => {
+                              return { ...prev, gender: e.target.value };
+                           })
+                        }
+                     />
+                     <Input
+                        labelName="Nữ"
+                        value={"Nữ"}
+                        type="radio"
+                        name="gender"
+                        checked={customerField.gender === "Nữ"}
+                        onChange={(e) =>
+                           setCustomerField((prev) => {
+                              return { ...prev, gender: e.target.value };
+                           })
+                        }
+                     />
+                     <Input
+                        labelName="Khác"
+                        value={"Khác"}
+                        type="radio"
+                        name="gender"
+                        checked={customerField.gender === "Khác"}
+                        onChange={(e) =>
+                           setCustomerField((prev) => {
+                              return { ...prev, gender: e.target.value };
+                           })
+                        }
+                     />
+                  </div>
+               </div>
+               <div className={classes.addressArea}>
+                  <Select
+                     options={provinceList}
+                     value={customerField.idProvince}
+                     className={classes.inputArea}
+                     labelName={"Thành phố"}
+                     onChange={(e) =>
+                        setCustomerField((prev) => {
+                           return { ...prev, idProvince: e.target.value };
+                        })
+                     }
+                  />
+                  <Select
+                     options={districtList}
+                     value={customerField.idDistrict}
+                     className={classes.inputArea}
+                     labelName={"Quận"}
+                     onChange={(e) =>
+                        setCustomerField((prev) => {
+                           return { ...prev, idDistrict: e.target.value };
+                        })
+                     }
+                  />
+                  <Select
+                     options={wardList}
+                     value={customerField.idWard}
+                     className={classes.inputArea}
+                     labelName={"Phường"}
+                     onChange={(e) =>
+                        setCustomerField((prev) => {
+                           return { ...prev, idWard: e.target.value };
+                        })
+                     }
+                  />
+                  <Input
+                     value={customerField.detailAddress}
+                     className={classes.inputArea}
+                     labelName={"Địa chỉ chi tiết"}
+                     onChange={(e) =>
+                        setCustomerField((prev) => {
+                           return { ...prev, detailAddress: e.target.value };
+                        })
+                     }
+                  />
+               </div>
+               <Button type="submit">Thêm</Button>
+            </form>
+
+            {/* <DatePicker 
+               value={customerField.birthday}
+            onChange={(e) =>
                   setCustomerField((prev) => {
-                     return { ...prev, idTag: e.target.value };
+                     return { ...prev, idWard: e };
                   })
-               }
-            />
-            <Select
-               options={tag}
-               value={customerField.idStatus}
-               labelName={"Trạng thái khách hàng"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, idStatus: e.target.value };
-                  })
-               }
-            />
-            <Select
-               options={provinceList}
-               value={customerField.idProvince}
-               labelName={"Thành phố"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, idProvince: e.target.value };
-                  })
-               }
-            />
-            <Select
-               options={districtList}
-               value={customerField.idDistrict}
-               labelName={"Quận"}
-               onChange={(e) =>
-                  setCustomerField((prev) => {
-                     return { ...prev, idDistrict: e.target.value };
-                  })
-               }
-            />
+               }/> */}
          </div>
       </Modal>
    );

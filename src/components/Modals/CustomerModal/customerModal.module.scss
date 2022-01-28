@@ -1,0 +1,28 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.form-customer {
+   form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .inputArea {
+         width: 48%;
+      }
+      .genderArea {
+         margin-top: 10px;
+         span {
+            font-size: 0.8rem;
+         }
+         .inner {
+            @include flex;
+         }
+      }
+      .addressArea {
+         width: 100%;
+         * {
+            width: 100%;
+         }
+      }
+   }
+}

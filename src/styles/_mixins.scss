@@ -41,7 +41,11 @@
       box-shadow: 1px 1px 5px 1px #adb4db;
    }
 }
-
+@mixin labelStyle {
+   font-size: 0.8rem;
+   margin-bottom: 5px;
+   display: inline-block;
+}
 @mixin icoButton {
    background-color: $main-color;
    color: $light-color;

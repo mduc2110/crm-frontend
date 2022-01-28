@@ -1,4 +1,14 @@
-.input__control input {
+.input__control {
+  margin-top: 10px;
+}
+
+.input__control .label {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.input__control input:not([type="radio"]) {
   outline: none;
   width: 100%;
   padding: 15px;
@@ -8,32 +18,32 @@
   transition: all 0.1s ease-in;
 }
 
-.input__control input::-webkit-input-placeholder {
+.input__control input:not([type="radio"])::-webkit-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.input__control input:-ms-input-placeholder {
+.input__control input:not([type="radio"]):-ms-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.input__control input::-webkit-input-placeholder {
+.input__control input:not([type="radio"])::-webkit-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.input__control input::-ms-input-placeholder {
+.input__control input:not([type="radio"])::-ms-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.input__control input::placeholder {
+.input__control input:not([type="radio"])::placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.input__control input:focus {
+.input__control input:not([type="radio"]):focus {
   border: 1px solid #939edd;
   -webkit-box-shadow: 1px 1px 5px 1px #adb4db;
           box-shadow: 1px 1px 5px 1px #adb4db;

@@ -1,13 +1,9 @@
 import axiosClient from "./axiosClient";
 
-const userApi = {
+const customerApi = {
    getAll() {
-      const url = "/api/orders";
+      const url = "/customers";
       return axiosClient.get(url);
-   },
-   login(data: { username: string; password: string }) {
-      const url = "/user/login";
-      return axiosClient.post(url, data);
    },
    //  getByUser() {
    //      const url = `api/orders/orders`;
@@ -30,4 +26,4 @@ const userApi = {
    //      return axiosClient.patch(url);
    //  }
 };
-export default userApi;
+export default customerApi;

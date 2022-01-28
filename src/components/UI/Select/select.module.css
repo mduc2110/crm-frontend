@@ -1,4 +1,14 @@
 .select {
+  margin-top: 10px;
+}
+
+.select .label {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.select select {
   outline: none;
   width: 100%;
   padding: 15px;
@@ -8,32 +18,32 @@
   transition: all 0.1s ease-in;
 }
 
-.select::-webkit-input-placeholder {
+.select select::-webkit-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.select:-ms-input-placeholder {
+.select select:-ms-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.select::-webkit-input-placeholder {
+.select select::-webkit-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.select::-ms-input-placeholder {
+.select select::-ms-input-placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.select::placeholder {
+.select select::placeholder {
   font-style: italic;
   color: #bcbcbc;
 }
 
-.select:focus {
+.select select:focus {
   border: 1px solid #939edd;
   -webkit-box-shadow: 1px 1px 5px 1px #adb4db;
           box-shadow: 1px 1px 5px 1px #adb4db;

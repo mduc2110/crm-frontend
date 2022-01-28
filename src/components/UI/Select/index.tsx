@@ -7,13 +7,13 @@ const Select: React.FC<{
    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
    value: string;
    inputId?: string;
+   className?: string;
 }> = (props) => {
-   console.log(props.options);
-
    return (
-      <div>
-         {props.labelName ?? <label htmlFor={props.inputId}></label>}
-         <select className={classes.select} onChange={(e) => props.onChange(e)} value={props.value}>
+      <div className={`${classes.select} ${props.className}`}>
+         <span className={classes.label}>{props.labelName}</span>
+         <select onChange={(e) => props.onChange(e)} value={props.value}>
+            <option value="">Chọn</option>
             {props.options?.map((option, index) => (
                <option key={index} value={option.id}>
                   {option.name}
