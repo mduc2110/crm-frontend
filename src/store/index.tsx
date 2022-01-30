@@ -2,10 +2,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { authReducer } from "../reducers/auth";
+import { customerReducer } from "../reducers/customer";
 import { AuthState } from "./types";
 
 const rootReducer = combineReducers({
    auth: authReducer,
+   customer: customerReducer,
 });
 
 // export const configureStore = () => {

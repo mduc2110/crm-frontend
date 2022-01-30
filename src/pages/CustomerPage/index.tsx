@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { AiOutlineEllipsis, AiOutlinePlusCircle, AiOutlineSearch, AiOutlineUpload } from "react-icons/ai";
+import {
+   AiOutlineEllipsis,
+   AiOutlinePlusCircle,
+   AiOutlineSearch,
+   AiOutlineUpload,
+} from "react-icons/ai";
 import CustomerList from "../../components/CustomerList";
 import CustomerModal from "../../components/Modals/CustomerModal";
 import Button from "../../components/UI/Button";
@@ -13,20 +18,20 @@ import classes from "./customerPage.module.css";
 const CustomerPage = () => {
    const [searchText, setSearchText] = useState<string>("");
    const searchCustomerHandler = () => {};
-   const [cartIsShown, setCartIsShown] = useState<boolean>(false);
+   const [modalIsShown, setModalIsShown] = useState<boolean>(false);
    const showCartHandler = () => {};
 
    const hideCartHandler = () => {
-      setCartIsShown(false);
+      setModalIsShown(false);
    };
 
    const addCustomerHandler = () => {
-      setCartIsShown(true);
+      setModalIsShown(true);
    };
 
    return (
       <div className={classes.customerPage}>
-         {cartIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideCartHandler} />}
+         {modalIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideCartHandler} />}
 
          <Panel>
             <div className={classes.header}>

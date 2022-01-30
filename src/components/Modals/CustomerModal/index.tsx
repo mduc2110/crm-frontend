@@ -12,6 +12,9 @@ import wardData from "../../../assets/address/ward.json";
 
 import classes from "./customerModal.module.css";
 import customerApi from "../../../api/customerApi";
+import { useDispatch } from "react-redux";
+import { addCustomer } from "../../../actions/customerAction";
+import { CustomerState } from "../../../store/types";
 interface Customer {
    customerName: string;
    phone: string;
@@ -36,7 +39,8 @@ const CustomerModal: React.FC<{
    onClose: () => void;
    title: string;
 }> = (props) => {
-   const [customerField, setCustomerField] = useState<Customer>({
+   const [customerField, setCustomerField] = useState<CustomerState>({
+      id: "",
       customerName: "",
       phone: "",
       email: "",
@@ -55,11 +59,9 @@ const CustomerModal: React.FC<{
    const [provinceList, setProvinceList] = useState<SelectType[]>([]);
    const [districtList, setDistrictList] = useState<SelectType[]>([]);
    const [wardList, setWardList] = useState<SelectType[]>([]);
-   console.log(process.env);
+   const dispatch = useDispatch();
 
    const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      // console.log(e.target.value);
-
       setCustomerField((prev) => {
          return {
             ...prev,
@@ -81,12 +83,7 @@ const CustomerModal: React.FC<{
             },
          ]);
       };
-      const fetchCustomer = async () => {
-         const data = await customerApi.getAll();
-         console.log(data);
-      };
       fetchTag();
-      fetchCustomer();
    }, []);
 
    useEffect(() => {
@@ -116,6 +113,7 @@ const CustomerModal: React.FC<{
    const onSubmitCustomerHandler = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(customerField);
+      dispatch(addCustomer(customerField));
    };
    return (
       <Modal onClose={props.onClose}>

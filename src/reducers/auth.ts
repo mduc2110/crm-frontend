@@ -8,7 +8,7 @@ const isSignIned = (): boolean => {
 const setToken = (token: any) => {
    localStorage.setItem("token", token);
 };
-const getToken = (): string | undefined => {
+export const getToken = (): string | undefined => {
    const token = localStorage.getItem("token");
    return token ? token : undefined;
 };
