@@ -1,27 +1,14 @@
 .form-customer form {
+  width: 800px;
+}
+
+.form-customer form .inputWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
-.form-customer form .inputArea {
-  width: 48%;
-}
-
-.form-customer form .genderArea {
-  margin-top: 10px;
-}
-
-.form-customer form .genderArea span {
-  font-size: 0.8rem;
-}
-
-.form-customer form .genderArea .inner {
+.form-customer form .inputWrap .informationArea {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,13 +18,49 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.form-customer form .addressArea {
+.form-customer form .inputWrap .informationArea .inputArea {
+  width: 48%;
+}
+
+.form-customer form .inputWrap .informationArea .genderArea {
+  margin-top: 10px;
+  width: 48%;
+}
+
+.form-customer form .inputWrap .informationArea .genderArea span {
+  font-size: 0.8rem;
+  margin-left: 2px;
+}
+
+.form-customer form .inputWrap .informationArea .genderArea .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.form-customer form .inputWrap .informationArea .genderArea .inner > * {
+  margin-right: 10px;
+}
+
+.form-customer form .inputWrap .addressArea {
   width: 100%;
+  margin-left: 30px;
 }
 
-.form-customer form .addressArea * {
+.form-customer form .inputWrap .addressArea * {
   width: 100%;
 }
 /*# sourceMappingURL=customerModal.module.css.map */

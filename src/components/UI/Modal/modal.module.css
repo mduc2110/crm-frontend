@@ -5,7 +5,6 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 500px;
   z-index: 10000;
   border-radius: 10px;
   padding: 2rem;

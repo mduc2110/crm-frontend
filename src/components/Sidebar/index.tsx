@@ -1,11 +1,5 @@
 import React from "react";
-import {
-   AiOutlineAppstore,
-   AiOutlineLogout,
-   AiOutlineMail,
-   AiOutlineStock,
-   AiOutlineUser,
-} from "react-icons/ai";
+import { AiOutlineAppstore, AiOutlineLogout, AiOutlineMail, AiOutlineOrderedList, AiOutlineStock, AiOutlineTeam, AiOutlineUser } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -45,6 +39,18 @@ const Sidebar = () => {
                <NavLink to="/statistic">
                   <AiOutlineStock />
                   Thống kê
+               </NavLink>
+            </li>
+            <li>
+               <NavLink to="/task">
+                  <AiOutlineOrderedList />
+                  Công việc
+               </NavLink>
+            </li>
+            <li>
+               <NavLink to="/role">
+                  <AiOutlineTeam />
+                  Quản lý phân quyền
                </NavLink>
             </li>
             <li>{/* <AiOutlineMail />{" "} */}</li>

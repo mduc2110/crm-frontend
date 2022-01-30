@@ -14,7 +14,7 @@ const Input: React.FC<{
    pattern?: string;
 }> = (props) => {
    return (
-      <div className={`${classes.input__control} ${props.className}`}>
+      <div className={`${classes.input__control} ${props.className ? props.className : ""}`}>
          {/* {props.labelName ?? <span className={classes.label}>{props.labelName}</span>} */}
          {props.type !== "radio" && <span className={classes.label}>{props.labelName}</span>}
 

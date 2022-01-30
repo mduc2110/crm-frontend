@@ -9,7 +9,7 @@ const SearchBar: React.FC<{
    const [searchText, setSearchText] = useState<string>("");
    const searchCustomerHandler = () => {};
    return (
-      <form onSubmit={searchCustomerHandler} className={`${classes.searchBar} ${props.className}`}>
+      <form onSubmit={searchCustomerHandler} className={`${classes.searchBar} ${props.className ? props.className : ""}`}>
          <Input onChange={(e) => setSearchText(e.target.value)} value={searchText} />
          <button type="submit">
             <AiOutlineSearch />

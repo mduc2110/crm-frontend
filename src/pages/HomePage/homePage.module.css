@@ -5,6 +5,9 @@
 
 .homePage .contents {
   margin-left: 30vh;
+}
+
+.homePage .contents .inner {
   padding: 2rem;
 }
 
