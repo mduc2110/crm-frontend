@@ -1,8 +1,14 @@
-import { AuthActionTypes, AuthState, SIGN_IN, SIGN_OUT } from "../store/types";
+import { AuthActionTypes, AuthState, UserAuth, SIGN_IN, SIGN_OUT } from "../store/types";
 
 const isSignIned = (): boolean => {
    const token = localStorage.getItem("token");
-   return token ? true : false;
+   const token_expire = localStorage.getItem("token_expire");
+   const user = localStorage.getItem("user");
+   const isAuth = token && token_expire && user ? true : false;
+   if (!isAuth) {
+      localStorage.clear();
+   }
+   return isAuth;
 };
 
 const setToken = (token: any) => {
@@ -25,13 +31,27 @@ export const getTokenExpire = () => {
 const removeTokenExpire = () => {
    localStorage.removeItem("token_expire");
 };
+
+const setUser = (user: any) => {
+   localStorage.setItem("user", JSON.stringify(user));
+};
+const getUser = () => {
+   const userJson = localStorage.getItem("user");
+   const user: UserAuth | null = JSON.parse(userJson as string);
+
+   return user ? user : undefined;
+};
+
+const clearStorage = () => {
+   localStorage.clear();
+};
 export const authReducer = (
    state: AuthState = {
       isFetching: false,
       isAuthenticated: isSignIned(),
       token: getToken(),
-      permissions: [],
       token_expire: getTokenExpire(),
+      user: getUser(),
    },
    action: AuthActionTypes
 ) => {
@@ -39,16 +59,18 @@ export const authReducer = (
       case SIGN_IN:
          setToken(action.payload.token);
          setTokenExpire(action.payload.token_expire);
+         setUser(action.payload.user);
+
          return {
             ...state,
             isAuthenticated: true,
             token: action.payload.token,
             permissions: action.payload.user.permissions,
             token_expire: action.payload.token_expire,
+            user: action.payload.user,
          };
       case SIGN_OUT:
-         removeToken();
-         removeTokenExpire();
+         clearStorage();
          return {
             ...state,
             isAuthenticated: false,

@@ -1,0 +1,63 @@
+@import "../variables";
+@import "../mixins";
+
+.actionDropdown {
+   position: relative;
+
+   .dropbox {
+      width: max-content;
+      position: absolute;
+      right: 0;
+      top: 70%;
+      background-color: $white-color;
+      border: 1px solid $light-main-color;
+      border-radius: 5px;
+      overflow: hidden;
+      display: none;
+      z-index: 100000;
+      ul {
+         li {
+            &:hover {
+               background-color: $light-main-color-2;
+            }
+            button {
+               padding: 10px 20px;
+               width: 100%;
+               text-align: left;
+               margin: 0;
+               color: $main-color;
+               font-size: 20px;
+               outline: none;
+               background-color: transparent;
+               border: none;
+               cursor: pointer;
+
+               &.delete {
+                  color: red;
+               }
+            }
+         }
+      }
+      &:hover {
+         display: block;
+      }
+   }
+
+   button {
+      &:hover + .dropbox {
+         display: block;
+      }
+   }
+}
+
+.back-link {
+   cursor: pointer;
+   text-decoration: underline;
+   font-style: italic;
+   color: $main-color;
+   svg {
+      vertical-align: middle;
+   }
+   margin-bottom: 1rem;
+   display: inline-block;
+}

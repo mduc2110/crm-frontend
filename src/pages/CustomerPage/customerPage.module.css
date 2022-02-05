@@ -25,7 +25,6 @@
 .customerPage .header .actions button {
   text-transform: inherit;
   font-size: 0.9rem;
-  width: initial;
   margin-top: 0;
   padding: 10px;
 }

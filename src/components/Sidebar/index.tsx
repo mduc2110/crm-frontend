@@ -1,5 +1,13 @@
 import React from "react";
-import { AiOutlineAppstore, AiOutlineLogout, AiOutlineMail, AiOutlineOrderedList, AiOutlineStock, AiOutlineTeam, AiOutlineUser } from "react-icons/ai";
+import {
+   AiOutlineAppstore,
+   AiOutlineLogout,
+   AiOutlineMail,
+   AiOutlineOrderedList,
+   AiOutlineStock,
+   AiOutlineTeam,
+   AiOutlineUser,
+} from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -17,38 +25,49 @@ const Sidebar = () => {
    };
    return (
       <div className={classes.sidebar}>
+         <h1>CRM</h1>
          <ul>
             <li>
-               <NavLink to="/dashboard" className={"active"}>
+               <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) => (isActive ? classes.active : "")}
+               >
                   {/* <NavLink className={({ isActive }) => (isActive ? "active" : "")} */}
                   <AiOutlineAppstore /> Dashboard
                </NavLink>
             </li>
             <li>
-               <NavLink to="/customer">
-                  <AiOutlineMail /> Khách hàng
+               <NavLink
+                  to="/customer"
+                  className={({ isActive }) => (isActive ? classes.active : "")}
+               >
+                  <AiOutlineMail />
+                  Khách hàng
                </NavLink>
             </li>
             <li>
-               <NavLink to="/user">
+               <NavLink to="/user" className={({ isActive }) => (isActive ? classes.active : "")}>
                   <AiOutlineUser />
                   Nhân viên
                </NavLink>
             </li>
             <li>
-               <NavLink to="/statistic">
+               <NavLink
+                  to="/statistic"
+                  className={({ isActive }) => (isActive ? classes.active : "")}
+               >
                   <AiOutlineStock />
                   Thống kê
                </NavLink>
             </li>
             <li>
-               <NavLink to="/task">
+               <NavLink to="/task" className={({ isActive }) => (isActive ? classes.active : "")}>
                   <AiOutlineOrderedList />
                   Công việc
                </NavLink>
             </li>
             <li>
-               <NavLink to="/role">
+               <NavLink to="/role" className={({ isActive }) => (isActive ? classes.active : "")}>
                   <AiOutlineTeam />
                   Quản lý phân quyền
                </NavLink>

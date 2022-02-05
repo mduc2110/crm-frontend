@@ -16,12 +16,9 @@ function App() {
    const navigate = useNavigate();
    const location = useLocation();
 
-   console.log(authState);
-
    useEffect(() => {
-      const expireTime = authState.token_expire;
-      if (expireTime && expireTime - Date.now() < 0) {
-         console.log(expireTime - Date.now());
+      const timeRemaining = authState.token_expire;
+      if (timeRemaining && timeRemaining - Date.now() < 0) {
          dispatch(logout());
       }
       if (!authState.isAuthenticated && location.pathname !== "/login") {

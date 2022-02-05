@@ -7,8 +7,16 @@
    position: fixed;
    left: 0;
    height: 100vh;
+
+   h1 {
+      padding: 1rem;
+      color: $main-color;
+      font-size: 2.5rem;
+      border-bottom: 0.2rem solid $main-color;
+   }
+
    ul {
-      margin-top: 50px;
+      margin-top: 1rem;
       li {
          // padding: 10px 20px;
          margin: 5px 5px;

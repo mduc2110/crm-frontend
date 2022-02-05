@@ -2,13 +2,20 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 
+export interface UserAuth {
+   id: number;
+   name: string;
+   emai: string;
+   permissions: string[];
+}
+
 export interface AuthState {
    isFetching: boolean;
-   // user: User;
+   user: undefined | null | UserAuth;
+   // name: string;
    token: string | undefined | null;
    isAuthenticated: boolean;
    errorMessage?: null;
-   permissions: [];
    token_expire: number | undefined | null;
 }
 
@@ -18,10 +25,11 @@ interface SignInAction {
       token?: string;
       token_expire: string;
       user: {
-         permissions?: [];
+         permissions?: string[];
          id: number;
          name: number;
       };
+      name: string;
    };
    error?: string;
 }

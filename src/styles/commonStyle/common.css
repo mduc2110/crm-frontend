@@ -1,0 +1,61 @@
+.actionDropdown {
+  position: relative;
+}
+
+.actionDropdown .dropbox {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  right: 0;
+  top: 70%;
+  background-color: #fff;
+  border: 1px solid #b4beff;
+  border-radius: 5px;
+  overflow: hidden;
+  display: none;
+  z-index: 100000;
+}
+
+.actionDropdown .dropbox ul li:hover {
+  background-color: #e5e9fb;
+}
+
+.actionDropdown .dropbox ul li button {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  margin: 0;
+  color: #3e4a92;
+  font-size: 20px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.actionDropdown .dropbox ul li button.delete {
+  color: red;
+}
+
+.actionDropdown .dropbox:hover {
+  display: block;
+}
+
+.actionDropdown button:hover + .dropbox {
+  display: block;
+}
+
+.back-link {
+  cursor: pointer;
+  text-decoration: underline;
+  font-style: italic;
+  color: #3e4a92;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.back-link svg {
+  vertical-align: middle;
+}
+/*# sourceMappingURL=common.css.map */

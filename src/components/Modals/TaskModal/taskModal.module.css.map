@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AACG,UADO,CACP,UAAU,CAAC;EACR,QAAQ,EAAE,QAAQ;CACpB;;AAHJ,AAIG,UAJO,CAIP,YAAY,CAAC;EACV,QAAQ,EAAE,QAAQ;EAClB,MAAM,EAAE,KAAK;EACb,KAAK,EAAE,IAAI;EACX,gBAAgB,EAAE,IAAI;EACtB,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,OAAkB;EAC1C,OAAO,EAAE,GAAG;CACd",
+    "sources": [
+        "taskModal.module.scss",
+        "../../../styles/_variables.scss",
+        "../../../styles/_mixins.scss"
+    ],
+    "names": [],
+    "file": "taskModal.module.css"
+}

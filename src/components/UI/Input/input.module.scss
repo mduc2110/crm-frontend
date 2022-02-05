@@ -3,6 +3,7 @@
 
 .input__control {
    margin-top: 10px;
+   position: relative;
    .label {
       @include labelStyle;
    }

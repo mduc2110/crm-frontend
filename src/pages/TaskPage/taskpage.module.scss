@@ -1,0 +1,48 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.taskPage {
+   @include flex;
+   align-items: flex-start;
+   .left {
+      width: 20%;
+      margin-right: 2rem;
+      ul {
+         margin-top: 1rem;
+         li {
+            button {
+               background: transparent;
+               border: none;
+               outline: none;
+               cursor: pointer;
+               padding: 10px 0;
+            }
+         }
+      }
+   }
+   .right {
+      width: 80%;
+      .header {
+         @include flex;
+         .search {
+            width: 50%;
+            @include flex;
+            align-items: flex-end;
+            .inputWrap {
+               width: 150px;
+               input {
+                  padding: 10px;
+               }
+            }
+            & > span {
+               line-height: 3rem;
+            }
+            button {
+               margin: 0;
+               width: fit-content;
+               padding: 13px;
+            }
+         }
+      }
+   }
+}

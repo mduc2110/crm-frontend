@@ -93,22 +93,25 @@ const CustomerModal: React.FC<{
       setProvinceList(province);
 
       const district: SelectType[] = customerField.idProvince
-         ? (districtData.district as { [key: string]: any })[customerField.idProvince as any].map((district: any) => {
-              return { id: district.code, name: district.name };
-           })
+         ? (districtData.district as { [key: string]: any })[customerField.idProvince as any].map(
+              (district: any) => {
+                 return { id: district.code, name: district.name };
+              }
+           )
          : [];
       setDistrictList(district);
 
       const ward: SelectType[] = customerField.idDistrict
-         ? (wardData.ward as { [key: string]: any })[customerField.idDistrict as any].map((ward: any) => {
-              return { id: ward.code, name: ward.name };
-           })
+         ? (wardData.ward as { [key: string]: any })[customerField.idDistrict as any].map(
+              (ward: any) => {
+                 return { id: ward.code, name: ward.name };
+              }
+           )
          : [];
       setWardList(ward);
    }, [customerField.idProvince, customerField.idDistrict]);
    const onSubmitCustomerHandler = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(customerField);
       dispatch(addCustomer(customerField));
    };
    return (

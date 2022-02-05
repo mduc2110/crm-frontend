@@ -1,0 +1,84 @@
+.taskPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.taskPage .left {
+  width: 20%;
+  margin-right: 2rem;
+}
+
+.taskPage .left ul {
+  margin-top: 1rem;
+}
+
+.taskPage .left ul li button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.taskPage .right {
+  width: 80%;
+}
+
+.taskPage .right .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.taskPage .right .header .search {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.taskPage .right .header .search .inputWrap {
+  width: 150px;
+}
+
+.taskPage .right .header .search .inputWrap input {
+  padding: 10px;
+}
+
+.taskPage .right .header .search > span {
+  line-height: 3rem;
+}
+
+.taskPage .right .header .search button {
+  margin: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 13px;
+}
+/*# sourceMappingURL=taskpage.module.css.map */

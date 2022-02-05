@@ -8,7 +8,9 @@ const Table: React.FC<{
 }> = (props) => {
    return (
       <>
-         <table className={classes.table}>{props.children}</table>
+         <div className={classes.tableWrap}>
+            <table className={classes.table}>{props.children}</table>
+         </div>
          <div className={classes.pagination}>
             Hiển thị{" "}
             <select name="" id="">

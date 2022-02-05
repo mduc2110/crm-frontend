@@ -1,58 +1,87 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
-.table {
-   width: 100%;
-   border-spacing: 1.2rem;
-   border-collapse: collapse;
-   thead {
-      border-bottom: 1px solid $light-main-color-2;
-      color: $main-color;
-      th {
-         text-align: left;
-         padding: 1rem;
-         &:nth-child(2) {
-            width: 1rem;
+.tableWrap {
+   max-height: 500px;
+   overflow: auto;
+   .table {
+      width: 100%;
+      border-spacing: 1.2rem;
+      border-collapse: collapse;
+      thead {
+         box-shadow: 1px 1px 1px #e5e9fb;
+         color: $main-color;
+         position: sticky;
+         top: 0;
+         background-color: $white-color;
+         tr {
          }
-         &:last-child {
-            text-align: center;
-         }
-      }
-   }
-   tbody {
-      padding-top: 10px;
-      tr {
-         //   margin: 10px 0;
-         td {
-            padding: 1.3rem 1rem 0 1rem;
-            &:nth-child(2) {
-               text-align: center;
-            }
+         th {
+            text-align: left;
+            padding: 1rem;
+
+            // &:nth-child(2) {
+            //    width: 1rem;
+            // }
             &:last-child {
                text-align: center;
             }
          }
       }
-   }
-   input[type="checkbox"] {
-      width: 15px;
-      height: 15px;
-   }
-   .actions {
-      text-align: center;
-      button {
-         color: $main-color;
-         margin: 0 3px;
-         font-size: 1rem;
-         outline: none;
-         background-color: transparent;
-         border: none;
-         cursor: pointer;
-
-         &.delete {
-            color: red;
+      tbody {
+         padding-top: 10px;
+         tr {
+            //   margin: 10px 0;
+            td {
+               padding: 1.3rem 1rem 0 1rem;
+               &:nth-child(2) {
+                  text-align: center;
+               }
+               &:last-child {
+                  text-align: center;
+               }
+            }
          }
       }
+      input[type="checkbox"] {
+         width: 15px;
+         height: 15px;
+      }
+      .actions {
+         text-align: center;
+         button {
+            color: $main-color;
+            margin: 0 3px;
+            font-size: 1rem;
+            outline: none;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+            &.delete {
+               color: red;
+            }
+         }
+      }
+   }
+
+   &::-webkit-scrollbar {
+      width: 6px;
+   }
+
+   /* Track */
+   &::-webkit-scrollbar-track {
+      background: $light-color;
+   }
+
+   /* Handle */
+   &::-webkit-scrollbar-thumb {
+      background: #5060ba;
+   }
+
+   /* Handle on hover */
+   &::-webkit-scrollbar-thumb:hover {
+      background: $main-color;
    }
 }
 

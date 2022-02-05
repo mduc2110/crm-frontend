@@ -1,22 +1,26 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
+import TaskDetail from "../../components/TaskDetail";
 import CustomerPage from "../CustomerPage";
+import TaskPage from "../TaskPage";
 import classes from "./homePage.module.css";
 const HomePage = () => {
    return (
       <div className={classes.homePage}>
          <Sidebar />
          <div className={classes.contents}>
-         <nav>Navbar</nav>
-         <div className={classes.inner}>
-            <Routes>
-               <Route path="/dashboard" element={<div>dashboard</div>} />
-               <Route path="/user" element={<div>user</div>} />
-               <Route path="/customer" element={<CustomerPage/>} />
-            </Routes>
-
-         </div>
+            <Navbar />
+            <div className={classes.inner}>
+               <Routes>
+                  <Route path="/dashboard" element={<div>dashboard</div>} />
+                  <Route path="/user" element={<div>user</div>} />
+                  <Route path="/customer" element={<CustomerPage />} />
+                  <Route path="/task" element={<TaskPage />} />
+                  <Route path="/task/:id" element={<TaskDetail />} />
+               </Routes>
+            </div>
          </div>
       </div>
    );

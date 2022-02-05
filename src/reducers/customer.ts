@@ -21,7 +21,7 @@ export const customerReducer = (state: CustomerState[] = [], action: CustomerAct
          return updatedList;
       case DELETE_CUSTOMER:
          const deleteđIdArry = action.payload;
-         return [...state].filter((customer) => deleteđIdArry.includes(customer.id));
+         return [...state].filter((customer) => !deleteđIdArry.includes(customer.id));
       default:
          return state;
    }

@@ -1,8 +1,38 @@
+@-webkit-keyframes slide-down {
+  0% {
+    opacity: 0.3;
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  90% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0.3;
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  90% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
 .panel {
   border-radius: 10px;
   padding: 1.5rem;
   background-color: #fff;
   -webkit-box-shadow: 2px 5px 12px #e8e8e8;
           box-shadow: 2px 5px 12px #e8e8e8;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  -webkit-animation: slide-down .7s 1;
+  animation: slide-down .7s 1;
 }
 /*# sourceMappingURL=panel.module.css.map */

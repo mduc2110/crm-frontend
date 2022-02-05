@@ -1,0 +1,9 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.taskDetail {
+   .title {
+      font-style: italic;
+      font-weight: 600;
+   }
+}

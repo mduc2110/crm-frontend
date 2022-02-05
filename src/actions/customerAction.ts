@@ -17,6 +17,7 @@ export const getCustomer = (queryString?: string) => async (dispatch: Dispatch) 
 export const addCustomer = (data: CustomerState) => async (dispatch: Dispatch) => {
    try {
       const response = await customerApi.create(data);
+
       dispatch({
          type: CREATE_CUSTOMER,
          payload: response.data,
@@ -31,7 +32,8 @@ export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) =
       const data = {
          customerIdArray: idList,
       };
-      await customerApi.remove(data);
+
+      await customerApi.remove(idList);
       dispatch({
          type: DELETE_CUSTOMER,
          payload: idList,

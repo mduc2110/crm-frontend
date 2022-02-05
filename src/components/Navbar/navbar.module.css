@@ -1,1 +1,60 @@
-/* No CSS *//*# sourceMappingURL=navbar.module.css.map */
+.nav {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav .right .notification {
+  position: relative;
+  color: #3e4a92;
+  font-size: 1.6rem;
+}
+
+.nav .right .notification .count {
+  position: absolute;
+  background-color: red;
+  font-size: 0.7rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  top: 0;
+  right: 0;
+  -webkit-transform: translate(50%, -50%);
+          transform: translate(50%, -50%);
+}
+
+.nav .right > * {
+  margin: 0 0.5rem;
+}
+
+.nav .right .action button {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.nav .right .action button svg {
+  vertical-align: middle;
+}
+/*# sourceMappingURL=navbar.module.css.map */

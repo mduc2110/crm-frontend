@@ -5,6 +5,8 @@ const customerApi = {
    getAll(queryString?: string) {
       const query = queryString || "";
       const url = "/customers" + query;
+
+      // const url = ("/customers" + queryString) as string;
       return axiosClient.get(url);
    },
    //  getByUser() {
@@ -15,14 +17,19 @@ const customerApi = {
       const url = "/customers";
       return axiosClient.post(url, data);
    },
-   remove(data: object = {}) {
-      // const body = data || []
+   remove(data: string[]) {
+      const d = {
+         customerIdArray: data,
+      };
       const url = `/customers`;
       console.log(data);
-
-      return axiosClient.delete(url, data);
+      return axiosClient.delete(url, { data: d });
    },
-
+   // remove(data: string[]) {
+   //    const url = `/customerss`;
+   //    const idArray = 2;
+   //    return axiosClient.delete(url, { data: { idArray: idArray } });
+   // },
    //  createShipping(data) {
    //      const url = '/api/orders/order-create';
    //      return axiosClient.post(url, data);

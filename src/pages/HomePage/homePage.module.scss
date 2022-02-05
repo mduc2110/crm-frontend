@@ -2,7 +2,7 @@
 @import "../../styles/mixins";
 .homePage {
    background-color: $light-color;
-   height: 200vh;
+   min-height: 100vh;
    .contents {
       margin-left: 30vh;
       .inner {

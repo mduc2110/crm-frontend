@@ -2,4 +2,45 @@
 @import "../../styles/variables";
 
 .nav {
+   padding: 2rem;
+   // background-color: $light-main-color-2;
+   // background-color: $white-color;
+   @include flex;
+   .left {
+   }
+   .right {
+      @include flex;
+      .notification {
+         position: relative;
+         color: $main-color;
+         font-size: 1.6rem;
+         .count {
+            position: absolute;
+            background-color: red;
+            font-size: 0.7rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            line-height: 1.5rem;
+            text-align: center;
+            border-radius: 50%;
+            color: $white-color;
+            top: 0;
+            right: 0;
+            transform: translate(50%, -50%);
+         }
+      }
+
+      & > * {
+         margin: 0 0.5rem;
+      }
+      .action {
+         button {
+            font-size: 1rem;
+            vertical-align: middle;
+            svg {
+               vertical-align: middle;
+            }
+         }
+      }
+   }
 }

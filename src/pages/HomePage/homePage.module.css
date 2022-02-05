@@ -1,6 +1,6 @@
 .homePage {
   background-color: #f5f6fb;
-  height: 200vh;
+  min-height: 100vh;
 }
 
 .homePage .contents {

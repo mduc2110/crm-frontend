@@ -9,7 +9,7 @@ const IconButton: React.FC<{
 }> = (props) => {
    return (
       <button
-         className={classes.button}
+         className={classes.icoButton}
          style={{ color: props.color, background: props.background }}
          type={props.type}
          onClick={props.onClick}

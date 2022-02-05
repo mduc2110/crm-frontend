@@ -1,0 +1,15 @@
+.taskModal .searchBox {
+  position: relative;
+}
+
+.taskModal .quickSearch {
+  position: absolute;
+  bottom: -2rem;
+  width: 100%;
+  background-color: #fff;
+  padding: 0.7rem;
+  -webkit-box-shadow: 1px 1px 1px #aaaaaa;
+          box-shadow: 1px 1px 1px #aaaaaa;
+  z-index: 100;
+}
+/*# sourceMappingURL=taskModal.module.css.map */

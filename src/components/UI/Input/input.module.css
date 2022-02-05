@@ -1,5 +1,6 @@
 .input__control {
   margin-top: 10px;
+  position: relative;
 }
 
 .input__control .label {

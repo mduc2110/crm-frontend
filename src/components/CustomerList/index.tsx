@@ -40,7 +40,6 @@ interface TTT {
 const CustomerList = () => {
    // const [customerList2, setCustomerList2] = useState<CustomerState[]>([]);
    const customerList: CustomerState[] = useAppSelector((state) => state.customer);
-   console.log(customerList);
 
    const navigate = useNavigate();
    const location = useLocation();
@@ -67,48 +66,50 @@ const CustomerList = () => {
       dispatch(deleteCustomer([id]));
    };
    return (
-      <Table>
-         <thead>
-            <tr>
-               <th>
-                  <input type="checkbox" />
-               </th>
-               <th>STT</th>
-               <th>Họ và tên</th>
-               <th>Email</th>
-               <th>Loại KH</th>
-               <th>Trạng thái</th>
-               <th className={classes.actions}>Hành động</th>
-            </tr>
-         </thead>
-         <tbody>
-            {customerList?.map((customer, index) => {
-               return (
-                  <tr key={index}>
-                     <td>
-                        <input type="checkbox" data-id={customer.id} />
-                     </td>
-                     <td>{index + 1}</td>
-                     <td>{customer.customerName}</td>
-                     <td>{customer.email}</td>
-                     <td>Khách hàng mới</td>
-                     <td>Hoạt động</td>
-                     <td>
-                        <IconButton
-                           onClick={() => editCustomerHandler(customer.id)}
-                           iconComponent={<AiOutlineEdit />}
-                        />
-                        <IconButton
-                           onClick={() => deleteCustomerHandler(customer.id)}
-                           iconComponent={<AiOutlineDelete />}
-                           color="red"
-                        />
-                     </td>
-                  </tr>
-               );
-            })}
-         </tbody>
-      </Table>
+      <div className={classes.customerList}>
+         <Table>
+            <thead>
+               <tr>
+                  <th>
+                     <input type="checkbox" />
+                  </th>
+                  <th>STT</th>
+                  <th>Họ và tên</th>
+                  <th>Email</th>
+                  <th>Loại KH</th>
+                  <th>Trạng thái</th>
+                  <th className={classes.actions}>Hành động</th>
+               </tr>
+            </thead>
+            <tbody>
+               {customerList?.map((customer, index) => {
+                  return (
+                     <tr key={index}>
+                        <td>
+                           <input type="checkbox" data-id={customer.id} />
+                        </td>
+                        <td>{index + 1}</td>
+                        <td>{customer.customerName}</td>
+                        <td>{customer.email}</td>
+                        <td>Khách hàng mới</td>
+                        <td>Hoạt động</td>
+                        <td>
+                           <IconButton
+                              onClick={() => editCustomerHandler(customer.id)}
+                              iconComponent={<AiOutlineEdit />}
+                           />
+                           <IconButton
+                              onClick={() => deleteCustomerHandler(customer.id)}
+                              iconComponent={<AiOutlineDelete />}
+                              color="red"
+                           />
+                        </td>
+                     </tr>
+                  );
+               })}
+            </tbody>
+         </Table>
+      </div>
    );
 };
 

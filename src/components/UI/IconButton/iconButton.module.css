@@ -1,4 +1,4 @@
-button {
+.icoButton {
   color: #3e4a92;
   margin: 0 3px;
   font-size: 20px;
@@ -8,7 +8,7 @@ button {
   cursor: pointer;
 }
 
-button.delete {
+.icoButton.delete {
   color: red;
 }
 /*# sourceMappingURL=iconButton.module.css.map */
