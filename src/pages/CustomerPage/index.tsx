@@ -14,6 +14,7 @@ import Panel from "../../components/UI/Panel";
 import SearchBar from "../../components/UI/SearchBar";
 import Table from "../../components/UI/Table";
 import classes from "./customerPage.module.css";
+import "../../styles/commonStyle/common.css";
 
 const CustomerPage = () => {
    const [searchText, setSearchText] = useState<string>("");
@@ -21,7 +22,7 @@ const CustomerPage = () => {
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
    const showCartHandler = () => {};
 
-   const hideCartHandler = () => {
+   const hideModalHandler = () => {
       setModalIsShown(false);
    };
 
@@ -31,7 +32,7 @@ const CustomerPage = () => {
 
    return (
       <div className={classes.customerPage}>
-         {modalIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideCartHandler} />}
+         {modalIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideModalHandler} />}
 
          <Panel>
             <div className={classes.header}>
@@ -43,9 +44,9 @@ const CustomerPage = () => {
                   <Button onClick={addCustomerHandler}>
                      <AiOutlinePlusCircle /> Thêm khách hàng
                   </Button>
-                  <div className={classes.actionDropdown}>
+                  <div className="actionDropdown">
                      <IconButton iconComponent={<AiOutlineEllipsis />} />
-                     <div className={classes.dropbox}>
+                     <div className="dr opbox">
                         <ul>
                            <li>
                               <button>Gửi email</button>
