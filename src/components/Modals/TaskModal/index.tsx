@@ -11,7 +11,8 @@ import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
 import Select from "../../UI/Select";
 import classes from "./taskModal.module.css";
-interface Task {
+
+export interface Task {
    customerId: string;
    endTime: string;
    startTime: string;
@@ -22,7 +23,9 @@ interface Task {
    userId: string;
 }
 
-const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
+const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: () => void }> = (
+   props
+) => {
    const [task, setTask] = useState<Task>({
       customerId: "",
       endTime: "",
@@ -45,10 +48,7 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
    useEffect(() => {
       const fetchType = async () => {
          const response = await taskApi.getTaskFilter();
-         // setTaskTypeList(response.data);
          const data: { id: string; nameType: string }[] = response.data;
-         console.log(response.data);
-
          const taskList = data.map((item) => {
             return {
                id: item.id,
@@ -56,7 +56,6 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
             };
          });
          setTaskTypeList(taskList);
-         // console.log(response.data.map(item=> {return {id: item.id, name: item.nameType}}));
       };
       fetchType();
    }, []);
@@ -100,15 +99,22 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
       setIsCustomerFieldFocused(false);
    };
 
-   const onSubmitHandler = (e: FormEvent) => {
-      e.preventDefault();
-      console.log(task);
-   };
    const editor = useRef(null);
-   // const [content, setContent] = useState("");
    const richTextHandler = (content: string) => {
-      setTask({ ...task, taskDescription: content });
+      setTask((prev) => {
+         return { ...prev, taskDescription: content };
+      });
    };
+
+   const onSubmitHandler = async (e: FormEvent) => {
+      e.preventDefault();
+
+      try {
+         const result = await taskApi.create(task);
+         console.log(result);
+      } catch (error) {}
+   };
+
    return (
       <Modal onClose={props.onClose}>
          <h2>{props.title}</h2>
@@ -172,16 +178,7 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
                            })
                         }
                      />
-                     {/* <Input
-                        value={task.taskTypeId}
-                        className={classes.inputArea}
-                        labelName={"Số điện thoại"}
-                        onChange={(e) =>
-                           setTask((prev) => {
-                              return { ...prev, phone: e.target.value };
-                           })
-                        }
-                     /> */}
+
                      <div className={classes.searchBox}>
                         <Input
                            value={emplName}
@@ -189,7 +186,6 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
                            labelName={"Nhân viên phụ trách"}
                            onChange={(e) => setEmplName(e.target.value)}
                            onFocus={() => setIsEmplFieldFocused(true)}
-                           // onBlur={() => setIsEmplFieldFocused(true)}
                         />
                         <div
                            className={`actionDropdown ${classes.quickSearch} ${

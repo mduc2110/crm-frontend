@@ -90,3 +90,57 @@ export type CustomerActionType =
    | CreateCustomerAction
    | UpdateCustomerAction
    | DeleteCustomerAction;
+
+//task
+export const GET_TASK = "GET_TASK";
+export const CREATE_TASK = "CREATE_TASK";
+export const UPDATE_TASK = "UPDATE_TASK";
+export const DELETE_TASK = "DELETE_TASK";
+
+export interface TaskState {
+   startTime: Date;
+   endTime: Date;
+   id: string;
+   taskName: string;
+   taskDescription: string;
+   status: string;
+   createdAt: Date;
+   updatedAt: Date;
+   user: {
+      id: string;
+      name: string;
+   };
+   customer: {
+      customerName: string;
+      id: string;
+   };
+   taskType: {
+      nameType: string;
+      id: string;
+   };
+}
+
+interface GetTaskAction {
+   type: typeof GET_CUSTOMER;
+   payload: CustomerState[];
+}
+interface CreateTaskAction {
+   type: typeof CREATE_CUSTOMER;
+   payload: CustomerState;
+}
+interface UpdateTaskAction {
+   type: typeof UPDATE_CUSTOMER;
+   payload: { customer: TaskState };
+}
+interface DeleteTaskAction {
+   type: typeof DELETE_CUSTOMER;
+   payload: string;
+}
+
+export type TaskAction =
+   | typeof GET_TASK
+   | typeof CREATE_TASK
+   | typeof UPDATE_TASK
+   | typeof DELETE_TASK;
+
+export type TaskActionType = GetTaskAction | CreateTaskAction | UpdateTaskAction | DeleteTaskAction;

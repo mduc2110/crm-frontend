@@ -27,6 +27,7 @@ const TaskPage = () => {
       to: moment(new Date()).format("yyyy-MM-DD"),
    });
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
+   const [isFetching, setIsFetching] = useState<boolean>(false);
    const navigate = useNavigate();
    const location = useLocation();
 
@@ -42,7 +43,6 @@ const TaskPage = () => {
 
    const taskFilterHandler = (id?: number) => {
       const queryParams = new URLSearchParams(location.search);
-
       if (id) {
          navigate("?idType=" + id);
       } else {
@@ -70,7 +70,13 @@ const TaskPage = () => {
 
    return (
       <div className={classes.taskPage}>
-         {modalIsShown && <TaskModal title="Tạo công việc" onClose={hideModalHandler} />}
+         {modalIsShown && (
+            <TaskModal
+               title="Tạo công việc"
+               onClose={hideModalHandler}
+               setIsFetching={() => setIsFetching(true)}
+            />
+         )}
          <Panel className={classes.left}>
             <h3>Phân loại công việc</h3>
             <ul>
@@ -123,7 +129,7 @@ const TaskPage = () => {
                   Tạo công việc
                </Button>
             </div>
-            <TaskList />
+            <TaskList isFetching={isFetching} setIsFetching={() => setIsFetching(false)} />
          </Panel>
       </div>
    );

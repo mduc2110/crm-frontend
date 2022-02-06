@@ -6,7 +6,7 @@ import taskApi from "../../api/taskApi";
 import { Link } from "react-router-dom";
 import { TaskState } from "../../types";
 
-const TaskList = () => {
+const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (props) => {
    const location = useLocation();
    const [taskList, setTaskList] = useState<TaskState[]>([]);
    useEffect(() => {
@@ -14,9 +14,10 @@ const TaskList = () => {
          const response = await taskApi.getAll(location.search);
          setTaskList(response.data.results);
          // console.log(response.data);
+         props.setIsFetching();
       };
       fetchTask();
-   }, [location.search]);
+   }, [location.search, props]);
 
    return (
       <div className={classes.taskList}>
