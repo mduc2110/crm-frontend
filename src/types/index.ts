@@ -25,3 +25,19 @@ export interface TaskState {
       id: string;
    };
 }
+
+export interface UserState {
+   id: string;
+   username: string;
+   password: string;
+   email: string;
+   active: string;
+   phone: string;
+   name: string;
+   roleId: string;
+}
+
+export interface SelectType {
+   id: string;
+   name: string;
+}

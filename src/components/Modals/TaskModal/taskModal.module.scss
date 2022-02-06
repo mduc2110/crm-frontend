@@ -2,15 +2,55 @@
 @import "../../../styles/mixins";
 .taskModal {
    .searchBox {
-      position: relative;
+      // position: relative;
    }
    .quickSearch {
-      position: absolute;
-      bottom: -2rem;
+      // bottom: -2rem;
       width: 100%;
       background-color: #fff;
-      padding: 0.7rem;
-      box-shadow: 1px 1px 1px rgb(170, 170, 170);
+      // padding: 0.7rem;
+      // box-shadow: 1px 1px 1px rgb(170, 170, 170);
       z-index: 100;
+      display: none;
+      .dropbox {
+         width: 100%;
+         display: block;
+         overflow: auto;
+         max-height: 200px;
+         ul {
+            display: block;
+            width: 100%;
+            li {
+               button {
+                  font-size: 1rem;
+               }
+            }
+         }
+      }
+
+      &.active {
+         display: block;
+      }
+   }
+
+   .richTextArea {
+      margin-top: 10px;
+      > span {
+         font-size: 0.8rem;
+         margin-bottom: 5px;
+         display: inline-block;
+      }
+   }
+
+   .timeArea {
+      @include flex;
+      // align-items: flex-end;
+      vertical-align: middle;
+      & > *:not(:nth-child(2)) {
+         width: 48%;
+      }
+      & > span {
+         margin-top: 2rem;
+      }
    }
 }

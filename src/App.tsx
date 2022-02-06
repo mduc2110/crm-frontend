@@ -10,11 +10,14 @@ import { useAppSelector } from "./store";
 import { AuthState } from "./store/types";
 import { getTokenExpire } from "./reducers/auth";
 import { logout } from "./actions/auth";
+import "./styles/commonStyle/common.css";
 function App() {
    const authState: AuthState = useAppSelector((state) => state.auth);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const location = useLocation();
+
+   console.log(authState);
 
    useEffect(() => {
       const timeRemaining = authState.token_expire;

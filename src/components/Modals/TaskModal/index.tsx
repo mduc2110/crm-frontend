@@ -1,7 +1,15 @@
-import React, { FormEvent, useState } from "react";
+import JoditEditor from "jodit-react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
+import customerApi from "../../../api/customerApi";
+import taskApi from "../../../api/taskApi";
+import userApi from "../../../api/userApi";
+import useDebounce from "../../../hooks/useDebounce";
+import { CustomerState } from "../../../store/types";
+import { SelectType, UserState } from "../../../types";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
+import Select from "../../UI/Select";
 import classes from "./taskModal.module.css";
 interface Task {
    customerId: string;
@@ -25,11 +33,82 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
       taskTypeId: "",
       userId: "",
    });
+   const [emplName, setEmplName] = useState<string>("");
+   const [isEmplFieldFocused, setIsEmplFieldFocused] = useState<boolean>(false);
+   const [emplList, setEmplList] = useState<UserState[]>([]);
+
+   const [customerName, setCustomerName] = useState<string>("");
+   const [isCustomerFieldFocused, setIsCustomerFieldFocused] = useState<boolean>(false);
+   const [customersList, setCustomersList] = useState<CustomerState[]>([]);
+
+   const [taskTypeList, setTaskTypeList] = useState<SelectType[]>([]);
+   useEffect(() => {
+      const fetchType = async () => {
+         const response = await taskApi.getTaskFilter();
+         // setTaskTypeList(response.data);
+         const data: { id: string; nameType: string }[] = response.data;
+         console.log(response.data);
+
+         const taskList = data.map((item) => {
+            return {
+               id: item.id,
+               name: item.nameType,
+            };
+         });
+         setTaskTypeList(taskList);
+         // console.log(response.data.map(item=> {return {id: item.id, name: item.nameType}}));
+      };
+      fetchType();
+   }, []);
+   //employee
+   useDebounce(
+      () => {
+         const fetchUserByName = async () => {
+            const response = await userApi.getAll("?q=" + emplName);
+
+            setEmplList(response.data.results);
+         };
+         fetchUserByName();
+      },
+      700,
+      [emplName]
+   );
+   const onChangeEmployeeHandler = (id: string, name: string) => {
+      setTask((prev) => {
+         return { ...prev, userId: id };
+      });
+      setEmplName(name);
+      setIsEmplFieldFocused(false);
+   };
+   //customer
+   useDebounce(
+      () => {
+         const fetchCustomerByName = async () => {
+            const response = await customerApi.getAll("?q=" + customerName);
+            setCustomersList(response.data.results);
+         };
+         fetchCustomerByName();
+      },
+      700,
+      [customerName]
+   );
+   const onChangeCustomerHandler = (id: string, name: string) => {
+      setTask((prev) => {
+         return { ...prev, customerId: id };
+      });
+      setCustomerName(name);
+      setIsCustomerFieldFocused(false);
+   };
+
    const onSubmitHandler = (e: FormEvent) => {
       e.preventDefault();
+      console.log(task);
    };
-   console.log(task);
-
+   const editor = useRef(null);
+   // const [content, setContent] = useState("");
+   const richTextHandler = (content: string) => {
+      setTask({ ...task, taskDescription: content });
+   };
    return (
       <Modal onClose={props.onClose}>
          <h2>{props.title}</h2>
@@ -43,21 +122,11 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
                         labelName={"Tiêu đề"}
                         onChange={(e) =>
                            setTask((prev) => {
-                              return { ...prev, customerName: e.target.value };
+                              return { ...prev, taskName: e.target.value };
                            })
                         }
                      />
-                     <Input
-                        value={task.taskTypeId}
-                        className={classes.inputArea}
-                        labelName={"Số điện thoại"}
-                        onChange={(e) =>
-                           setTask((prev) => {
-                              return { ...prev, phone: e.target.value };
-                           })
-                        }
-                     />
-                     <div className={classes.searchBox}>
+                     <div className={classes.timeArea}>
                         <Input
                            value={task.startTime}
                            className={classes.inputArea}
@@ -69,34 +138,115 @@ const TaskModal: React.FC<{ onClose: () => void; title: string }> = (props) => {
                               })
                            }
                         />
-                        <div className={`actionDropdown ${classes.quickSearch}`}>
-                           <ul className="dropbox">
-                              <li>
-                                 <button>Nhân viên 1</button>
-                              </li>
-                              <li>
-                                 <button>Nhân viên 2</button>
-                              </li>
-                              <li>
-                                 <button>Nhân viên 3</button>
-                              </li>
-                              <li>
-                                 <button>Nhân viên 4</button>
-                              </li>
-                           </ul>
-                        </div>
+                        <span>-</span>
+                        <Input
+                           value={task.endTime}
+                           className={classes.inputArea}
+                           labelName={"Thời gian kết thúc"}
+                           type="datetime-local"
+                           min={task.startTime}
+                           onChange={(e) =>
+                              setTask((prev) => {
+                                 return { ...prev, endTime: e.target.value };
+                              })
+                           }
+                        />
                      </div>
-                     <Input
-                        value={task.endTime}
+                     <div className={classes.richTextArea}>
+                        <span>Nội dung công việc</span>
+                        <JoditEditor
+                           ref={editor}
+                           value={task.taskDescription}
+                           onBlur={(content) => richTextHandler(content)}
+                        />
+                     </div>
+
+                     <Select
+                        options={taskTypeList}
+                        value={task.taskTypeId}
                         className={classes.inputArea}
-                        labelName={"Thời gian kết thúc"}
-                        type="datetime-local"
+                        labelName={"Công việc"}
                         onChange={(e) =>
                            setTask((prev) => {
-                              return { ...prev, endTime: e.target.value };
+                              return { ...prev, taskTypeId: e.target.value };
                            })
                         }
                      />
+                     {/* <Input
+                        value={task.taskTypeId}
+                        className={classes.inputArea}
+                        labelName={"Số điện thoại"}
+                        onChange={(e) =>
+                           setTask((prev) => {
+                              return { ...prev, phone: e.target.value };
+                           })
+                        }
+                     /> */}
+                     <div className={classes.searchBox}>
+                        <Input
+                           value={emplName}
+                           className={classes.inputArea}
+                           labelName={"Nhân viên phụ trách"}
+                           onChange={(e) => setEmplName(e.target.value)}
+                           onFocus={() => setIsEmplFieldFocused(true)}
+                           // onBlur={() => setIsEmplFieldFocused(true)}
+                        />
+                        <div
+                           className={`actionDropdown ${classes.quickSearch} ${
+                              isEmplFieldFocused ? classes.active : ""
+                           }`}
+                        >
+                           <div className={`dropbox ${classes.dropbox}`}>
+                              <ul>
+                                 {emplList?.map((empl, index) => (
+                                    <li key={index}>
+                                       <button
+                                          onClick={() =>
+                                             onChangeEmployeeHandler(empl.id, empl.name)
+                                          }
+                                       >
+                                          {empl.name}
+                                       </button>
+                                    </li>
+                                 ))}
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <div className={classes.searchBox}>
+                        <Input
+                           value={customerName}
+                           className={classes.inputArea}
+                           labelName={"Khách hàng"}
+                           onChange={(e) => setCustomerName(e.target.value)}
+                           onFocus={() => setIsCustomerFieldFocused(true)}
+                           // onBlur={() => setIsEmplFieldFocused(true)}
+                        />
+                        <div
+                           className={`actionDropdown ${classes.quickSearch} ${
+                              isCustomerFieldFocused ? classes.active : ""
+                           }`}
+                        >
+                           <div className={`dropbox ${classes.dropbox}`}>
+                              <ul>
+                                 {customersList?.map((customer, index) => (
+                                    <li key={index}>
+                                       <button
+                                          onClick={() =>
+                                             onChangeCustomerHandler(
+                                                customer.id,
+                                                customer.customerName
+                                             )
+                                          }
+                                       >
+                                          {customer.customerName}
+                                       </button>
+                                    </li>
+                                 ))}
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
                <Button type="submit">Thêm</Button>

@@ -1,15 +1,58 @@
-.taskModal .searchBox {
-  position: relative;
-}
-
 .taskModal .quickSearch {
-  position: absolute;
-  bottom: -2rem;
   width: 100%;
   background-color: #fff;
-  padding: 0.7rem;
-  -webkit-box-shadow: 1px 1px 1px #aaaaaa;
-          box-shadow: 1px 1px 1px #aaaaaa;
   z-index: 100;
+  display: none;
+}
+
+.taskModal .quickSearch .dropbox {
+  width: 100%;
+  display: block;
+  overflow: auto;
+  max-height: 200px;
+}
+
+.taskModal .quickSearch .dropbox ul {
+  display: block;
+  width: 100%;
+}
+
+.taskModal .quickSearch .dropbox ul li button {
+  font-size: 1rem;
+}
+
+.taskModal .quickSearch.active {
+  display: block;
+}
+
+.taskModal .richTextArea {
+  margin-top: 10px;
+}
+
+.taskModal .richTextArea > span {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.taskModal .timeArea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+}
+
+.taskModal .timeArea > *:not(:nth-child(2)) {
+  width: 48%;
+}
+
+.taskModal .timeArea > span {
+  margin-top: 2rem;
 }
 /*# sourceMappingURL=taskModal.module.css.map */

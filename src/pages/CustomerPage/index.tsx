@@ -14,7 +14,7 @@ import Panel from "../../components/UI/Panel";
 import SearchBar from "../../components/UI/SearchBar";
 import Table from "../../components/UI/Table";
 import classes from "./customerPage.module.css";
-import "../../styles/commonStyle/common.css";
+// import "../../styles/commonStyle/common.css";
 
 const CustomerPage = () => {
    const [searchText, setSearchText] = useState<string>("");
@@ -46,7 +46,7 @@ const CustomerPage = () => {
                   </Button>
                   <div className="actionDropdown">
                      <IconButton iconComponent={<AiOutlineEllipsis />} />
-                     <div className="dr opbox">
+                     <div className="dropbox">
                         <ul>
                            <li>
                               <button>Gửi email</button>

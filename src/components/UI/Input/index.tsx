@@ -8,10 +8,13 @@ const Input: React.FC<{
    placeholder?: string;
    value: any;
    onChange: (e: any) => void;
+   onFocus?: (e: any) => void;
+   onBlur?: (e: any) => void;
    className?: string;
    name?: string;
    checked?: boolean;
    pattern?: string;
+   min?: string;
 }> = (props) => {
    return (
       <div className={`${classes.input__control} ${props.className ? props.className : ""}`}>
@@ -27,6 +30,9 @@ const Input: React.FC<{
             name={props.name}
             checked={props.checked}
             pattern={props.pattern}
+            onFocus={props.onFocus}
+            onBlur={props.onBlur}
+            min={props.min}
          />
          {props.type === "radio" && <span className={classes.label}>{props.labelName}</span>}
       </div>

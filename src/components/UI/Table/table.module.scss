@@ -65,24 +65,24 @@
       }
    }
 
-   &::-webkit-scrollbar {
-      width: 6px;
-   }
+   // &::-webkit-scrollbar {
+   //    width: 6px;
+   // }
 
-   /* Track */
-   &::-webkit-scrollbar-track {
-      background: $light-color;
-   }
+   // /* Track */
+   // &::-webkit-scrollbar-track {
+   //    background: $light-color;
+   // }
 
-   /* Handle */
-   &::-webkit-scrollbar-thumb {
-      background: #5060ba;
-   }
+   // /* Handle */
+   // &::-webkit-scrollbar-thumb {
+   //    background: #5060ba;
+   // }
 
-   /* Handle on hover */
-   &::-webkit-scrollbar-thumb:hover {
-      background: $main-color;
-   }
+   // /* Handle on hover */
+   // &::-webkit-scrollbar-thumb:hover {
+   //    background: $main-color;
+   // }
 }
 
 .pagination {

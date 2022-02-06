@@ -1,9 +1,6 @@
 .tableWrap {
   max-height: 500px;
   overflow: auto;
-  /* Track */
-  /* Handle */
-  /* Handle on hover */
 }
 
 .tableWrap .table {
@@ -70,22 +67,6 @@
   color: red;
 }
 
-.tableWrap::-webkit-scrollbar {
-  width: 6px;
-}
-
-.tableWrap::-webkit-scrollbar-track {
-  background: #f5f6fb;
-}
-
-.tableWrap::-webkit-scrollbar-thumb {
-  background: #5060ba;
-}
-
-.tableWrap::-webkit-scrollbar-thumb:hover {
-  background: #3e4a92;
-}
-
 .pagination {
   margin-top: 3rem;
 }
@@ -93,7 +74,7 @@
 .pagination select {
   outline: none;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #3e4a92;
   -webkit-transition: all 0.1s ease-in;

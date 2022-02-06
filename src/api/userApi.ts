@@ -1,12 +1,26 @@
+import { UserState } from "../types";
 import axiosClient from "./axiosClient";
 
 const userApi = {
-   getAll() {
-      const url = "/api/orders";
+   getAll(queryString: string) {
+      const query = queryString || "";
+      const url = "/users" + query;
       return axiosClient.get(url);
    },
    login(data: { username: string; password: string }) {
-      const url = "/user/login";
+      const url = "/users/login";
+      return axiosClient.post(url, data);
+   },
+   getOne(id: string) {
+      const url = "/users/" + id;
+      return axiosClient.get(url);
+   },
+   remove(id: string) {
+      const url = "/users/" + id;
+      return axiosClient.delete(url);
+   },
+   create(data: UserState) {
+      const url = "/tasks";
       return axiosClient.post(url, data);
    },
    //  getByUser() {

@@ -58,4 +58,23 @@
 .back-link svg {
   vertical-align: middle;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f6fb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5060ba;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3e4a92;
+}
 /*# sourceMappingURL=common.css.map */

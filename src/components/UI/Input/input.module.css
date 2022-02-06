@@ -12,7 +12,7 @@
 .input__control input:not([type="radio"]) {
   outline: none;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #3e4a92;
   -webkit-transition: all 0.1s ease-in;
