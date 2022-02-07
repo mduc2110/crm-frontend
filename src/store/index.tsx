@@ -3,11 +3,13 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { authReducer } from "../reducers/auth";
 import { customerReducer } from "../reducers/customer";
+import { userReducer } from "../reducers/user";
 import { AuthState } from "./types";
 
 const rootReducer = combineReducers({
    auth: authReducer,
    customer: customerReducer,
+   user: userReducer,
 });
 
 // export const configureStore = () => {

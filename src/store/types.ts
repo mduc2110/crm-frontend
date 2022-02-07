@@ -121,19 +121,19 @@ export interface TaskState {
 }
 
 interface GetTaskAction {
-   type: typeof GET_CUSTOMER;
-   payload: CustomerState[];
+   type: typeof GET_TASK;
+   payload: TaskState[];
 }
 interface CreateTaskAction {
-   type: typeof CREATE_CUSTOMER;
-   payload: CustomerState;
+   type: typeof CREATE_TASK;
+   payload: TaskState;
 }
 interface UpdateTaskAction {
-   type: typeof UPDATE_CUSTOMER;
-   payload: { customer: TaskState };
+   type: typeof UPDATE_TASK;
+   payload: { TASK: TaskState };
 }
 interface DeleteTaskAction {
-   type: typeof DELETE_CUSTOMER;
+   type: typeof DELETE_TASK;
    payload: string;
 }
 
@@ -144,3 +144,45 @@ export type TaskAction =
    | typeof DELETE_TASK;
 
 export type TaskActionType = GetTaskAction | CreateTaskAction | UpdateTaskAction | DeleteTaskAction;
+
+//USER
+
+export const GET_USER = "GET_USER";
+export const CREATE_USER = "CREATE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const DELETE_USER = "DELETE_USER";
+
+export interface UserState {
+   id: string;
+   username: string;
+   email: string | undefined;
+   active: boolean;
+   phone: string;
+   name: string;
+   deptId: string;
+   roleId: string;
+}
+interface GetUserAction {
+   type: typeof GET_USER;
+   payload: UserState[];
+}
+interface CreateUserAction {
+   type: typeof CREATE_USER;
+   payload: UserState;
+}
+interface UpdateUserAction {
+   type: typeof UPDATE_USER;
+   payload: UserState;
+}
+interface DeleteUserAction {
+   type: typeof DELETE_USER;
+   payload: string;
+}
+
+export type UserAction =
+   | typeof GET_USER
+   | typeof CREATE_USER
+   | typeof UPDATE_USER
+   | typeof DELETE_USER;
+
+export type UserActionType = GetUserAction | CreateUserAction | UpdateUserAction | DeleteUserAction;

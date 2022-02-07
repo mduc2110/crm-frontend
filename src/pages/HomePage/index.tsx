@@ -5,6 +5,7 @@ import Sidebar from "../../components/Sidebar";
 import TaskDetail from "../../components/TaskDetail";
 import CustomerPage from "../CustomerPage";
 import TaskPage from "../TaskPage";
+import UserPage from "../UserPage/inedx";
 import classes from "./homePage.module.css";
 const HomePage = () => {
    return (
@@ -15,7 +16,7 @@ const HomePage = () => {
             <div className={classes.inner}>
                <Routes>
                   <Route path="/dashboard" element={<div>dashboard</div>} />
-                  <Route path="/user" element={<div>user</div>} />
+                  <Route path="/user" element={<UserPage />} />
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/task" element={<TaskPage />} />
                   <Route path="/task/:id" element={<TaskDetail />} />

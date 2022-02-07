@@ -13,7 +13,7 @@ const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (
       const fetchTask = async () => {
          const response = await taskApi.getAll(location.search);
          setTaskList(response.data.results);
-         // console.log(response.data);
+         console.log(response.data);
          props.setIsFetching();
       };
       fetchTask();
@@ -46,7 +46,7 @@ const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (
                         <td>
                            <Link to={"/task/" + task.id}>{task.taskName}</Link>
                         </td>
-                        <td>{task.taskType.nameType}</td>
+                        <td>{task.tasktype.nameType}</td>
                         <td>{task.user.name}</td>
                         <td>{task.status}</td>
                      </tr>

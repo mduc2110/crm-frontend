@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "userPage.module.scss",
+        "../../styles/_mixins.scss",
+        "../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "userPage.module.css"
+}
