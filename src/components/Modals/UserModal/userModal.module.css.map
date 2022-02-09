@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "userModal.module.scss",
+        "../../../styles/_variables.scss",
+        "../../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "userModal.module.css"
+}

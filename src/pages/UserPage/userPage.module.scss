@@ -2,4 +2,10 @@
 @import "../../styles/variables";
 
 .userPage {
+   .header {
+      @include flex;
+      button {
+         margin: 0;
+      }
+   }
 }

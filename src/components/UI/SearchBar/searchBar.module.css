@@ -4,8 +4,11 @@
   display: flex;
 }
 
-.searchBar input {
+.searchBar input:not([type="radio"]) {
   padding: 10px;
+  border-radius: initial;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .searchBar > * {
@@ -16,6 +19,9 @@
   background-color: #3e4a92;
   color: #f5f6fb;
   width: 50px;
-  border-radius: 5px;
+  border-radius: initial;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 11px;
 }
 /*# sourceMappingURL=searchBar.module.css.map */

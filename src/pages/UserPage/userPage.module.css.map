@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAGA,AACG,SADM,CACN,OAAO,CAAC;ECHR,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;EAC9B,WAAW,EAAE,MAAM;CDMlB;;AANJ,AAGM,SAHG,CACN,OAAO,CAEJ,MAAM,CAAC;EACJ,MAAM,EAAE,CAAC;CACX",
     "sources": [
         "userPage.module.scss",
         "../../styles/_mixins.scss",

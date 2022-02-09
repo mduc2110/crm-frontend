@@ -23,6 +23,11 @@ const userApi = {
       const url = "/users/";
       return axiosClient.post(url, data);
    },
+
+   getAllDept() {
+      const url = "/depts/";
+      return axiosClient.get(url);
+   },
    //  getByUser() {
    //      const url = `api/orders/orders`;
    //      return axiosClient.get(url);

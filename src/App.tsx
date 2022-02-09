@@ -17,7 +17,7 @@ function App() {
    const navigate = useNavigate();
    const location = useLocation();
 
-   console.log(authState);
+   // console.log(authState);
 
    useEffect(() => {
       const timeRemaining = authState.token_expire;

@@ -3,9 +3,12 @@
 
 .searchBar {
    display: flex;
-   input {
+   input:not([type="radio"]) {
       // display: none;
       padding: 10px;
+      border-radius: initial;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
    }
    > * {
       margin: 0;
@@ -14,6 +17,9 @@
       background-color: $main-color;
       color: $light-color;
       width: 50px;
-      border-radius: 5px;
+      border-radius: initial;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding: 11px;
    }
 }

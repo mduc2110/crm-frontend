@@ -161,6 +161,14 @@ export interface UserState {
    name: string;
    deptId: string;
    roleId: string;
+   dept: {
+      id: string;
+      departmentName: string;
+   };
+   role: {
+      id: string;
+      description: string;
+   };
 }
 interface GetUserAction {
    type: typeof GET_USER;
