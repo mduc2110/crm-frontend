@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { uploadFileCustomer } from "../../../actions/customerAction";
@@ -19,7 +19,8 @@ const UploadModal: React.FC<{
 
       setFileSelected(fileList[0]);
    };
-   const uploadFileHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+   // const uploadFileHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+   const uploadFileHandler = (e: FormEvent) => {
       e.preventDefault();
       if (fileSelected) {
          const formData = new FormData();
@@ -30,7 +31,7 @@ const UploadModal: React.FC<{
    };
    return (
       <Modal className={classes.uploadModal} onClose={props.onClose}>
-         <form onSubmit={() => uploadFileHandler}>
+         <form onSubmit={uploadFileHandler}>
             <div className={classes.button}>
                {/* <Input type="file" /> */}
                <AiOutlineCloudUpload />
