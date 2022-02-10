@@ -14,6 +14,7 @@ const UserList: React.FC = (props) => {
                </th>
                <th>STT</th>
                <th>Tên đăng nhập</th>
+               <th>Họ và tên</th>
                <th>Email</th>
                <th>Chức vụ</th>
                <th>Phòng ban</th>
@@ -28,6 +29,7 @@ const UserList: React.FC = (props) => {
                      </td>
                      <td>{index + 1}</td>
                      <td>{user.username}</td>
+                     <td>{user.name}</td>
                      <td>{user.email}</td>
                      <td>{user.role.description}</td>
                      <td>{user.dept.departmentName}</td>

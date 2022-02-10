@@ -12,10 +12,13 @@ const Backdrop: React.FC<{
 
 const ModalOverlay: React.FC<{
    children?: ReactNode;
+   isLoading?: boolean;
+   className?: string;
 }> = (props) => {
    return (
-      <div className={classes.modal}>
+      <div className={`${classes.modal} ${props.className}`}>
          <div className={classes.content}>{props.children}</div>
+         {props.isLoading && <div className={classes.loading}></div>}
       </div>
    );
 };
@@ -24,14 +27,21 @@ const portalElement = document.getElementById("overlays");
 
 const Modal: React.FC<{
    children?: ReactNode;
+   isLoading?: boolean;
    onClose: () => void;
+   className?: string;
 }> = (props) => {
    return (
       <Fragment>
          {portalElement &&
             ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
          {portalElement &&
-            ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
+            ReactDOM.createPortal(
+               <ModalOverlay className={props.className} isLoading={props.isLoading}>
+                  {props.children}
+               </ModalOverlay>,
+               portalElement
+            )}
       </Fragment>
    );
 };

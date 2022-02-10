@@ -36,3 +36,14 @@ export interface Role {
    name: string;
    description: string;
 }
+
+export interface UserPostData {
+   username: string;
+   password: string;
+   confirmPassword: string;
+   email: string;
+   phone: string;
+   name: string;
+   deptId: string;
+   roleId: string;
+}

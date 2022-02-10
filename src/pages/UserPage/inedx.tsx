@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getAllUser } from "../../actions/userAction";
 import userApi from "../../api/userApi";
 import CustomerList from "../../components/CustomerList";
@@ -15,12 +16,13 @@ import classes from "./userPage.module.css";
 const UserPage = () => {
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
    const dispatch = useDispatch();
+   const location = useLocation();
    useEffect(() => {
       const fetchAllUser = async () => {
-         dispatch(getAllUser());
+         dispatch(getAllUser(location.search));
       };
       fetchAllUser();
-   }, [dispatch]);
+   }, [dispatch, location.search]);
 
    const addUserHandler = () => {
       setModalIsShown(true);
@@ -29,10 +31,9 @@ const UserPage = () => {
    const hideModalHandler = () => {
       setModalIsShown(false);
    };
-
    return (
       <div className={classes.userPage}>
-         {modalIsShown && <UserModal title="Thêm khách hàng" onClose={hideModalHandler} />}
+         {modalIsShown && <UserModal title="Thêm nhân viên" onClose={hideModalHandler} />}
          <Panel>
             <div className={classes.header}>
                <SearchBar />

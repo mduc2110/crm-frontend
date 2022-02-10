@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import CustomerList from "../../components/CustomerList";
 import CustomerModal from "../../components/Modals/CustomerModal";
+import UploadModal from "../../components/Modals/UploadModal";
 import Button from "../../components/UI/Button";
 import IconButton from "../../components/UI/IconButton";
 import Input from "../../components/UI/Input";
@@ -17,10 +18,8 @@ import classes from "./customerPage.module.css";
 // import "../../styles/commonStyle/common.css";
 
 const CustomerPage = () => {
-   const [searchText, setSearchText] = useState<string>("");
-   const searchCustomerHandler = () => {};
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
-   const showCartHandler = () => {};
+   const [uploadModalIsShown, setUploadModalIsShown] = useState<boolean>(false);
 
    const hideModalHandler = () => {
       setModalIsShown(false);
@@ -33,12 +32,13 @@ const CustomerPage = () => {
    return (
       <div className={classes.customerPage}>
          {modalIsShown && <CustomerModal title="Thêm khách hàng" onClose={hideModalHandler} />}
+         {uploadModalIsShown && <UploadModal onClose={() => setUploadModalIsShown(false)} />}
 
          <Panel>
             <div className={classes.header}>
                <SearchBar />
                <div className={classes.actions}>
-                  <Button>
+                  <Button onClick={() => setUploadModalIsShown(true)}>
                      <AiOutlineUpload /> Tải lên
                   </Button>
                   <Button onClick={addCustomerHandler}>

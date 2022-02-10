@@ -42,3 +42,17 @@ export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) =
       console.log(error);
    }
 };
+
+export const uploadFileCustomer = (data: any) => async (dispatch: Dispatch) => {
+   try {
+      const response = await customerApi.uploads(data);
+      console.log(response);
+
+      // dispatch({
+      //    type: DELETE_CUSTOMER,
+      //    payload: idList,
+      // });
+   } catch (error) {
+      console.log(error);
+   }
+};

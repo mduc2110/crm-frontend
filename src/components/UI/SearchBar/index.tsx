@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import classes from "./searchBar.module.css";
 import IconButton from "../IconButton";
+import queryString from "query-string";
 import { AiOutlineSearch } from "react-icons/ai";
 import Input from "../Input";
 import Button from "../Button";
+import { useLocation, useNavigate } from "react-router-dom";
 const SearchBar: React.FC<{
    className?: string;
 }> = (props) => {
    const [searchText, setSearchText] = useState<string>("");
-   const searchCustomerHandler = () => {};
+   const nagivate = useNavigate();
+   const location = useLocation();
+   const searchCustomerHandler = (e: FormEvent) => {
+      e.preventDefault();
+      if (searchText) {
+         const q = queryString.parse(location.search);
+         q.q = searchText;
+         setSearchText("");
+         nagivate("?" + queryString.stringify(q));
+      } else {
+         nagivate("");
+      }
+   };
    return (
       <form
          onSubmit={searchCustomerHandler}

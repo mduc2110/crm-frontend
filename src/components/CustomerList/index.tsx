@@ -8,54 +8,24 @@ import { CustomerState } from "../../store/types";
 import IconButton from "../UI/IconButton";
 import Table from "../UI/Table";
 import classes from "./customer.module.css";
-interface CustomerTest {
-   name: string;
-   email: string;
-   address: string;
-}
-interface TTT {
-   id: string;
-   name: string;
-   username: string;
-   email: string;
-   address: {
-      street: string;
-      suite: string;
-      city: string;
-      zipcode: string;
-      geo: {
-         lat: string;
-         lng: string;
-      };
-   };
-   phone: string;
-   website: string;
-   company: {
-      name: string;
-      catchPhrase: string;
-      bs: string;
-   };
-}
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const CustomerList = () => {
    // const [customerList2, setCustomerList2] = useState<CustomerState[]>([]);
    const customerList: CustomerState[] = useAppSelector((state) => state.customer);
+   console.log(customerList);
 
    const navigate = useNavigate();
    const location = useLocation();
 
    const dispatch = useDispatch();
-   useEffect(() => {
-      // const fetchUser = async () => {
-      //    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-      //    const userData = await response.json();
-      //    setCustomerList2(userData);
-      // };
 
-      // fetchUser();
-      dispatch(getCustomer());
+   useEffect(() => {
+      dispatch(getCustomer(location.search));
       // dispatch(getCustomer("?page=1&limit=10"));
-   }, [dispatch]);
+   }, [dispatch, location]);
    const editCustomerHandler = (id: string) => {
       navigate({
          pathname: location.pathname,
@@ -63,7 +33,20 @@ const CustomerList = () => {
       });
    };
    const deleteCustomerHandler = (id: string) => {
-      dispatch(deleteCustomer([id]));
+      Swal.fire({
+         // title: "Are you sure?",
+         text: "Bạn sẽ không thể hoàn tác",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3e4a92",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Xóa",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            dispatch(deleteCustomer([id]));
+            Swal.fire("Deleted!", "Xóa thành công.", "success");
+         }
+      });
    };
    return (
       <div className={classes.customerList}>

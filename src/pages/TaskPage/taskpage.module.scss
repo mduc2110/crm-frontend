@@ -25,7 +25,8 @@
       .header {
          @include flex;
          .search {
-            width: 50%;
+            width: 430px;
+
             @include flex;
             align-items: flex-end;
             .inputWrap {

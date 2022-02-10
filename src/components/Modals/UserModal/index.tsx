@@ -8,10 +8,14 @@ import React, {
    useRef,
    useState,
 } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { setloading } from "../../../actions/uiAction";
+import { addUser } from "../../../actions/userAction";
 import roleApi from "../../../api/roleApi";
 import userApi from "../../../api/userApi";
 import { UserState } from "../../../store/types";
-import { Role, SelectType } from "../../../types";
+import { Role, SelectType, UserPostData } from "../../../types";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
@@ -21,7 +25,7 @@ const UserModal: React.FC<{
    onClose: () => void;
    title: string;
 }> = (props) => {
-   const [user, setUser] = useState({
+   const [user, setUser] = useState<UserPostData>({
       username: "",
       password: "",
       confirmPassword: "",
@@ -31,11 +35,13 @@ const UserModal: React.FC<{
       deptId: "",
       roleId: "",
    });
-   const [isValid, setIsvalid] = useState<boolean>(false);
+   const [loading, setLoading] = useState<boolean>(false);
    const [isValidPassword, setIsvalidPassword] = useState<boolean>(false);
 
    const [roleList, setRoleList] = useState<SelectType[]>([]);
    const [deptList, setDeptList] = useState<SelectType[]>([]);
+
+   const dispatch = useDispatch();
 
    useEffect(() => {
       const fetchRole = async () => {
@@ -49,11 +55,18 @@ const UserModal: React.FC<{
                };
             })
          );
-         console.log(response.data);
       };
       const fetchDept = async () => {
          const response = await userApi.getAllDept();
-         console.log(response.data);
+         const deptData: { id: string; departmentName: string }[] = response.data;
+         setDeptList(
+            deptData.map((dept) => {
+               return {
+                  id: dept.id,
+                  name: dept.departmentName,
+               };
+            })
+         );
       };
       fetchDept();
       fetchRole();
@@ -72,12 +85,23 @@ const UserModal: React.FC<{
          setIsvalidPassword(true);
       }
    };
-   const submitUserHandler = (e: FormEvent) => {
+   const submitUserHandler = async (e: FormEvent) => {
       e.preventDefault();
+      if (!isValidPassword) {
+         toast.error("Password không trùng khớp");
+      }
       console.log(user);
+      try {
+         await setLoading(true);
+         await dispatch(addUser(user));
+         await setLoading(false);
+         await props.onClose();
+      } catch (error) {
+         console.log(error);
+      }
    };
    return (
-      <Modal onClose={props.onClose}>
+      <Modal onClose={props.onClose} isLoading={loading}>
          <h2>{props.title}</h2>
          <form onSubmit={submitUserHandler}>
             <Input
@@ -147,6 +171,17 @@ const UserModal: React.FC<{
                onChange={(e) =>
                   setUser((prev) => {
                      return { ...prev, roleId: e.target.value };
+                  })
+               }
+            />
+            <Select
+               options={deptList}
+               value={user.deptId}
+               className={classes.inputArea}
+               labelName={"Phòng ban"}
+               onChange={(e) =>
+                  setUser((prev) => {
+                     return { ...prev, deptId: e.target.value };
                   })
                }
             />

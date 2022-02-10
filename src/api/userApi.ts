@@ -1,4 +1,5 @@
 import { UserState } from "../store/types";
+import { UserPostData } from "../types";
 import axiosClient from "./axiosClient";
 
 const userApi = {
@@ -19,7 +20,7 @@ const userApi = {
       const url = "/users/" + id;
       return axiosClient.delete(url);
    },
-   create(data: UserState) {
+   create(data: UserPostData) {
       const url = "/users/";
       return axiosClient.post(url, data);
    },

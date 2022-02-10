@@ -1,6 +1,8 @@
+import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import userApi from "../api/userApi";
 import { CREATE_USER, DELETE_USER, GET_USER, UserState } from "../store/types";
+import { UserPostData } from "../types";
 
 export const getAllUser = (queryString?: string) => async (dispatch: Dispatch) => {
    try {
@@ -16,15 +18,19 @@ export const getAllUser = (queryString?: string) => async (dispatch: Dispatch) =
    }
 };
 
-export const addUser = (data: UserState) => async (dispatch: Dispatch) => {
+export const addUser = (data: UserPostData) => async (dispatch: Dispatch) => {
    try {
       const response = await userApi.create(data);
+      const payload: UserState = response.data;
       dispatch({
          type: CREATE_USER,
-         payload: response.data,
+         payload: payload,
       });
-   } catch (error) {
-      console.log(error);
+      toast.success("Thêm thành công");
+   } catch (error: any) {
+      // console.log(error.response.data.message);
+
+      toast.error(error.response.data.message);
    }
 };
 

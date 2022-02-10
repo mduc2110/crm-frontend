@@ -20,5 +20,10 @@ const customerApi = {
       console.log(data);
       return axiosClient.delete(url, { data: d });
    },
+   uploads(data: any) {
+      const url = `/customers/uploads`;
+      console.log(data);
+      return axiosClient.post(url, data);
+   },
 };
 export default customerApi;

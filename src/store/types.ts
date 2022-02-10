@@ -1,3 +1,14 @@
+//ui
+export const SET_LOADING = "SET_LOADING";
+
+export interface SetLoadingAction {
+   type: typeof SET_LOADING;
+}
+
+export type UIActions = typeof SET_LOADING;
+
+export type UIActionType = SetLoadingAction;
+
 //auth
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";

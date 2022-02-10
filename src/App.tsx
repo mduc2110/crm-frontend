@@ -11,8 +11,11 @@ import { AuthState } from "./store/types";
 import { getTokenExpire } from "./reducers/auth";
 import { logout } from "./actions/auth";
 import "./styles/commonStyle/common.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
    const authState: AuthState = useAppSelector((state) => state.auth);
+   const uiState = useAppSelector((state) => state.ui);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const location = useLocation();
@@ -32,6 +35,19 @@ function App() {
    return (
       <div className="App">
          {authState.isAuthenticated ?? <Navigate to="/" />}
+         <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+         />
+         {uiState.isLoading && <div className="loading-overlay"></div>}
+
          <Routes>
             <Route
                path="/"
