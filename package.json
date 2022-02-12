@@ -31,7 +31,7 @@
       "react-loading-skeleton": "^3.0.3",
       "react-redux": "^7.2.6",
       "react-router-dom": "^6.2.1",
-      "react-scripts": "^3.0.1",
+      "react-scripts": "^5.0.0",
       "react-toastify": "^8.1.1",
       "redux": "^4.1.2",
       "redux-thunk": "^2.4.1",
@@ -66,6 +66,7 @@
    },
    "devDependencies": {
       "@types/jsonwebtoken": "^8.5.8",
-      "dotenv-webpack": "^7.1.0"
+      "dotenv-webpack": "^7.1.0",
+      "webpack": "^5.68.0"
    }
 }

@@ -92,9 +92,7 @@ const CustomerList = () => {
                         <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
                      </td>
                   </tr>
-               ) : (
-                  ""
-               )}
+               ) : null}
                {!isFetchingData &&
                   customerList?.map((customer, index) => {
                      return (
@@ -108,15 +106,8 @@ const CustomerList = () => {
                            <td>{customer.customerstatus.status}</td>
                            <td>{customer.customertag.tagName}</td>
                            <td>
-                              <IconButton
-                                 onClick={() => editCustomerHandler(customer.id)}
-                                 iconComponent={<AiOutlineEdit />}
-                              />
-                              <IconButton
-                                 onClick={() => deleteCustomerHandler(customer.id)}
-                                 iconComponent={<AiOutlineDelete />}
-                                 color="red"
-                              />
+                              <IconButton onClick={() => editCustomerHandler(customer.id)} iconComponent={<AiOutlineEdit />} />
+                              <IconButton onClick={() => deleteCustomerHandler(customer.id)} iconComponent={<AiOutlineDelete />} color="red" />
                            </td>
                         </tr>
                      );

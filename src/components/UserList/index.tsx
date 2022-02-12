@@ -80,9 +80,7 @@ const UserList: React.FC = (props) => {
                      <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
                   </td>
                </tr>
-            ) : (
-               ""
-            )}
+            ) : null}
             {userList?.map((user, index) => {
                return (
                   <tr key={index}>
@@ -96,15 +94,8 @@ const UserList: React.FC = (props) => {
                      <td>{user.role.description}</td>
                      <td>{user.dept.departmentName}</td>
                      <td>
-                        <IconButton
-                           onClick={() => editUserHandler(user.id)}
-                           iconComponent={<AiOutlineEdit />}
-                        />
-                        <IconButton
-                           onClick={() => deleteUserHandler(user.id)}
-                           iconComponent={<AiOutlineDelete />}
-                           color="red"
-                        />
+                        <IconButton onClick={() => editUserHandler(user.id)} iconComponent={<AiOutlineEdit />} />
+                        <IconButton onClick={() => deleteUserHandler(user.id)} iconComponent={<AiOutlineDelete />} color="red" />
                      </td>
                   </tr>
                );

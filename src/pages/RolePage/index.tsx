@@ -110,12 +110,7 @@ const RolePage = () => {
    };
    return (
       <Panel className={classes.rolePage}>
-         <Select
-            className={classes.select}
-            options={roleList}
-            value={selectedRole}
-            onChange={(e) => setSelectedRole(e.target.value)}
-         />
+         <Select className={classes.select} options={roleList} value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)} />
          <div className={classes.permissionTable}>
             <form onSubmit={submitHandler}>
                <table className={classes.table}>
@@ -123,44 +118,22 @@ const RolePage = () => {
                      {isFetchingData ? (
                         <tr>
                            <td>
-                              <Skeleton
-                                 count={10}
-                                 height="25px"
-                                 width="20px"
-                                 style={{ marginTop: "10px" }}
-                              />
+                              <Skeleton count={10} height="25px" width="20px" style={{ marginTop: "10px" }} />
                            </td>
                            <td>
-                              <Skeleton
-                                 count={10}
-                                 height="25px"
-                                 width="80px"
-                                 style={{ marginTop: "10px" }}
-                              />
+                              <Skeleton count={10} height="25px" width="80px" style={{ marginTop: "10px" }} />
                            </td>
                            <td>
-                              <Skeleton
-                                 count={10}
-                                 height="25px"
-                                 width="200px"
-                                 style={{ marginTop: "10px" }}
-                              />
+                              <Skeleton count={10} height="25px" width="200px" style={{ marginTop: "10px" }} />
                            </td>
                         </tr>
-                     ) : (
-                        ""
-                     )}
+                     ) : null}
 
                      {permissionList?.map((permission, index) => {
                         return (
                            <tr key={index}>
                               <td>
-                                 <input
-                                    type="checkbox"
-                                    checked={permission.isChecked}
-                                    onChange={checkedHandler}
-                                    value={permission.id}
-                                 />
+                                 <input type="checkbox" checked={permission.isChecked} onChange={checkedHandler} value={permission.id} />
                               </td>
                               <td>{permission.permissionName}</td>
                               <td>{permission.description}</td>

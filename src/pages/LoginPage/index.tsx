@@ -41,17 +41,8 @@ const LoginPage = () => {
             <LoginImage />
             <form onSubmit={loginHandler} className={classes.loginForm}>
                <h1>WELCOME BACK</h1>
-               <Input
-                  value={username}
-                  placeholder="Username"
-                  onChange={(e) => setUsername(e.target.value)}
-               />
-               <Input
-                  value={password}
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-               />
+               <Input value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+               <Input value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" />
                <Button type="submit">Đăng nhập</Button>
             </form>
          </div>

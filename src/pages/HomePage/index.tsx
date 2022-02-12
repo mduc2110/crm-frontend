@@ -8,7 +8,7 @@ import CustomerPage from "../CustomerPage";
 import Dashboard from "../Dashboard";
 import RolePage from "../RolePage";
 import TaskPage from "../TaskPage";
-import UserPage from "../UserPage/inedx";
+import UserPage from "../UserPage";
 import classes from "./homePage.module.css";
 const HomePage = () => {
    const auth = getPermission();

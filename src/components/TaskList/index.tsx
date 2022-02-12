@@ -12,12 +12,19 @@ const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (
    const [taskList, setTaskList] = useState<TaskState[]>([]);
    const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
    useEffect(() => {
+      let isMounted = true;
       setIsFetchingData(true);
       const fetchTask = async () => {
          const response = await taskApi.getAll(location.search);
-         setTaskList(response.data.results);
-         props.setIsFetching();
-         setIsFetchingData(false);
+         if (isMounted) {
+            setTaskList(response.data.results);
+            props.setIsFetching();
+
+            setIsFetchingData(false);
+         }
+         return () => {
+            isMounted = false;
+         };
       };
       fetchTask();
    }, [location.search, props]);

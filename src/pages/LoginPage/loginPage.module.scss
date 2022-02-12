@@ -6,16 +6,20 @@
 
    .inner {
       @include flex;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
 
       svg {
          width: 60%;
+         height: 100vh;
       }
       h1 {
          color: $main-color;
          text-align: center;
          margin-bottom: 30px;
+      }
+      button {
+         width: 100%;
       }
    }
 }
