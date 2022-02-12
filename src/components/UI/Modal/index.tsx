@@ -1,7 +1,6 @@
 import React, { Fragment, ReactNode } from "react";
 import classes from "./modal.module.css";
 import ReactDOM from "react-dom";
-import Panel from "../Panel";
 
 const Backdrop: React.FC<{
    children?: ReactNode;

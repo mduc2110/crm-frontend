@@ -1,13 +1,23 @@
 //ui
 export const SET_LOADING = "SET_LOADING";
+export const SET_PAGE_TITLE = "SET_PAGE_TITLE";
+
+export interface UIState {
+   isLoading: boolean;
+   pageTitle: string;
+}
 
 export interface SetLoadingAction {
    type: typeof SET_LOADING;
 }
+export interface SetPageTitleAction {
+   type: typeof SET_PAGE_TITLE;
+   payload: string;
+}
 
-export type UIActions = typeof SET_LOADING;
+export type UIActions = typeof SET_LOADING | typeof SET_PAGE_TITLE;
 
-export type UIActionType = SetLoadingAction;
+export type UIActionType = SetLoadingAction | SetPageTitleAction;
 
 //auth
 export const SIGN_IN = "SIGN_IN";
@@ -60,6 +70,7 @@ export const GET_CUSTOMER = "GET_CUSTOMER";
 export const CREATE_CUSTOMER = "CREATE_CUSTOMER";
 export const UPDATE_CUSTOMER = "UPDATE_CUSTOMER";
 export const DELETE_CUSTOMER = "DELETE_CUSTOMER";
+export const ADD_LIST_CUSTOMER = "ADD_LIST_CUSTOMER";
 
 export interface CustomerState {
    id: string;
@@ -75,6 +86,28 @@ export interface CustomerState {
    idDistrict: string;
    idWard: string;
    detailAddress: string;
+}
+export interface CustomerState {
+   id: string;
+   customerName: string;
+   phone: string;
+   email: string;
+   birthday: string;
+   gender: string;
+   personalID: string;
+   idProvince: string;
+   idDistrict: string;
+   idWard: string;
+   detailAddress: string;
+
+   customertag: {
+      id: string;
+      tagName: string;
+   };
+   customerstatus: {
+      id: string;
+      status: string;
+   };
 }
 
 interface GetCustomerAction {
@@ -94,13 +127,22 @@ interface DeleteCustomerAction {
    payload: string[];
 }
 
-export type CustomerAction = typeof GET_CUSTOMER | typeof CREATE_CUSTOMER;
+interface AddListCustomerAction {
+   type: typeof ADD_LIST_CUSTOMER;
+   payload: CustomerState[];
+}
+
+export type CustomerAction =
+   | typeof GET_CUSTOMER
+   | typeof CREATE_CUSTOMER
+   | typeof ADD_LIST_CUSTOMER;
 
 export type CustomerActionType =
    | GetCustomerAction
    | CreateCustomerAction
    | UpdateCustomerAction
-   | DeleteCustomerAction;
+   | DeleteCustomerAction
+   | AddListCustomerAction;
 
 //task
 export const GET_TASK = "GET_TASK";

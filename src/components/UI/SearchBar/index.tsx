@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
+import React from "react";
 import classes from "./searchBar.module.css";
-import IconButton from "../IconButton";
 import queryString from "query-string";
 import { AiOutlineSearch } from "react-icons/ai";
 import Input from "../Input";

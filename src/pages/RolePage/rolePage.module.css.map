@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAGG,SAHM,CAGN,OAAO,CAAC;EACL,KAAK,EAAE,WAAW;CACpB;;AALJ,AASM,SATG,CAMN,MAAM,CAGH,EAAE;AATR,SAAS,CAMN,MAAM,CAIH,EAAE,CAAC;EAEA,WAAW,EAAE,IAAI;EACjB,aAAa,EAAE,IAAI;CACrB",
+    "sources": [
+        "rolePage.module.scss",
+        "../../styles/_mixins.scss",
+        "../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "rolePage.module.css"
+}

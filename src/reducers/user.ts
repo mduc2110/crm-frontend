@@ -20,8 +20,8 @@ export const userReducer = (state: UserState[] = [], action: UserActionType) => 
          updatedList[index] = user;
          return updatedList;
       case DELETE_USER:
-         const deleteđIdArry = action.payload;
-         return [...state].filter((user) => !deleteđIdArry.includes(user.id));
+         const id = action.payload;
+         return [...state].filter((user) => user.id !== id);
       default:
          return state;
    }

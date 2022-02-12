@@ -2,13 +2,13 @@ import React from "react";
 import { AiOutlineBell, AiOutlineCaretDown, AiOutlineLogout } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/auth";
-import { getToken } from "../../reducers/auth";
 import { useAppSelector } from "../../store";
-import { AuthState } from "../../store/types";
+import { AuthState, UIState } from "../../store/types";
 import IconButton from "../UI/IconButton";
 import classes from "./navbar.module.css";
 const Navbar = () => {
    const auth: AuthState = useAppSelector((state) => state.auth);
+   const ui: UIState = useAppSelector((state) => state.ui);
    const dispatch = useDispatch();
 
    const logoutHandler = () => {
@@ -16,7 +16,9 @@ const Navbar = () => {
    };
    return (
       <div className={classes.nav}>
-         <div className={classes.left}></div>
+         <div className={classes.left}>
+            <h2>{ui.pageTitle}</h2>
+         </div>
          <div className={classes.right}>
             <div className={classes.notification}>
                <AiOutlineBell />

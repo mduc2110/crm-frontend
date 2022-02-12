@@ -7,8 +7,6 @@ import { UserPostData } from "../types";
 export const getAllUser = (queryString?: string) => async (dispatch: Dispatch) => {
    try {
       const response = await userApi.getAll(queryString as string);
-      console.log(response);
-
       dispatch({
          type: GET_USER,
          payload: response.data.results,
@@ -34,12 +32,12 @@ export const addUser = (data: UserPostData) => async (dispatch: Dispatch) => {
    }
 };
 
-export const deleteUser = (idList: string) => async (dispatch: Dispatch) => {
+export const deleteUser = (id: string) => async (dispatch: Dispatch) => {
    try {
-      await userApi.remove(idList);
+      await userApi.remove(id);
       dispatch({
          type: DELETE_USER,
-         payload: idList,
+         payload: id,
       });
    } catch (error) {
       console.log(error);

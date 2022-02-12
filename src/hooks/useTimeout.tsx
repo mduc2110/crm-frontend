@@ -1,4 +1,4 @@
-import { MutableRefObject, RefObject, useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 // function useRef<T>(initialValue: T|null): RefObject<T>;
 export default function useTimeout(callback: () => void, delay: number | undefined) {
    const callbackRef = useRef(callback);

@@ -1,5 +1,5 @@
 import { AuthActionTypes, AuthState, UserAuth, SIGN_IN, SIGN_OUT } from "../store/types";
-
+import jwt_decode from "jwt-decode";
 const isSignIned = (): boolean => {
    const token = localStorage.getItem("token");
    const token_expire = localStorage.getItem("token_expire");
@@ -18,9 +18,21 @@ export const getToken = (): string | undefined => {
    const token = localStorage.getItem("token");
    return token ? token : undefined;
 };
-const removeToken = () => {
-   localStorage.removeItem("token");
+export const getPermission = () => {
+   const token = getToken();
+   if (token) {
+      const decoded: any = jwt_decode(token);
+      return {
+         role: decoded.role,
+         permissions: decoded.permissions,
+      };
+   } else {
+      return undefined;
+   }
 };
+// const removeToken = () => {
+//    localStorage.removeItem("token");
+// };
 const setTokenExpire = (token_expire: any) => {
    localStorage.setItem("token_expire", token_expire);
 };
@@ -28,9 +40,9 @@ export const getTokenExpire = () => {
    const tokenExpire = localStorage.getItem("token_expire");
    return tokenExpire ? +tokenExpire : undefined;
 };
-const removeTokenExpire = () => {
-   localStorage.removeItem("token_expire");
-};
+// const removeTokenExpire = () => {
+//    localStorage.removeItem("token_expire");
+// };
 
 const setUser = (user: any) => {
    localStorage.setItem("user", JSON.stringify(user));

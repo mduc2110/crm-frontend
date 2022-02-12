@@ -5,16 +5,19 @@ import { useLocation } from "react-router-dom";
 import taskApi from "../../api/taskApi";
 import { Link } from "react-router-dom";
 import { TaskState } from "../../types";
+import Skeleton from "react-loading-skeleton";
 
 const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (props) => {
    const location = useLocation();
    const [taskList, setTaskList] = useState<TaskState[]>([]);
+   const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
    useEffect(() => {
+      setIsFetchingData(true);
       const fetchTask = async () => {
          const response = await taskApi.getAll(location.search);
          setTaskList(response.data.results);
-         console.log(response.data);
          props.setIsFetching();
+         setIsFetchingData(false);
       };
       fetchTask();
    }, [location.search, props]);
@@ -36,22 +39,45 @@ const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (
                </tr>
             </thead>
             <tbody>
-               {taskList?.map((task, index) => {
-                  return (
-                     <tr key={index}>
-                        <td>
-                           <input type="checkbox" data-id={task.id} />
-                        </td>
-                        <td>{index + 1}</td>
-                        <td>
-                           <Link to={"/task/" + task.id}>{task.taskName}</Link>
-                        </td>
-                        <td>{task.tasktype.nameType}</td>
-                        <td>{task.user.name}</td>
-                        <td>{task.status}</td>
-                     </tr>
-                  );
-               })}
+               {isFetchingData ? (
+                  <tr>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                  </tr>
+               ) : null}
+               {!isFetchingData &&
+                  taskList?.map((task, index) => {
+                     return (
+                        <tr key={index}>
+                           <td>
+                              <input type="checkbox" data-id={task.id} />
+                           </td>
+                           <td>{index + 1}</td>
+                           <td>
+                              <Link to={"/task/" + task.id}>{task.taskName}</Link>
+                           </td>
+                           <td>{task.tasktype.nameType}</td>
+                           <td>{task.user.name}</td>
+                           <td>{task.status}</td>
+                        </tr>
+                     );
+                  })}
             </tbody>
          </Table>
       </div>

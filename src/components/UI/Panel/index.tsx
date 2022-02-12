@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import classes from "./panel.module.css";
 
 const Panel: React.FC<{

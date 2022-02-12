@@ -1,20 +1,9 @@
-import { log } from "console";
-import React, {
-   ChangeEvent,
-   createRef,
-   FormEvent,
-   RefObject,
-   useEffect,
-   useRef,
-   useState,
-} from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { setloading } from "../../../actions/uiAction";
 import { addUser } from "../../../actions/userAction";
 import roleApi from "../../../api/roleApi";
 import userApi from "../../../api/userApi";
-import { UserState } from "../../../store/types";
 import { Role, SelectType, UserPostData } from "../../../types";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";

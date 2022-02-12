@@ -1,5 +1,4 @@
 import React from "react";
-import { Tag } from "../../../types";
 import classes from "./select.module.css";
 const Select: React.FC<{
    options: any[];

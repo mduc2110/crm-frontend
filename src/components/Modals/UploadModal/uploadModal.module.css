@@ -1,9 +1,31 @@
-.uploadModal .button {
-  width: 100px;
-  height: 100px;
+.uploadModal {
+  width: 400px;
 }
 
-.uploadModal .button input {
+.uploadModal h3 {
+  text-align: center;
+}
+
+.uploadModal .download {
+  margin: 20px 0;
+}
+
+.uploadModal .download span {
+  text-decoration: underline;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.uploadModal form .button {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  border: 2px dashed #3e4a92;
+  border-radius: 5px;
+}
+
+.uploadModal form .button input {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -13,9 +35,13 @@
   cursor: pointer;
 }
 
-.uploadModal .button svg {
+.uploadModal form .button svg {
   color: #3e4a92;
   font-size: 100px;
   width: 100px;
+}
+
+.uploadModal form button {
+  width: 100%;
 }
 /*# sourceMappingURL=uploadModal.module.css.map */

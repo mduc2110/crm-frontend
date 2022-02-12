@@ -1,0 +1,115 @@
+.dashboard .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboard .header .headerChild {
+  width: 23%;
+}
+
+.dashboard .header .headerChild .amount {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboard .header .headerChild .amount .outerIcon {
+  background-color: #177cff;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.dashboard .header .headerChild .amount .outerIcon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: white;
+}
+
+.dashboard .header .headerChild .title {
+  font-size: 0.9rem;
+  margin-top: 0.8rem;
+  color: #bcbcbc;
+}
+
+.dashboard .body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 2rem;
+}
+
+.dashboard .body .w-4 {
+  width: 34%;
+}
+
+.dashboard .body .w-6 {
+  width: 64%;
+}
+
+.dashboard .body .w-10 {
+  width: 100%;
+}
+
+.brief {
+  width: 23%;
+}
+
+.brief .amount {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.brief .amount .outerIcon {
+  background-color: #177cff;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.brief .amount .outerIcon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fff;
+}
+
+.brief .title {
+  font-size: 0.9rem;
+  margin-top: 0.8rem;
+  color: #bcbcbc;
+}
+/*# sourceMappingURL=Dashboard.module.css.map */

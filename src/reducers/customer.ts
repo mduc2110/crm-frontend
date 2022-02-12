@@ -1,4 +1,5 @@
 import {
+   ADD_LIST_CUSTOMER,
    CREATE_CUSTOMER,
    CustomerActionType,
    CustomerState,
@@ -22,6 +23,8 @@ export const customerReducer = (state: CustomerState[] = [], action: CustomerAct
       case DELETE_CUSTOMER:
          const deleteđIdArry = action.payload;
          return [...state].filter((customer) => !deleteđIdArry.includes(customer.id));
+      case ADD_LIST_CUSTOMER:
+         return state.concat(action.payload);
       default:
          return state;
    }

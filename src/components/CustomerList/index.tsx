@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,12 +10,12 @@ import Table from "../UI/Table";
 import classes from "./customer.module.css";
 
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import Skeleton from "react-loading-skeleton";
 
 const CustomerList = () => {
    // const [customerList2, setCustomerList2] = useState<CustomerState[]>([]);
    const customerList: CustomerState[] = useAppSelector((state) => state.customer);
-   console.log(customerList);
+   const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
 
    const navigate = useNavigate();
    const location = useLocation();
@@ -23,7 +23,10 @@ const CustomerList = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getCustomer(location.search));
+      setIsFetchingData(true);
+      setTimeout(dispatch(getCustomer(location.search)), 3000);
+
+      setIsFetchingData(false);
       // dispatch(getCustomer("?page=1&limit=10"));
    }, [dispatch, location]);
    const editCustomerHandler = (id: string) => {
@@ -65,31 +68,59 @@ const CustomerList = () => {
                </tr>
             </thead>
             <tbody>
-               {customerList?.map((customer, index) => {
-                  return (
-                     <tr key={index}>
-                        <td>
-                           <input type="checkbox" data-id={customer.id} />
-                        </td>
-                        <td>{index + 1}</td>
-                        <td>{customer.customerName}</td>
-                        <td>{customer.email}</td>
-                        <td>Khách hàng mới</td>
-                        <td>Hoạt động</td>
-                        <td>
-                           <IconButton
-                              onClick={() => editCustomerHandler(customer.id)}
-                              iconComponent={<AiOutlineEdit />}
-                           />
-                           <IconButton
-                              onClick={() => deleteCustomerHandler(customer.id)}
-                              iconComponent={<AiOutlineDelete />}
-                              color="red"
-                           />
-                        </td>
-                     </tr>
-                  );
-               })}
+               {isFetchingData ? (
+                  <tr>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                     <td>
+                        <Skeleton count={8} height="25px" style={{ marginTop: "10px" }} />
+                     </td>
+                  </tr>
+               ) : (
+                  ""
+               )}
+               {!isFetchingData &&
+                  customerList?.map((customer, index) => {
+                     return (
+                        <tr key={index}>
+                           <td>
+                              <input type="checkbox" data-id={customer.id} />
+                           </td>
+                           <td>{index + 1}</td>
+                           <td>{customer.customerName}</td>
+                           <td>{customer.email}</td>
+                           <td>{customer.customerstatus.status}</td>
+                           <td>{customer.customertag.tagName}</td>
+                           <td>
+                              <IconButton
+                                 onClick={() => editCustomerHandler(customer.id)}
+                                 iconComponent={<AiOutlineEdit />}
+                              />
+                              <IconButton
+                                 onClick={() => deleteCustomerHandler(customer.id)}
+                                 iconComponent={<AiOutlineDelete />}
+                                 color="red"
+                              />
+                           </td>
+                        </tr>
+                     );
+                  })}
             </tbody>
          </Table>
       </div>

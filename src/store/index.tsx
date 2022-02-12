@@ -6,8 +6,6 @@ import { customerReducer } from "../reducers/customer";
 import { userReducer } from "../reducers/user";
 import { uiReducer } from "../reducers/ui";
 
-import { AuthState } from "./types";
-
 const rootReducer = combineReducers({
    auth: authReducer,
    customer: customerReducer,

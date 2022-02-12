@@ -1,26 +1,24 @@
-import { useState } from "react";
-import {
-   AiOutlineEllipsis,
-   AiOutlinePlusCircle,
-   AiOutlineSearch,
-   AiOutlineUpload,
-} from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiOutlineEllipsis, AiOutlinePlusCircle, AiOutlineUpload } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../actions/uiAction";
 import CustomerList from "../../components/CustomerList";
 import CustomerModal from "../../components/Modals/CustomerModal";
 import UploadModal from "../../components/Modals/UploadModal";
 import Button from "../../components/UI/Button";
 import IconButton from "../../components/UI/IconButton";
-import Input from "../../components/UI/Input";
 import Panel from "../../components/UI/Panel";
 import SearchBar from "../../components/UI/SearchBar";
-import Table from "../../components/UI/Table";
 import classes from "./customerPage.module.css";
 // import "../../styles/commonStyle/common.css";
 
 const CustomerPage = () => {
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
    const [uploadModalIsShown, setUploadModalIsShown] = useState<boolean>(false);
-
+   const dispatch = useDispatch();
+   useEffect(() => {
+      dispatch(setPageTitle("Khách hàng"));
+   }, []);
    const hideModalHandler = () => {
       setModalIsShown(false);
    };

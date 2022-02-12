@@ -47,3 +47,19 @@ export interface UserPostData {
    deptId: string;
    roleId: string;
 }
+
+export interface CustomerPostData {
+   id: string;
+   customerName: string;
+   phone: string;
+   email: string;
+   birthday: string;
+   gender: string;
+   personalID: string;
+   idStatus: string;
+   idTag: string;
+   idProvince: string;
+   idDistrict: string;
+   idWard: string;
+   detailAddress: string;
+}

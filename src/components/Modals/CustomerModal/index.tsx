@@ -1,6 +1,6 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { Tag } from "../../../types";
+import { CustomerPostData } from "../../../types";
 import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
 import Select from "../../UI/Select";
@@ -14,7 +14,6 @@ import classes from "./customerModal.module.css";
 import customerApi from "../../../api/customerApi";
 import { useDispatch } from "react-redux";
 import { addCustomer } from "../../../actions/customerAction";
-import { CustomerState } from "../../../store/types";
 interface Customer {
    customerName: string;
    phone: string;
@@ -39,7 +38,7 @@ const CustomerModal: React.FC<{
    onClose: () => void;
    title: string;
 }> = (props) => {
-   const [customerField, setCustomerField] = useState<CustomerState>({
+   const [customerField, setCustomerField] = useState<CustomerPostData>({
       id: "",
       customerName: "",
       phone: "",
@@ -54,36 +53,60 @@ const CustomerModal: React.FC<{
       idWard: "",
       detailAddress: "",
    });
-   const [tag, setTag] = useState<Tag[]>([]);
 
    const [provinceList, setProvinceList] = useState<SelectType[]>([]);
    const [districtList, setDistrictList] = useState<SelectType[]>([]);
    const [wardList, setWardList] = useState<SelectType[]>([]);
+
+   const [tagList, setTagList] = useState<SelectType[]>([]);
+   const [statusList, setStatusList] = useState<SelectType[]>([]);
    const dispatch = useDispatch();
 
-   const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCustomerField((prev) => {
-         return {
-            ...prev,
-            detailAddress: e.target.value,
-         };
-      });
-   };
+   const [loading, setLoading] = useState<boolean>(false);
+
+   // const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+   //    setCustomerField((prev) => {
+   //       return {
+   //          ...prev,
+   //          detailAddress: e.target.value,
+   //       };
+   //    });
+   // };
 
    useEffect(() => {
       const fetchTag = async () => {
-         setTag([
-            {
-               id: 1,
-               name: "KH Mới",
-            },
-            {
-               id: 2,
-               name: "KH Tiềm năng",
-            },
-         ]);
+         const response = await customerApi.getAllCustomerTag();
+         const tagData: {
+            id: string;
+            tagName: string;
+         }[] = response.data;
+         setTagList(
+            tagData.map((tag) => {
+               return {
+                  id: tag.id,
+                  name: tag.tagName,
+               };
+            })
+         );
+      };
+
+      const fetchStatus = async () => {
+         const response = await customerApi.getAllCustomerStatus();
+         const statusData: {
+            id: string;
+            status: string;
+         }[] = response.data;
+         setStatusList(
+            statusData.map((role) => {
+               return {
+                  id: role.id,
+                  name: role.status,
+               };
+            })
+         );
       };
       fetchTag();
+      fetchStatus();
    }, []);
 
    useEffect(() => {
@@ -110,12 +133,15 @@ const CustomerModal: React.FC<{
          : [];
       setWardList(ward);
    }, [customerField.idProvince, customerField.idDistrict]);
-   const onSubmitCustomerHandler = (e: React.FormEvent<HTMLFormElement>) => {
+   const onSubmitCustomerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      dispatch(addCustomer(customerField));
+      await setLoading(true);
+      await dispatch(addCustomer(customerField));
+      await setLoading(false);
+      await props.onClose();
    };
    return (
-      <Modal onClose={props.onClose}>
+      <Modal onClose={props.onClose} isLoading={loading}>
          <h2>{props.title}</h2>
          <div className={classes["form-customer"]}>
             <form onSubmit={(e) => onSubmitCustomerHandler(e)}>
@@ -153,7 +179,7 @@ const CustomerModal: React.FC<{
                      />
 
                      <Select
-                        options={tag}
+                        options={tagList}
                         value={customerField.idTag}
                         className={classes.inputArea}
                         labelName={"Tag"}
@@ -164,7 +190,7 @@ const CustomerModal: React.FC<{
                         }
                      />
                      <Select
-                        options={tag}
+                        options={statusList}
                         value={customerField.idStatus}
                         className={classes.inputArea}
                         labelName={"Trạng thái khách hàng"}

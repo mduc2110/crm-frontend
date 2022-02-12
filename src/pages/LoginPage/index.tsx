@@ -3,12 +3,11 @@ import classes from "./loginPage.module.css";
 import LoginImage from "./LoginImage";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
-import userApi from "../../api/userApi";
 import { useDispatch } from "react-redux";
 import { auth } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthState } from "../../store/types";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
 const LoginPage = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");

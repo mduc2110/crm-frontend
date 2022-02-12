@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from "react";
-import { Navigate, Outlet, Route, RouteProps, useLocation } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet, RouteProps } from "react-router-dom";
 
 export type ProtectedRouteProps = {
    isAuthenticated: boolean;
@@ -8,13 +8,7 @@ export type ProtectedRouteProps = {
    component: any;
 } & RouteProps;
 
-const ProtectedRoute = ({
-   children,
-   isAuthenticated,
-   authenticationPath,
-   redirectPath,
-   ...routeProps
-}: ProtectedRouteProps) => {
+const ProtectedRoute = ({ isAuthenticated, redirectPath }: ProtectedRouteProps) => {
    // const currentLocation = useLocation();
 
    // return <Route {...routeProps} element={children} />;

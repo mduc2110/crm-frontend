@@ -1,4 +1,4 @@
-import { CustomerState } from "../store/types";
+import { CustomerPostData } from "../types";
 import axiosClient from "./axiosClient";
 
 const customerApi = {
@@ -8,7 +8,7 @@ const customerApi = {
       // const url = ("/customers" + queryString) as string;
       return axiosClient.get(url);
    },
-   create(data: CustomerState) {
+   create(data: CustomerPostData) {
       const url = "/customers";
       return axiosClient.post(url, data);
    },
@@ -17,13 +17,23 @@ const customerApi = {
          customerIdArray: data,
       };
       const url = `/customers`;
-      console.log(data);
       return axiosClient.delete(url, { data: d });
    },
    uploads(data: any) {
       const url = `/customers/uploads`;
-      console.log(data);
       return axiosClient.post(url, data);
+   },
+   // download() {
+   //    const url = "/file-download";
+   //    return axiosClient
+   // }
+   getAllCustomerTag() {
+      const url = `/customer_tags`;
+      return axiosClient.get(url);
+   },
+   getAllCustomerStatus() {
+      const url = `/customer_status`;
+      return axiosClient.get(url);
    },
 };
 export default customerApi;

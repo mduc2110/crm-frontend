@@ -1,0 +1,73 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.dashboard {
+   .header {
+      @include flex;
+      .headerChild {
+         width: 23%;
+         .amount {
+            @include flex;
+            .outerIcon {
+               background-color: rgb(23, 124, 255);
+               width: 40px;
+               height: 40px;
+               border-radius: 5px;
+               position: relative;
+               svg {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  color: rgb(255, 255, 255);
+               }
+            }
+         }
+         .title {
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            color: $gray-color;
+         }
+      }
+   }
+   .body {
+      @include flex;
+      margin-top: 2rem;
+      .w-4 {
+         width: 34%;
+      }
+      .w-6 {
+         width: 64%;
+      }
+      .w-10 {
+         width: 100%;
+         // color: rgb(48, 197, 60);
+      }
+   }
+}
+
+.brief {
+   width: 23%;
+   .amount {
+      @include flex;
+      .outerIcon {
+         background-color: rgb(23, 124, 255);
+         width: 40px;
+         height: 40px;
+         border-radius: 5px;
+         position: relative;
+         svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+         }
+      }
+   }
+   .title {
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+      color: $gray-color;
+   }
+}

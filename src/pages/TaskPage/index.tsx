@@ -10,6 +10,8 @@ import Input from "../../components/UI/Input";
 import moment from "moment";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import TaskModal from "../../components/Modals/TaskModal";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../actions/uiAction";
 
 interface TaskFilter {
    id: number;
@@ -30,7 +32,10 @@ const TaskPage = () => {
    const [isFetching, setIsFetching] = useState<boolean>(false);
    const navigate = useNavigate();
    const location = useLocation();
-
+   const dispatch = useDispatch();
+   useEffect(() => {
+      dispatch(setPageTitle("Công việc"));
+   }, []);
    useEffect(() => {
       const fetchFilter = async () => {
          const response = await taskApi.getTaskFilter();
@@ -38,15 +43,14 @@ const TaskPage = () => {
          setIsLoading(false);
       };
       fetchFilter();
-      const parsed = queryString.parse(location.search);
+      // const parsed = queryString.parse(location.search);
    }, [location.search, isLoading]);
 
    const taskFilterHandler = (id?: number) => {
-      const queryParams = new URLSearchParams(location.search);
+      // const queryParams = new URLSearchParams(location.search);
       if (id) {
          navigate("?idType=" + id);
       } else {
-         // navigate(location.pathname);
          navigate("");
       }
    };

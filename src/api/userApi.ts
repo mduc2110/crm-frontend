@@ -1,4 +1,3 @@
-import { UserState } from "../store/types";
 import { UserPostData } from "../types";
 import axiosClient from "./axiosClient";
 

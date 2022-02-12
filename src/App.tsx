@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import ProtectedRoute, { ProtectedRouteProps } from "./pages/ProtectedRoute";
-import { useDispatch, useSelector } from "react-redux";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "./store";
 import { AuthState } from "./store/types";
-import { getTokenExpire } from "./reducers/auth";
 import { logout } from "./actions/auth";
 import "./styles/commonStyle/common.css";
 import { ToastContainer } from "react-toastify";

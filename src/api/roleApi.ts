@@ -19,5 +19,18 @@ const roleApi = {
       const url = "/roles";
       return axiosClient.post(url, data);
    },
+   getAllPermission() {
+      const url = "/permissions";
+      return axiosClient.get(url);
+   },
+   updatePermisionForRole(roleId: string, permissionListid: string[]) {
+      const url = "/role_permissions";
+      const data = {
+         roleId,
+         permissionsList: permissionListid,
+      };
+      console.log(data);
+      return axiosClient.post(url, data);
+   },
 };
 export default roleApi;

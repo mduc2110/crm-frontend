@@ -1,0 +1,12 @@
+.rolePage .select {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.rolePage .table tr,
+.rolePage .table td {
+  padding-top: 1rem;
+  padding-right: 1rem;
+}
+/*# sourceMappingURL=rolePage.module.css.map */

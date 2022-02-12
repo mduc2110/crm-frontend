@@ -1,6 +1,8 @@
+import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import customerApi from "../api/customerApi";
-import { CREATE_CUSTOMER, CustomerState, DELETE_CUSTOMER, GET_CUSTOMER } from "../store/types";
+import { ADD_LIST_CUSTOMER, CREATE_CUSTOMER, DELETE_CUSTOMER, GET_CUSTOMER } from "../store/types";
+import { CustomerPostData } from "../types";
 
 export const getCustomer = (queryString?: string) => async (dispatch: Dispatch) => {
    try {
@@ -14,7 +16,7 @@ export const getCustomer = (queryString?: string) => async (dispatch: Dispatch) 
    }
 };
 
-export const addCustomer = (data: CustomerState) => async (dispatch: Dispatch) => {
+export const addCustomer = (data: CustomerPostData) => async (dispatch: Dispatch) => {
    try {
       const response = await customerApi.create(data);
 
@@ -22,17 +24,15 @@ export const addCustomer = (data: CustomerState) => async (dispatch: Dispatch) =
          type: CREATE_CUSTOMER,
          payload: response.data,
       });
-   } catch (error) {
+      toast.success("Thêm thành công");
+   } catch (error: any) {
       console.log(error);
+      toast.error(error.response.data.message);
    }
 };
 
 export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) => {
    try {
-      const data = {
-         customerIdArray: idList,
-      };
-
       await customerApi.remove(idList);
       dispatch({
          type: DELETE_CUSTOMER,
@@ -48,11 +48,12 @@ export const uploadFileCustomer = (data: any) => async (dispatch: Dispatch) => {
       const response = await customerApi.uploads(data);
       console.log(response);
 
-      // dispatch({
-      //    type: DELETE_CUSTOMER,
-      //    payload: idList,
-      // });
-   } catch (error) {
-      console.log(error);
+      dispatch({
+         type: ADD_LIST_CUSTOMER,
+         payload: response.data,
+      });
+      toast.success("Thêm thành công");
+   } catch (error: any) {
+      toast.error(error.response.data.message);
    }
 };

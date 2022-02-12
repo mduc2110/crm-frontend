@@ -1,28 +1,24 @@
 import React from "react";
 import {
    AiOutlineAppstore,
-   AiOutlineLogout,
-   AiOutlineMail,
+   AiOutlineForm,
    AiOutlineOrderedList,
    AiOutlineStock,
    AiOutlineTeam,
    AiOutlineUser,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { logout } from "../../actions/auth";
-import { useAppDispatch } from "../../store";
+// import { logout } from "../../actions/auth";
+import { getPermission } from "../../reducers/auth";
 import classes from "./sidebar.module.css";
 const Sidebar = () => {
-   const dispatch = useDispatch();
+   const auth = getPermission();
    // const {} = bindActionCreators( , dispatch);
-   const logoutHandler = () => {
-      // dispatch(logout());
-      // useAppDispatch(logout());
-      dispatch(logout());
-   };
+   // const logoutHandler = () => {
+   //    // dispatch(logout());
+   //    // useAppDispatch(logout());
+   //    dispatch(logout());
+   // };
    return (
       <div className={classes.sidebar}>
          <h1>CRM</h1>
@@ -41,7 +37,7 @@ const Sidebar = () => {
                   to="/customer"
                   className={({ isActive }) => (isActive ? classes.active : "")}
                >
-                  <AiOutlineMail />
+                  <AiOutlineOrderedList />
                   Khách hàng
                </NavLink>
             </li>
@@ -62,16 +58,21 @@ const Sidebar = () => {
             </li>
             <li>
                <NavLink to="/task" className={({ isActive }) => (isActive ? classes.active : "")}>
-                  <AiOutlineOrderedList />
+                  <AiOutlineForm />
                   Công việc
                </NavLink>
             </li>
-            <li>
-               <NavLink to="/role" className={({ isActive }) => (isActive ? classes.active : "")}>
-                  <AiOutlineTeam />
-                  Quản lý phân quyền
-               </NavLink>
-            </li>
+            {auth?.role === "ADMIN" && (
+               <li>
+                  <NavLink
+                     to="/role"
+                     className={({ isActive }) => (isActive ? classes.active : "")}
+                  >
+                     <AiOutlineTeam />
+                     Quản lý phân quyền
+                  </NavLink>
+               </li>
+            )}
             <li>{/* <AiOutlineMail />{" "} */}</li>
          </ul>
          {/* <div className={classes.modal}></div> */}
