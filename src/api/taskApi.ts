@@ -1,4 +1,4 @@
-import { Task } from "../components/Modals/TaskModal";
+import { TaskPostData } from "../types";
 import axiosClient from "./axiosClient";
 
 const taskApi = {
@@ -19,9 +19,13 @@ const taskApi = {
       const url = "/tasks_types";
       return axiosClient.get(url);
    },
-   create(data: Task) {
+   create(data: TaskPostData) {
       const url = "/tasks";
       return axiosClient.post(url, data);
+   },
+   update(id: string, data: TaskPostData) {
+      const url = "/tasks/" + id;
+      return axiosClient.put(url, data);
    },
 };
 export default taskApi;

@@ -2,6 +2,7 @@ import React from "react";
 import {
    AiOutlineAppstore,
    AiOutlineForm,
+   AiOutlineMail,
    AiOutlineOrderedList,
    AiOutlineStock,
    AiOutlineTeam,
@@ -42,11 +43,26 @@ const Sidebar = () => {
                </NavLink>
             </li>
             <li>
-               <NavLink to="/user" className={({ isActive }) => (isActive ? classes.active : "")}>
-                  <AiOutlineUser />
-                  Nhân viên
+               <NavLink
+                  to="/campaign"
+                  className={({ isActive }) => (isActive ? classes.active : "")}
+               >
+                  <AiOutlineMail />
+                  Gửi mail
                </NavLink>
             </li>
+            {auth?.role === "ADMIN" ||
+               (auth?.role === "CRM_MANAGER" && (
+                  <li>
+                     <NavLink
+                        to="/user"
+                        className={({ isActive }) => (isActive ? classes.active : "")}
+                     >
+                        <AiOutlineUser />
+                        Nhân viên
+                     </NavLink>
+                  </li>
+               ))}
             <li>
                <NavLink
                   to="/statistic"

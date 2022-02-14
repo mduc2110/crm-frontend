@@ -20,7 +20,8 @@
             &:hover {
                background-color: $light-main-color-2;
             }
-            button {
+            span {
+               display: block;
                padding: 10px 20px;
                width: 100%;
                text-align: left;
@@ -31,7 +32,7 @@
                background-color: transparent;
                border: none;
                cursor: pointer;
-
+               font-size: 0.9rem;
                &.delete {
                   color: red;
                }
@@ -40,6 +41,13 @@
       }
       &:hover {
          display: block;
+      }
+      &.active {
+         display: block;
+      }
+      &.searchResult {
+         overflow: auto;
+         max-height: 200px;
       }
    }
 
@@ -79,4 +87,43 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
    background: $main-color;
+}
+
+.status {
+   display: inline-block;
+   font-size: 0.9rem;
+   border-radius: 5px;
+   padding: 6px;
+   color: #fff;
+
+   &.processing {
+      background-color: rgb(33, 117, 243);
+   }
+   &.fail {
+      background-color: rgb(226, 67, 67);
+   }
+   &.done {
+      background-color: rgb(84, 196, 88);
+   }
+   &.cancelled {
+      background-color: rgb(247, 156, 37);
+   }
+}
+
+.jodit-workplace {
+   background-color: #fff;
+}
+
+.noData {
+   color: #a5a5a5;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 1rem;
+   width: 100%;
+   margin: 50px 0;
+   svg {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+   }
 }

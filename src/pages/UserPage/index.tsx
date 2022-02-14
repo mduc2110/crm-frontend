@@ -14,7 +14,7 @@ const UserPage = () => {
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(setPageTitle("Nhân viên"));
-   }, []);
+   }, [dispatch]);
    const addUserHandler = () => {
       setModalIsShown(true);
    };

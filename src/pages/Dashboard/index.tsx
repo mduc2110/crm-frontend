@@ -106,7 +106,7 @@ const Dashboard = () => {
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(setPageTitle("Dashboard"));
-   }, []);
+   }, [dispatch]);
    return (
       <div className={classes.dashboard}>
          <div className={classes.header}>

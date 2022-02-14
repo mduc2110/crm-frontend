@@ -1,39 +1,34 @@
 import JoditEditor from "jodit-react";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { createTask, updateTask } from "../../../actions/taskAction";
 import customerApi from "../../../api/customerApi";
 import taskApi from "../../../api/taskApi";
 import userApi from "../../../api/userApi";
 import useDebounce from "../../../hooks/useDebounce";
 import { CustomerState, UserState } from "../../../store/types";
-import { SelectType } from "../../../types";
+import { SelectType, TaskPostData } from "../../../types";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import Modal from "../../UI/Modal";
 import Select from "../../UI/Select";
 import classes from "./taskModal.module.css";
 
-export interface Task {
-   customerId: string;
-   endTime: string;
-   startTime: string;
-   status: string;
-   taskDescription: string;
-   taskName: string;
-   taskTypeId: string;
-   userId: string;
-}
+import queryString from "query-string";
+import moment from "moment";
 
 const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: () => void }> = (
    props
 ) => {
-   const [task, setTask] = useState<Task>({
+   const [task, setTask] = useState<TaskPostData>({
       customerId: "",
       endTime: "",
-      startTime: "",
+      startTime: moment(new Date()).format("YYYY-MM-DDTkk:mm"),
       status: "",
       taskDescription: "",
       taskName: "",
-      taskTypeId: "",
+      tasktypeId: "",
       userId: "",
    });
    const [emplName, setEmplName] = useState<string>("");
@@ -45,6 +40,64 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
    const [customersList, setCustomersList] = useState<CustomerState[]>([]);
 
    const [taskTypeList, setTaskTypeList] = useState<SelectType[]>([]);
+
+   const [statusList, setStatusList] = useState<SelectType[]>([
+      {
+         id: "PROCESSING",
+         name: "PROCESSING",
+      },
+      {
+         id: "DONE",
+         name: "DONE",
+      },
+      {
+         id: "FAIL",
+         name: "FAIL",
+      },
+      {
+         id: "CANCELLED",
+         name: "CANCELLED",
+      },
+      {
+         id: "POSTPONE",
+         name: "POSTPONE",
+      },
+   ]);
+
+   const [buttonText, setButtonText] = useState<string>("Thêm");
+   const [title, setTitle] = useState<string>("Tạo mới công việc");
+
+   const dispatch = useDispatch();
+   const location = useLocation();
+
+   useEffect(() => {
+      const { id, edit } = queryString.parse(location.search);
+
+      const fetchData = async (id: string) => {
+         const response = await taskApi.getOne(id);
+         setTask({
+            startTime: moment(new Date(response.data.startTime)).format("YYYY-MM-DDTkk:mm"),
+            endTime: moment(new Date(response.data.endTime)).format("YYYY-MM-DDTkk:mm"),
+            customerId: response.data.customer.id,
+            tasktypeId: response.data.tasktype.id,
+            userId: response.data.user.id,
+            status: response.data.status,
+            taskDescription: response.data.taskDescription,
+            taskName: response.data.taskName,
+         });
+
+         setCustomerName(response.data.customer.customerName);
+         setEmplName(response.data.user.name);
+      };
+      if (edit && edit === "T") {
+         setButtonText("Cập nhật");
+         setTitle("Cập nhật công việc");
+      }
+      if (id) {
+         fetchData(id as string);
+      }
+   }, [location.search]);
+
    useEffect(() => {
       const fetchType = async () => {
          const response = await taskApi.getTaskFilter();
@@ -83,7 +136,14 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
    useDebounce(
       () => {
          const fetchCustomerByName = async () => {
-            const response = await customerApi.getAll("?q=" + customerName);
+            let query = "";
+            if (customerName) {
+               query += "?q=" + customerName;
+            } else {
+               query += "?limit=10";
+            }
+
+            const response = await customerApi.getAll(query);
             setCustomersList(response.data.results);
          };
          fetchCustomerByName();
@@ -105,21 +165,23 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
          return { ...prev, taskDescription: content };
       });
    };
-
    const onSubmitHandler = async (e: FormEvent) => {
       e.preventDefault();
-
-      try {
-         const result = await taskApi.create(task);
-         console.log(result);
-      } catch (error) {}
+      const { id, edit } = queryString.parse(location.search);
+      if (edit === "T") {
+         await dispatch(updateTask(id as string, task));
+      } else {
+         await dispatch(createTask(task));
+      }
+      // const response = responseFunction();
+      await props.onClose();
    };
 
    return (
-      <Modal onClose={props.onClose}>
-         <h2>{props.title}</h2>
-         <div className={classes.taskModal}>
-            <form onSubmit={(e) => onSubmitHandler(e)}>
+      <Modal onClose={props.onClose} className={classes.taskModal}>
+         <h2 className={classes.title}>{title}</h2>
+         <div className={classes.inner}>
+            <form onSubmit={onSubmitHandler}>
                <div className={classes.inputWrap}>
                   <div className={classes.informationArea}>
                      <Input
@@ -158,23 +220,15 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
                            }
                         />
                      </div>
-                     <div className={classes.richTextArea}>
-                        <span>Nội dung công việc</span>
-                        <JoditEditor
-                           ref={editor}
-                           value={task.taskDescription}
-                           onBlur={(content) => richTextHandler(content)}
-                        />
-                     </div>
 
                      <Select
                         options={taskTypeList}
-                        value={task.taskTypeId}
+                        value={task.tasktypeId}
                         className={classes.inputArea}
                         labelName={"Công việc"}
                         onChange={(e) =>
                            setTask((prev) => {
-                              return { ...prev, taskTypeId: e.target.value };
+                              return { ...prev, tasktypeId: e.target.value };
                            })
                         }
                      />
@@ -196,13 +250,13 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
                               <ul>
                                  {emplList?.map((empl, index) => (
                                     <li key={index}>
-                                       <button
+                                       <span
                                           onClick={() =>
                                              onChangeEmployeeHandler(empl.id, empl.name)
                                           }
                                        >
-                                          {empl.name}
-                                       </button>
+                                          {`${empl.name} - ${empl.phone}`}
+                                       </span>
                                     </li>
                                  ))}
                               </ul>
@@ -227,7 +281,7 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
                               <ul>
                                  {customersList?.map((customer, index) => (
                                     <li key={index}>
-                                       <button
+                                       <span
                                           onClick={() =>
                                              onChangeCustomerHandler(
                                                 customer.id,
@@ -235,17 +289,36 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
                                              )
                                           }
                                        >
-                                          {customer.customerName}
-                                       </button>
+                                          {`${customer.customerName} - ${customer.phone}`}
+                                       </span>
                                     </li>
                                  ))}
                               </ul>
                            </div>
                         </div>
                      </div>
+
+                     <div className={classes.richTextArea}>
+                        <span>Nội dung công việc</span>
+                        <JoditEditor
+                           ref={editor}
+                           value={task.taskDescription}
+                           onBlur={(content) => richTextHandler(content)}
+                        />
+                     </div>
                   </div>
                </div>
-               <Button type="submit">Thêm</Button>
+               <Select
+                  options={statusList}
+                  value={task.status}
+                  labelName={"Trạng thái"}
+                  onChange={(e) =>
+                     setTask((prev) => {
+                        return { ...prev, status: e.target.value };
+                     })
+                  }
+               />
+               <Button type="submit">{buttonText}</Button>
             </form>
 
             {/* <DatePicker 

@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAGA,AACG,SADM,CACN,CAAC,CAAC;EACC,OAAO,EAAE,WAAW;EACpB,kBAAkB,EAAE,CAAC;EACrB,QAAQ,EAAE,MAAM;EAChB,kBAAkB,EAAE,QAAQ;CAC9B",
     "sources": [
         "taskList.module.scss",
         "../../styles/_variables.scss",

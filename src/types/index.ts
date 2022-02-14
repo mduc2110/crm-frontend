@@ -3,28 +3,28 @@ export interface Tag {
    name: string;
 }
 
-export interface TaskState {
-   startTime: Date;
-   endTime: Date;
-   id: string;
-   taskName: string;
-   taskDescription: string;
-   status: string;
-   createdAt: Date;
-   updatedAt: Date;
-   user: {
-      id: string;
-      name: string;
-   };
-   customer: {
-      customerName: string;
-      id: string;
-   };
-   tasktype: {
-      nameType: string;
-      id: string;
-   };
-}
+// export interface TaskState {
+//    startTime: Date;
+//    endTime: Date;
+//    id: string;
+//    taskName: string;
+//    taskDescription: string;
+//    status: string;
+//    createdAt: Date;
+//    updatedAt: Date;
+//    user: {
+//       id: string;
+//       name: string;
+//    };
+//    customer: {
+//       customerName: string;
+//       id: string;
+//    };
+//    tasktype: {
+//       nameType: string;
+//       id: string;
+//    };
+// }
 
 export interface SelectType {
    id: string;
@@ -62,4 +62,15 @@ export interface CustomerPostData {
    idDistrict: string;
    idWard: string;
    detailAddress: string;
+}
+
+export interface TaskPostData {
+   customerId: string;
+   endTime: string;
+   startTime: string;
+   status: string;
+   taskDescription: string;
+   taskName: string;
+   tasktypeId: string;
+   userId: string;
 }

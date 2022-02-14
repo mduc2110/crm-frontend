@@ -49,12 +49,14 @@
   margin: 0 0.5rem;
 }
 
+.nav .right .action span,
 .nav .right .action button {
-  font-size: 1rem;
+  font-size: 0.9rem;
   vertical-align: middle;
 }
 
+.nav .right .action span svg,
 .nav .right .action button svg {
-  vertical-align: middle;
+  vertical-align: bottom;
 }
 /*# sourceMappingURL=navbar.module.css.map */

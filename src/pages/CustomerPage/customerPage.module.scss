@@ -12,6 +12,9 @@
 
       .actions {
          display: flex;
+         > * {
+            margin-left: 10px;
+         }
          button {
             text-transform: inherit;
             font-size: 0.9rem;

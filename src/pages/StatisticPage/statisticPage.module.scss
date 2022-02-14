@@ -1,0 +1,31 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.statisticPage {
+   .inner {
+      @include flex;
+      align-items: flex-start;
+      .left {
+         width: max-content;
+         h3 {
+            padding: 0 10px 1rem;
+         }
+         ul {
+            max-height: 290px;
+            overflow-y: auto;
+            li {
+               cursor: pointer;
+               padding: 5px 10px;
+               &:hover {
+                  background: #ecefff;
+                  border-radius: 9px;
+                  color: #3e4a92;
+               }
+            }
+         }
+      }
+      .right {
+         width: 75%;
+      }
+   }
+}

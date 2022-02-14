@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,7 +12,10 @@ import classes from "./customer.module.css";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 
-const CustomerList = () => {
+const CustomerList: React.FC<{
+   onSetIdCustomerList: (e: ChangeEvent<HTMLInputElement>) => void;
+   refreshCustomerCheckList: () => void;
+}> = (props) => {
    // const [customerList2, setCustomerList2] = useState<CustomerState[]>([]);
    const customerList: CustomerState[] = useAppSelector((state) => state.customer);
    const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
@@ -24,7 +27,7 @@ const CustomerList = () => {
 
    useEffect(() => {
       setIsFetchingData(true);
-      setTimeout(dispatch(getCustomer(location.search)), 3000);
+      dispatch(getCustomer(location.search));
 
       setIsFetchingData(false);
       // dispatch(getCustomer("?page=1&limit=10"));
@@ -47,6 +50,7 @@ const CustomerList = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             dispatch(deleteCustomer([id]));
+            props.refreshCustomerCheckList();
             Swal.fire("Deleted!", "Xóa thành công.", "success");
          }
       });
@@ -96,9 +100,14 @@ const CustomerList = () => {
                {!isFetchingData &&
                   customerList?.map((customer, index) => {
                      return (
-                        <tr key={index}>
+                        <tr key={customer.id + "_" + index}>
                            <td>
-                              <input type="checkbox" data-id={customer.id} />
+                              <input
+                                 type="checkbox"
+                                 value={customer.id}
+                                 data-email={customer.email}
+                                 onChange={(e) => props.onSetIdCustomerList(e)}
+                              />
                            </td>
                            <td>{index + 1}</td>
                            <td>{customer.customerName}</td>
@@ -106,8 +115,15 @@ const CustomerList = () => {
                            <td>{customer.customerstatus.status}</td>
                            <td>{customer.customertag.tagName}</td>
                            <td>
-                              <IconButton onClick={() => editCustomerHandler(customer.id)} iconComponent={<AiOutlineEdit />} />
-                              <IconButton onClick={() => deleteCustomerHandler(customer.id)} iconComponent={<AiOutlineDelete />} color="red" />
+                              <IconButton
+                                 onClick={() => editCustomerHandler(customer.id)}
+                                 iconComponent={<AiOutlineEdit />}
+                              />
+                              <IconButton
+                                 onClick={() => deleteCustomerHandler("" + customer.id)}
+                                 iconComponent={<AiOutlineDelete />}
+                                 color="red"
+                              />
                            </td>
                         </tr>
                      );

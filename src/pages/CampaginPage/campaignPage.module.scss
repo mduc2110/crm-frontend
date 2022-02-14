@@ -1,0 +1,78 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+.campaignPage {
+   display: block;
+
+   .textEditor {
+      background: #fff;
+   }
+   .title {
+      font-size: 0.9rem;
+      border-radius: 3px;
+      background: #fff;
+      padding: 5px;
+      color: #283893;
+      margin: 3px;
+   }
+   .searchBox {
+      max-width: 400px;
+
+      .dropbox {
+         width: 100%;
+      }
+   }
+   ul.emailList {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      .sendTo {
+         font-size: 0.8rem;
+         border-radius: 3px;
+         background: #fff;
+         padding: 5px;
+         color: #283893;
+         margin: 3px;
+      }
+      li {
+         font-size: 0.8rem;
+         border-radius: 3px;
+         background: #bec3df;
+         padding: 5px 10px;
+         color: #283893;
+         margin: 3px;
+         svg {
+            font-size: 1rem;
+            vertical-align: bottom;
+            &:hover {
+               color: #fff;
+               background: #df6a6a;
+               border-radius: 50%;
+               cursor: pointer;
+            }
+         }
+      }
+   }
+
+   .inputSubject {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #dadada;
+      padding: 8px;
+   }
+   .richTextArea {
+      margin-top: 1rem;
+      > span {
+         margin-bottom: 0.5rem;
+         display: inline-block;
+      }
+   }
+
+   .spinnerWrapper {
+      text-align: center;
+      margin: 25px;
+      > * {
+         display: initial !important;
+      }
+   }
+}

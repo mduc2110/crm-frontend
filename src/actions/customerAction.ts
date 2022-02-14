@@ -33,7 +33,8 @@ export const addCustomer = (data: CustomerPostData) => async (dispatch: Dispatch
 
 export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) => {
    try {
-      await customerApi.remove(idList);
+      // await customerApi.remove(idList);
+
       dispatch({
          type: DELETE_CUSTOMER,
          payload: idList,

@@ -16,11 +16,12 @@ import { setPageTitle } from "../../actions/uiAction";
 interface TaskFilter {
    id: number;
    nameType: string;
+   active: boolean | undefined;
 }
 
 const TaskPage = () => {
    const [taskFilter, setTaskFilter] = useState<TaskFilter[]>([]);
-   const [isLoading, setIsLoading] = useState<boolean>(false);
+   // const [isLoading, setIsLoading] = useState<boolean>(false);
    const [searchDay, setSearchDay] = useState<{
       from: string;
       to: string;
@@ -33,18 +34,76 @@ const TaskPage = () => {
    const navigate = useNavigate();
    const location = useLocation();
    const dispatch = useDispatch();
+
+   const [isActiveAllFilter, setIsActiveAllfilter] = useState<boolean>(true);
    useEffect(() => {
       dispatch(setPageTitle("Công việc"));
-   }, []);
+   }, [dispatch]);
    useEffect(() => {
       const fetchFilter = async () => {
          const response = await taskApi.getTaskFilter();
-         setTaskFilter(response.data);
-         setIsLoading(false);
+         const data: TaskFilter[] = response.data;
+         const params = queryString.parse(location.search);
+         // if (params.idType) {
+         // }
+         // console.log(params);
+         // setTaskFilter(response.data);
+         setTaskFilter(
+            data.map((item) => {
+               let active = false;
+               if (params.idType && +params.idType === item.id) {
+                  active = true;
+               }
+               return {
+                  id: item.id,
+                  nameType: item.nameType,
+                  active: active,
+               };
+            })
+         );
       };
+
       fetchFilter();
-      // const parsed = queryString.parse(location.search);
-   }, [location.search, isLoading]);
+   }, []);
+   useEffect(() => {
+      const params = queryString.parse(location.search);
+      const id = params.idType;
+      const edit = params.edit;
+
+      if (edit && edit === "T") {
+         setModalIsShown(edit && edit === "T");
+      }
+
+      //for active filter
+      if (!id) {
+         setIsActiveAllfilter(true);
+         setTaskFilter((prev) => {
+            return prev.map((item) => {
+               return {
+                  ...item,
+                  active: false,
+               };
+            });
+         });
+      } else {
+         setIsActiveAllfilter(false);
+
+         setTaskFilter((prev) => {
+            const index = prev.findIndex((item) => +item.id === +id);
+            const cloneFilter = prev.map((item) => {
+               return {
+                  ...item,
+                  active: false,
+               };
+            });
+            cloneFilter[index] = {
+               ...cloneFilter[index],
+               active: true,
+            };
+            return cloneFilter;
+         });
+      }
+   }, [location.search]);
 
    const taskFilterHandler = (id?: number) => {
       // const queryParams = new URLSearchParams(location.search);
@@ -57,14 +116,21 @@ const TaskPage = () => {
    const searchHandler = (e: React.FormEvent) => {
       e.preventDefault();
       // const q = queryString.stringify(searchDay);
-      setIsLoading(true);
+      setIsFetching(true);
       const q = queryString.parse(location.search);
       q.from = searchDay.from;
       q.to = searchDay.to;
       navigate("?" + queryString.stringify(q));
    };
-
    const hideModalHandler = () => {
+      const parsedQuery = queryString.parse(location.search);
+      if (parsedQuery.edit) {
+         delete parsedQuery.edit;
+      }
+      if (parsedQuery.id) {
+         delete parsedQuery.id;
+      }
+      navigate("?" + queryString.stringify(parsedQuery));
       setModalIsShown(false);
    };
 
@@ -83,13 +149,21 @@ const TaskPage = () => {
          )}
          <Panel className={classes.left}>
             <h3>Phân loại công việc</h3>
-            <ul>
+            <ul className={classes.menuFilter}>
                <li>
-                  <button onClick={() => taskFilterHandler()}>Tất cả</button>
+                  <button
+                     className={isActiveAllFilter ? classes.active : ""}
+                     onClick={() => taskFilterHandler()}
+                  >
+                     Tất cả
+                  </button>
                </li>
                {taskFilter?.map((element, index) => (
                   <li key={index}>
-                     <button onClick={() => taskFilterHandler(element.id)}>
+                     <button
+                        className={element.active ? classes.active : ""}
+                        onClick={() => taskFilterHandler(element.id)}
+                     >
                         {element.nameType}
                      </button>
                   </li>
@@ -98,7 +172,7 @@ const TaskPage = () => {
          </Panel>
          <Panel className={classes.right}>
             <div className={classes.header}>
-               <form className={classes.search} onSubmit={(e) => searchHandler(e)}>
+               <form className={classes.search} onSubmit={searchHandler}>
                   <Input
                      className={classes.inputWrap}
                      value={searchDay.from}
@@ -124,7 +198,7 @@ const TaskPage = () => {
                         })
                      }
                   />
-                  <Button type="submit" disabled={isLoading}>
+                  <Button type="submit" disabled={isFetching}>
                      Tìm kiếm
                   </Button>
                </form>
@@ -133,7 +207,11 @@ const TaskPage = () => {
                   Tạo công việc
                </Button>
             </div>
-            <TaskList isFetching={isFetching} setIsFetching={() => setIsFetching(false)} />
+            <TaskList
+               onShowModal={() => setModalIsShown(true)}
+               isFetching={isFetching}
+               setIsFetching={() => setIsFetching(false)}
+            />
          </Panel>
       </div>
    );

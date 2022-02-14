@@ -18,16 +18,20 @@
   margin-right: 2rem;
 }
 
-.taskPage .left ul {
+.taskPage .left ul.menuFilter {
   margin-top: 1rem;
 }
 
-.taskPage .left ul li button {
+.taskPage .left ul.menuFilter li button {
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 10px 0;
+  padding: 7px 0;
+}
+
+.taskPage .left ul.menuFilter li button.active {
+  font-weight: 500;
 }
 
 .taskPage .right {
@@ -76,9 +80,8 @@
 
 .taskPage .right .header .search button {
   margin: 0;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100px;
   padding: 13px;
+  height: 42px;
 }
 /*# sourceMappingURL=taskpage.module.css.map */

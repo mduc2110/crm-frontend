@@ -7,7 +7,7 @@
    .left {
       width: 20%;
       margin-right: 2rem;
-      ul {
+      ul.menuFilter {
          margin-top: 1rem;
          li {
             button {
@@ -15,7 +15,10 @@
                border: none;
                outline: none;
                cursor: pointer;
-               padding: 10px 0;
+               padding: 7px 0;
+               &.active {
+                  font-weight: 500;
+               }
             }
          }
       }
@@ -40,8 +43,10 @@
             }
             button {
                margin: 0;
-               width: fit-content;
+               width: 100px;
                padding: 13px;
+               height: 42px;
+               // padding: 21px;
             }
          }
       }

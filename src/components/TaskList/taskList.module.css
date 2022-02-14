@@ -1,1 +1,7 @@
-/* No CSS *//*# sourceMappingURL=taskList.module.css.map */
+.taskList a {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+/*# sourceMappingURL=taskList.module.css.map */

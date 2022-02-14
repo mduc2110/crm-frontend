@@ -2,32 +2,44 @@ import React, { useEffect, useState } from "react";
 import classes from "./taskList.module.css";
 import Table from "../UI/Table";
 import { useLocation } from "react-router-dom";
-import taskApi from "../../api/taskApi";
 import { Link } from "react-router-dom";
-import { TaskState } from "../../types";
 import Skeleton from "react-loading-skeleton";
+import { TaskState } from "../../store/types";
+import { useAppSelector } from "../../store";
+import { useDispatch } from "react-redux";
+import { getAllTask } from "../../actions/taskAction";
 
-const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (props) => {
+const TaskList: React.FC<{
+   isFetching: boolean;
+   setIsFetching: () => void;
+   onShowModal: () => void;
+}> = (props) => {
    const location = useLocation();
-   const [taskList, setTaskList] = useState<TaskState[]>([]);
    const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
+   const dispatch = useDispatch();
+   const taskList: TaskState[] = useAppSelector((state) => state.task);
    useEffect(() => {
-      let isMounted = true;
+      // let isMounted = true;
       setIsFetchingData(true);
-      const fetchTask = async () => {
-         const response = await taskApi.getAll(location.search);
-         if (isMounted) {
-            setTaskList(response.data.results);
-            props.setIsFetching();
+      dispatch(getAllTask(location.search));
+      // setIsFetchingData(true);
+      // const fetchTask = async () => {
+      //    const response = await taskApi.getAll(location.search);
+      //    if (isMounted) {
+      //       setTaskList(response.data.results);
+      //       props.setIsFetching();
 
-            setIsFetchingData(false);
-         }
-         return () => {
-            isMounted = false;
-         };
-      };
-      fetchTask();
-   }, [location.search, props]);
+      //       setIsFetchingData(false);
+      //    }
+
+      // };
+      // fetchTask();
+      props.setIsFetching();
+      setIsFetchingData(false);
+      // return () => {
+      //    isMounted = false;
+      // };
+   }, [location.search, props, dispatch]);
 
    return (
       <div className={classes.taskList}>
@@ -76,7 +88,8 @@ const TaskList: React.FC<{ isFetching: boolean; setIsFetching: () => void }> = (
                               <input type="checkbox" data-id={task.id} />
                            </td>
                            <td>{index + 1}</td>
-                           <td>
+                           <td style={{ width: "400px" }}>
+                              {/* <span onClick={props.onShowModal}>{task.taskName}</span> */}
                               <Link to={"/task/" + task.id}>{task.taskName}</Link>
                            </td>
                            <td>{task.tasktype.nameType}</td>

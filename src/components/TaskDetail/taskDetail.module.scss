@@ -2,8 +2,85 @@
 @import "../../styles/variables";
 
 .taskDetail {
+   color: #49526a;
+   position: relative;
+   h2.bigTitle {
+      margin-bottom: 4rem;
+      svg {
+         cursor: pointer;
+         margin-right: 1rem;
+         &:hover {
+            transition: all 0.3s;
+            color: red;
+         }
+      }
+   }
    .title {
       font-style: italic;
       font-weight: 600;
    }
+   .detailBody {
+      @include flex;
+      align-items: flex-start;
+      .left {
+         width: 60%;
+      }
+      .right {
+         width: 30%;
+      }
+      .section {
+         margin-bottom: 3rem;
+         .titleBody {
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            background-color: $white-color;
+            // width: max-content;
+            border-bottom: 1px solid $gray-color;
+            // &::after {
+            //    content: "";
+            //    width: 100%;
+            //    height: 1px;
+            //    background-color: $gray-color;
+            //    position: absolute;
+            //    right: -110%;
+            //    top: 50%;
+            //    transform: translateY(-50%);
+            //    z-index: 1;
+            // }
+         }
+         .info {
+            margin-top: 1rem;
+         }
+      }
+      .status {
+         color: red;
+      }
+   }
+
+   .btnDelete {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      color: #fff;
+      outline: none;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+
+      background: #ed5050;
+      cursor: pointer;
+      svg {
+         vertical-align: middle;
+      }
+      &:hover {
+         background: #e16666;
+      }
+   }
+}
+
+.processing {
+   background-color: blue;
+   display: inline-block;
 }

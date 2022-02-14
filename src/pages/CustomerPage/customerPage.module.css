@@ -22,6 +22,10 @@
   display: flex;
 }
 
+.customerPage .header .actions > * {
+  margin-left: 10px;
+}
+
 .customerPage .header .actions button {
   text-transform: inherit;
   font-size: 0.9rem;

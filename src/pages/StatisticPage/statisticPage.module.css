@@ -1,0 +1,45 @@
+.statisticPage .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.statisticPage .inner .left {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.statisticPage .inner .left h3 {
+  padding: 0 10px 1rem;
+}
+
+.statisticPage .inner .left ul {
+  max-height: 290px;
+  overflow-y: auto;
+}
+
+.statisticPage .inner .left ul li {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.statisticPage .inner .left ul li:hover {
+  background: #ecefff;
+  border-radius: 9px;
+  color: #3e4a92;
+}
+
+.statisticPage .inner .right {
+  width: 75%;
+}
+/*# sourceMappingURL=statisticPage.module.css.map */

@@ -5,12 +5,14 @@ import { authReducer } from "../reducers/auth";
 import { customerReducer } from "../reducers/customer";
 import { userReducer } from "../reducers/user";
 import { uiReducer } from "../reducers/ui";
+import { taskReducer } from "../reducers/task";
 
 const rootReducer = combineReducers({
    auth: authReducer,
    customer: customerReducer,
    user: userReducer,
    ui: uiReducer,
+   task: taskReducer,
 });
 
 // export const configureStore = () => {

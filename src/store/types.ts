@@ -167,7 +167,7 @@ export interface TaskState {
       customerName: string;
       id: string;
    };
-   taskType: {
+   tasktype: {
       nameType: string;
       id: string;
    };
@@ -183,7 +183,7 @@ interface CreateTaskAction {
 }
 interface UpdateTaskAction {
    type: typeof UPDATE_TASK;
-   payload: { TASK: TaskState };
+   payload: TaskState;
 }
 interface DeleteTaskAction {
    type: typeof DELETE_TASK;

@@ -9,6 +9,8 @@ import classes from "./rolePage.module.css";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../actions/uiAction";
 
 interface Permission {
    id: string;
@@ -22,39 +24,53 @@ const RolePage = () => {
    const [roleList, setRoleList] = useState<SelectType[]>([]);
    const [selectedRole, setSelectedRole] = useState("");
    const [isFetchingData, setIsFetchingData] = useState<boolean>(true);
+   const dispatch = useDispatch();
    useEffect(() => {
+      dispatch(setPageTitle("Phân quyền"));
+   }, [dispatch]);
+   useEffect(() => {
+      let isMounted = true;
       const fetchRole = async () => {
-         const response = await roleApi.getAll();
-         const roles: any[] = response.data;
-         setRoleList(
-            roles.map((role) => {
-               return {
-                  id: role.id,
-                  name: role.roleName + " - " + role.description,
-               };
-            })
-         );
-         setSelectedRole(roles[0].id);
+         //fetch role
+         const roleResponse = await roleApi.getAll();
+         const roles: any[] = roleResponse.data;
+
+         //fetch permissions
+         const permissionResponse = await roleApi.getAllPermission();
+         const permissions: Permission[] = permissionResponse.data;
+
+         if (isMounted) {
+            setRoleList(
+               roles.map((role) => {
+                  return {
+                     id: role.id,
+                     name: role.roleName + " - " + role.description,
+                  };
+               })
+            );
+            // setSelectedRole(roles[0].id);
+
+            setPermissionList(
+               permissions.map((permission) => {
+                  return {
+                     id: permission.id,
+                     description: permission.description,
+                     permissionName: permission.permissionName,
+                     isChecked: false,
+                  };
+               })
+            );
+            setIsFetchingData(false);
+         }
       };
-      const fetchPermission = async () => {
-         const response = await roleApi.getAllPermission();
-         const permissions: Permission[] = response.data;
-         setPermissionList(
-            permissions.map((permission) => {
-               return {
-                  id: permission.id,
-                  description: permission.description,
-                  permissionName: permission.permissionName,
-                  isChecked: false,
-               };
-            })
-         );
-         setIsFetchingData(false);
-      };
-      fetchPermission();
+
       fetchRole();
+      return () => {
+         isMounted = false;
+      };
    }, []);
    useEffect(() => {
+      setIsFetchingData(true);
       const fetchOneRole = async () => {
          const response = await roleApi.getOne(selectedRole);
          // setPermissionList(response.data);
@@ -80,21 +96,25 @@ const RolePage = () => {
             }
          });
          setPermissionList(clonePermissionList);
+         setIsFetchingData(false);
       };
       fetchOneRole();
    }, [selectedRole]);
    // const changeRoleHandler = () => {};
    const checkedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      const cloneObject = Object.assign(permissionList, {});
-      const index = cloneObject.findIndex((item) => +item.id === +e.target.value);
-      cloneObject[index] = {
-         ...cloneObject[index],
-         isChecked: e.target.checked,
-      };
-      setPermissionList([...cloneObject]);
+      if (!selectedRole) {
+         toast.warn("Vui lòng chọn một quyền");
+      } else {
+         const cloneObject = Object.assign(permissionList, {});
+         const index = cloneObject.findIndex((item) => +item.id === +e.target.value);
+         cloneObject[index] = {
+            ...cloneObject[index],
+            isChecked: e.target.checked,
+         };
+         setPermissionList([...cloneObject]);
+      }
       // console.log(cloneObject.findIndex((item) => +item.id === +e.target.value));
    };
-   console.log(isFetchingData);
 
    const submitHandler = async (e: FormEvent) => {
       e.preventDefault();
@@ -110,7 +130,12 @@ const RolePage = () => {
    };
    return (
       <Panel className={classes.rolePage}>
-         <Select className={classes.select} options={roleList} value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)} />
+         <Select
+            className={classes.select}
+            options={roleList}
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+         />
          <div className={classes.permissionTable}>
             <form onSubmit={submitHandler}>
                <table className={classes.table}>
@@ -118,28 +143,48 @@ const RolePage = () => {
                      {isFetchingData ? (
                         <tr>
                            <td>
-                              <Skeleton count={10} height="25px" width="20px" style={{ marginTop: "10px" }} />
+                              <Skeleton
+                                 count={10}
+                                 height="25px"
+                                 width="20px"
+                                 style={{ marginTop: "10px" }}
+                              />
                            </td>
                            <td>
-                              <Skeleton count={10} height="25px" width="80px" style={{ marginTop: "10px" }} />
+                              <Skeleton
+                                 count={10}
+                                 height="25px"
+                                 width="80px"
+                                 style={{ marginTop: "10px" }}
+                              />
                            </td>
                            <td>
-                              <Skeleton count={10} height="25px" width="200px" style={{ marginTop: "10px" }} />
+                              <Skeleton
+                                 count={10}
+                                 height="25px"
+                                 width="200px"
+                                 style={{ marginTop: "10px" }}
+                              />
                            </td>
                         </tr>
-                     ) : null}
-
-                     {permissionList?.map((permission, index) => {
-                        return (
-                           <tr key={index}>
-                              <td>
-                                 <input type="checkbox" checked={permission.isChecked} onChange={checkedHandler} value={permission.id} />
-                              </td>
-                              <td>{permission.permissionName}</td>
-                              <td>{permission.description}</td>
-                           </tr>
-                        );
-                     })}
+                     ) : (
+                        permissionList?.map((permission, index) => {
+                           return (
+                              <tr key={index}>
+                                 <td>
+                                    <input
+                                       type="checkbox"
+                                       checked={permission.isChecked}
+                                       onChange={checkedHandler}
+                                       value={permission.id}
+                                    />
+                                 </td>
+                                 <td>{permission.permissionName}</td>
+                                 <td>{permission.description}</td>
+                              </tr>
+                           );
+                        })
+                     )}
                   </tbody>
                </table>
                <Button>Cập nhật</Button>

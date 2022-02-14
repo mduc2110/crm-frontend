@@ -1,56 +1,62 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 .taskModal {
-   .searchBox {
-      // position: relative;
+   overflow: initial;
+   .title {
+      margin-bottom: 1rem;
    }
-   .quickSearch {
-      // bottom: -2rem;
-      width: 100%;
-      background-color: #fff;
-      // padding: 0.7rem;
-      // box-shadow: 1px 1px 1px rgb(170, 170, 170);
-      z-index: 100;
-      display: none;
-      .dropbox {
+   .inner {
+      max-height: 500px;
+      overflow: auto;
+      padding-right: 5px;
+      .quickSearch {
+         // bottom: -2rem;
          width: 100%;
-         display: block;
-         overflow: auto;
-         max-height: 200px;
-         ul {
-            display: block;
+         background-color: #fff;
+         // padding: 0.7rem;
+         // box-shadow: 1px 1px 1px rgb(170, 170, 170);
+         z-index: 100;
+         display: none;
+         .dropbox {
             width: 100%;
-            li {
-               button {
-                  font-size: 1rem;
+            display: block;
+            overflow: auto;
+            max-height: 200px;
+            ul {
+               display: block;
+               width: 100%;
+               li {
+                  button {
+                     font-size: 1rem;
+                  }
                }
             }
          }
+
+         &.active {
+            display: block;
+         }
       }
 
-      &.active {
-         display: block;
+      .richTextArea {
+         margin-top: 10px;
+         > span {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            display: inline-block;
+         }
       }
-   }
 
-   .richTextArea {
-      margin-top: 10px;
-      > span {
-         font-size: 0.8rem;
-         margin-bottom: 5px;
-         display: inline-block;
-      }
-   }
-
-   .timeArea {
-      @include flex;
-      // align-items: flex-end;
-      vertical-align: middle;
-      & > *:not(:nth-child(2)) {
-         width: 48%;
-      }
-      & > span {
-         margin-top: 2rem;
+      .timeArea {
+         @include flex;
+         // align-items: flex-end;
+         vertical-align: middle;
+         & > *:not(:nth-child(2)) {
+            width: 48%;
+         }
+         & > span {
+            margin-top: 2rem;
+         }
       }
    }
 }

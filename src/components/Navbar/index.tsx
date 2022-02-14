@@ -1,5 +1,11 @@
 import React from "react";
-import { AiOutlineBell, AiOutlineCaretDown, AiOutlineLogout } from "react-icons/ai";
+import {
+   AiOutlineBell,
+   AiOutlineCaretDown,
+   AiOutlineLogout,
+   AiOutlineSetting,
+   AiOutlineUser,
+} from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/auth";
 import { useAppSelector } from "../../store";
@@ -30,9 +36,19 @@ const Navbar = () => {
                <div className="dropbox">
                   <ul>
                      <li>
-                        <button onClick={logoutHandler}>
-                           Đăng xuất <AiOutlineLogout />
-                        </button>
+                        <span>
+                           <AiOutlineUser /> Thông tin cá nhân
+                        </span>
+                     </li>
+                     <li>
+                        <span>
+                           <AiOutlineSetting /> Cài đặt
+                        </span>
+                     </li>
+                     <li>
+                        <span onClick={logoutHandler}>
+                           <AiOutlineLogout /> Đăng xuất
+                        </span>
                      </li>
                   </ul>
                </div>

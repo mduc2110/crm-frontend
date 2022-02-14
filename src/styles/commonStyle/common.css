@@ -21,7 +21,8 @@
   background-color: #e5e9fb;
 }
 
-.actionDropdown .dropbox ul li button {
+.actionDropdown .dropbox ul li span {
+  display: block;
   padding: 10px 20px;
   width: 100%;
   text-align: left;
@@ -32,14 +33,24 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
-.actionDropdown .dropbox ul li button.delete {
+.actionDropdown .dropbox ul li span.delete {
   color: red;
 }
 
 .actionDropdown .dropbox:hover {
   display: block;
+}
+
+.actionDropdown .dropbox.active {
+  display: block;
+}
+
+.actionDropdown .dropbox.searchResult {
+  overflow: auto;
+  max-height: 200px;
 }
 
 .actionDropdown button:hover + .dropbox {
@@ -76,5 +87,54 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #3e4a92;
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  padding: 6px;
+  color: #fff;
+}
+
+.status.processing {
+  background-color: #2175f3;
+}
+
+.status.fail {
+  background-color: #e24343;
+}
+
+.status.done {
+  background-color: #54c458;
+}
+
+.status.cancelled {
+  background-color: #f79c25;
+}
+
+.jodit-workplace {
+  background-color: #fff;
+}
+
+.noData {
+  color: #a5a5a5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1rem;
+  width: 100%;
+  margin: 50px 0;
+}
+
+.noData svg {
+  font-size: 2rem;
+  margin-right: 0.5rem;
 }
 /*# sourceMappingURL=common.css.map */

@@ -1,41 +1,55 @@
-.taskModal .quickSearch {
+.taskModal {
+  overflow: initial;
+}
+
+.taskModal .title {
+  margin-bottom: 1rem;
+}
+
+.taskModal .inner {
+  max-height: 500px;
+  overflow: auto;
+  padding-right: 5px;
+}
+
+.taskModal .inner .quickSearch {
   width: 100%;
   background-color: #fff;
   z-index: 100;
   display: none;
 }
 
-.taskModal .quickSearch .dropbox {
+.taskModal .inner .quickSearch .dropbox {
   width: 100%;
   display: block;
   overflow: auto;
   max-height: 200px;
 }
 
-.taskModal .quickSearch .dropbox ul {
+.taskModal .inner .quickSearch .dropbox ul {
   display: block;
   width: 100%;
 }
 
-.taskModal .quickSearch .dropbox ul li button {
+.taskModal .inner .quickSearch .dropbox ul li button {
   font-size: 1rem;
 }
 
-.taskModal .quickSearch.active {
+.taskModal .inner .quickSearch.active {
   display: block;
 }
 
-.taskModal .richTextArea {
+.taskModal .inner .richTextArea {
   margin-top: 10px;
 }
 
-.taskModal .richTextArea > span {
+.taskModal .inner .richTextArea > span {
   font-size: 0.8rem;
   margin-bottom: 5px;
   display: inline-block;
 }
 
-.taskModal .timeArea {
+.taskModal .inner .timeArea {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,11 +62,11 @@
   vertical-align: middle;
 }
 
-.taskModal .timeArea > *:not(:nth-child(2)) {
+.taskModal .inner .timeArea > *:not(:nth-child(2)) {
   width: 48%;
 }
 
-.taskModal .timeArea > span {
+.taskModal .inner .timeArea > span {
   margin-top: 2rem;
 }
 /*# sourceMappingURL=taskModal.module.css.map */

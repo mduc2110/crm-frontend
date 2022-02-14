@@ -16,6 +16,7 @@ const Button: React.FC<{
          type={type}
          style={props.style}
       >
+         {/* {props.disabled ? <Oval color="#fff" height={25} width={25}></Oval> : props.children} */}
          <Oval color="#fff" height={25} width={25}></Oval>
          {props.children}
       </button>

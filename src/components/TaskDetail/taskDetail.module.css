@@ -1,5 +1,95 @@
+.taskDetail {
+  color: #49526a;
+  position: relative;
+}
+
+.taskDetail h2.bigTitle {
+  margin-bottom: 4rem;
+}
+
+.taskDetail h2.bigTitle svg {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.taskDetail h2.bigTitle svg:hover {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: red;
+}
+
 .taskDetail .title {
   font-style: italic;
   font-weight: 600;
+}
+
+.taskDetail .detailBody {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.taskDetail .detailBody .left {
+  width: 60%;
+}
+
+.taskDetail .detailBody .right {
+  width: 30%;
+}
+
+.taskDetail .detailBody .section {
+  margin-bottom: 3rem;
+}
+
+.taskDetail .detailBody .section .titleBody {
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  background-color: #fff;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.taskDetail .detailBody .section .info {
+  margin-top: 1rem;
+}
+
+.taskDetail .detailBody .status {
+  color: red;
+}
+
+.taskDetail .btnDelete {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background: #ed5050;
+  cursor: pointer;
+}
+
+.taskDetail .btnDelete svg {
+  vertical-align: middle;
+}
+
+.taskDetail .btnDelete:hover {
+  background: #e16666;
+}
+
+.processing {
+  background-color: blue;
+  display: inline-block;
 }
 /*# sourceMappingURL=taskDetail.module.css.map */
