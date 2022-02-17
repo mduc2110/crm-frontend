@@ -22,6 +22,8 @@ const TaskDetail = () => {
       const getSingleTask = async () => {
          const response = await taskApi.getOne(id as string);
          setTask(response.data);
+         console.log(response.data);
+
          setIsFetching(false);
       };
       getSingleTask();
@@ -94,8 +96,12 @@ const TaskDetail = () => {
                            <span>{task?.user.name}</span>
                         </div>
                         <div className={classes.info}>
-                           <span className={classes.title}>Tên khách hàng: </span>
-                           <span>{task?.customer.customerName}</span>
+                           {task?.customer ? (
+                              <>
+                                 <span className={classes.title}>Tên khách hàng: </span>
+                                 <span>{task?.customer.customerName}</span>
+                              </>
+                           ) : null}
                         </div>
                      </div>
 

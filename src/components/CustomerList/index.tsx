@@ -55,6 +55,7 @@ const CustomerList: React.FC<{
          }
       });
    };
+
    return (
       <div className={classes.customerList}>
          <Table>
@@ -97,6 +98,7 @@ const CustomerList: React.FC<{
                      </td>
                   </tr>
                ) : null}
+
                {!isFetchingData &&
                   customerList?.map((customer, index) => {
                      return (

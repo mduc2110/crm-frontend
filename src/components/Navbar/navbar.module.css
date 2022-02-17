@@ -11,6 +11,11 @@
           align-items: center;
 }
 
+.nav .left h2 {
+  color: #222746;
+  text-transform: uppercase;
+}
+
 .nav .right {
   display: -webkit-box;
   display: -ms-flexbox;

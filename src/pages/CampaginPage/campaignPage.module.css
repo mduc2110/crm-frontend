@@ -68,6 +68,7 @@
   outline: none;
   border-bottom: 1px solid #dadada;
   padding: 8px;
+  font-size: 0.95rem;
 }
 
 .campaignPage .richTextArea {

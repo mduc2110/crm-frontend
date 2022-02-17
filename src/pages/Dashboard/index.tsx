@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
-import { AiOutlineForm, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineForm, AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import Panel from "../../components/UI/Panel";
 import classes from "./Dashboard.module.css";
 import { Chart, Doughnut } from "react-chartjs-2";
@@ -31,27 +31,27 @@ const labels = ["January", "February", "March", "April", "May", "June", "July"];
 const data = {
    labels,
    datasets: [
-      {
-         type: "line" as const,
-         label: "Dataset 1",
-         borderColor: "rgb(255, 99, 132)",
-         borderWidth: 2,
-         fill: false,
-         data: [1, 3, 5, 4, 2, 3, 4],
-      },
+      // {
+      //    type: "line" as const,
+      //    label: "Dataset 1",
+      //    borderColor: "rgb(255, 99, 132)",
+      //    borderWidth: 2,
+      //    fill: false,
+      //    data: [1, 3, 5, 4, 2, 3, 4],
+      // },
       {
          type: "bar" as const,
-         label: "Dataset 2",
+         label: "Khách hàng",
          backgroundColor: "rgb(75, 192, 192)",
-         data: [1, 3, 5, 4, 2, 3, 4],
+         data: [12, 30, 52, 70, 22, 30, 41],
          borderColor: "white",
          borderWidth: 2,
       },
       {
          type: "bar" as const,
-         label: "Dataset 3",
+         label: "Công việc",
          backgroundColor: "rgb(53, 162, 235)",
-         data: [1, 3, 5, 4, 2, 3, 4],
+         data: [18, 30, 15, 44, 72, 32, 14],
       },
    ],
 };
@@ -88,11 +88,12 @@ const Brief: React.FC<{
    title?: string;
    icon: ReactNode;
    color: string;
+   amount: string;
 }> = (props) => {
    return (
       <Panel className={classes.brief}>
          <div className={classes.amount}>
-            <h1>30+</h1>
+            <h1>{props.amount}</h1>
             <div className={`${classes.outerIcon}`} style={{ backgroundColor: props.color }}>
                {/* <AiOutlineUser /> */}
                {props.icon}
@@ -110,16 +111,18 @@ const Dashboard = () => {
    return (
       <div className={classes.dashboard}>
          <div className={classes.header}>
-            <Brief title="Online" icon={<AiOutlineUser />} color="rgb(48, 197, 60)" />
-            <Brief title="Khách hàng" icon={<AiOutlineUser />} color="#177cff" />
-            <Brief title="Công việc" icon={<AiOutlineForm />} color="#9766ff" />
-            <Brief title="Nhân viên" icon={<AiOutlineForm />} color="#ff8800" />
+            <Brief amount="10" title="Online" icon={<AiOutlineUser />} color="rgb(48, 197, 60)" />
+            <Brief amount="12+" title="Khách hàng" icon={<AiOutlineHeart />} color="#177cff" />
+            <Brief amount="8" title="Công việc" icon={<AiOutlineForm />} color="#9766ff" />
+            <Brief amount="2" title="Nhân viên" icon={<AiOutlineForm />} color="#ff8800" />
          </div>
          <div className={classes.body}>
             <Panel className={classes["w-4"]}>
+               <h3 className={classes.chartTitle}>Tiến trình công việc</h3>
                <Doughnut data={doughnutData} options={options} />
             </Panel>
             <Panel className={classes["w-6"]}>
+               <h3 className={classes.chartTitle}>Công việc</h3>
                <Chart type="bar" data={data} />
             </Panel>
          </div>

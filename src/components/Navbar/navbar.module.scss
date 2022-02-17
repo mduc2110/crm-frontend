@@ -7,6 +7,10 @@
    // background-color: $white-color;
    @include flex;
    .left {
+      h2 {
+         color: #222746;
+         text-transform: uppercase;
+      }
    }
    .right {
       @include flex;

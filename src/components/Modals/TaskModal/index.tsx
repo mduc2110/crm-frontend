@@ -75,10 +75,12 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
 
       const fetchData = async (id: string) => {
          const response = await taskApi.getOne(id);
+         console.log(response.data);
+
          setTask({
             startTime: moment(new Date(response.data.startTime)).format("YYYY-MM-DDTkk:mm"),
             endTime: moment(new Date(response.data.endTime)).format("YYYY-MM-DDTkk:mm"),
-            customerId: response.data.customer.id,
+            customerId: response.data.customer?.id || "",
             tasktypeId: response.data.tasktype.id,
             userId: response.data.user.id,
             status: response.data.status,
@@ -86,7 +88,7 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
             taskName: response.data.taskName,
          });
 
-         setCustomerName(response.data.customer.customerName);
+         setCustomerName(response.data.customer?.customerName || "");
          setEmplName(response.data.user.name);
       };
       if (edit && edit === "T") {

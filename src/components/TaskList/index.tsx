@@ -94,7 +94,22 @@ const TaskList: React.FC<{
                            </td>
                            <td>{task.tasktype.nameType}</td>
                            <td>{task.user.name}</td>
-                           <td>{task.status}</td>
+                           <td>
+                              <span
+                                 style={{ fontSize: "0.75rem" }}
+                                 className={` status ${
+                                    task?.status === "PROCESSING"
+                                       ? "processing"
+                                       : task?.status === "DONE"
+                                       ? "done"
+                                       : task?.status === "FAIL"
+                                       ? "fail"
+                                       : "cancelled"
+                                 } `}
+                              >
+                                 {task.status}
+                              </span>
+                           </td>
                         </tr>
                      );
                   })}

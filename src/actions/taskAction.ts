@@ -54,7 +54,7 @@ export const deleteTask = (id: string) => async (dispatch: Dispatch) => {
          type: DELETE_TASK,
          payload: response.data,
       });
-      toast.success("Xóa thành công");
+      // toast.success("Xóa thành công");
    } catch (error: any) {
       toast.error(error.response.data.message);
       // return error.response.status;

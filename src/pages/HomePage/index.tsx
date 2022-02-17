@@ -24,10 +24,9 @@ const HomePage = () => {
                <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />
                   {/* <Route path="/user" element={<UserPage />} /> */}
-                  {auth?.role === "ADMIN" ||
-                     (auth?.role === "CRM_MANAGER" && (
-                        <Route path="/user" element={<UserPage />} />
-                     ))}
+                  {(auth?.role === "ADMIN" || auth?.role === "CRM_MANAGER") && (
+                     <Route path="/user" element={<UserPage />} />
+                  )}
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/campaign" element={<CampaignPage />} />
                   <Route path="/task" element={<TaskPage />} />

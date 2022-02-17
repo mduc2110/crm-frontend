@@ -2,6 +2,10 @@
 @import "../../styles/variables";
 
 .dashboard {
+   h3.chartTitle {
+      margin-bottom: 2rem;
+      text-align: center;
+   }
    .header {
       @include flex;
       .headerChild {

@@ -33,7 +33,7 @@ export const addCustomer = (data: CustomerPostData) => async (dispatch: Dispatch
 
 export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) => {
    try {
-      // await customerApi.remove(idList);
+      await customerApi.remove(idList);
 
       dispatch({
          type: DELETE_CUSTOMER,
@@ -53,7 +53,7 @@ export const uploadFileCustomer = (data: any) => async (dispatch: Dispatch) => {
          type: ADD_LIST_CUSTOMER,
          payload: response.data,
       });
-      toast.success("Thêm thành công");
+      toast.success(`Thêm thành công ${response.data.length} khách hàng`);
    } catch (error: any) {
       toast.error(error.response.data.message);
    }

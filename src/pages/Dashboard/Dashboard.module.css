@@ -1,3 +1,8 @@
+.dashboard h3.chartTitle {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
 .dashboard .header {
   display: -webkit-box;
   display: -ms-flexbox;

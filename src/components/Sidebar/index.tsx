@@ -51,18 +51,17 @@ const Sidebar = () => {
                   Gửi mail
                </NavLink>
             </li>
-            {auth?.role === "ADMIN" ||
-               (auth?.role === "CRM_MANAGER" && (
-                  <li>
-                     <NavLink
-                        to="/user"
-                        className={({ isActive }) => (isActive ? classes.active : "")}
-                     >
-                        <AiOutlineUser />
-                        Nhân viên
-                     </NavLink>
-                  </li>
-               ))}
+            {auth?.role === "ADMIN" || auth?.role === "CRM_MANAGER" ? (
+               <li>
+                  <NavLink
+                     to="/user"
+                     className={({ isActive }) => (isActive ? classes.active : "")}
+                  >
+                     <AiOutlineUser />
+                     Nhân viên
+                  </NavLink>
+               </li>
+            ) : null}
             <li>
                <NavLink
                   to="/statistic"
