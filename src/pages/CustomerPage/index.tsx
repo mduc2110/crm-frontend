@@ -12,6 +12,9 @@ import IconButton from "../../components/UI/IconButton";
 import Panel from "../../components/UI/Panel";
 import SearchBar from "../../components/UI/SearchBar";
 import classes from "./customerPage.module.css";
+
+import queryString from "query-string";
+import { useLocation, useNavigate } from "react-router-dom";
 // import "../../styles/commonStyle/common.css";
 
 interface CustomerSelect {
@@ -23,14 +26,23 @@ const CustomerPage = () => {
    const [modalIsShown, setModalIsShown] = useState<boolean>(false);
    const [uploadModalIsShown, setUploadModalIsShown] = useState<boolean>(false);
    const [customerSelect, setCustomerSelect] = useState<CustomerSelect[]>([]);
+   const navigate = useNavigate();
    const dispatch = useDispatch();
+   const location = useLocation();
    useEffect(() => {
       dispatch(setPageTitle("Khách hàng"));
    }, [dispatch]);
    const hideModalHandler = () => {
+      const parsedQuery = queryString.parse(location.search);
+      if (parsedQuery.edit) {
+         delete parsedQuery.edit;
+      }
+      if (parsedQuery.id) {
+         delete parsedQuery.id;
+      }
+      navigate("?" + queryString.stringify(parsedQuery));
       setModalIsShown(false);
    };
-
    const addCustomerHandler = () => {
       setModalIsShown(true);
    };
@@ -121,6 +133,7 @@ const CustomerPage = () => {
             </form> */}
 
             <CustomerList
+               onShowModal={() => setModalIsShown(true)}
                onSetIdCustomerList={changeCustomerSelectHandler}
                refreshCustomerCheckList={refreshCustomerSelectListHandler}
             />

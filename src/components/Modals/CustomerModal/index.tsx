@@ -14,20 +14,24 @@ import classes from "./customerModal.module.css";
 import customerApi from "../../../api/customerApi";
 import { useDispatch } from "react-redux";
 import { addCustomer } from "../../../actions/customerAction";
-interface Customer {
-   customerName: string;
-   phone: string;
-   email: string;
-   birthday: string;
-   gender: string;
-   personalID: string;
-   idStatus: string;
-   idTag: string;
-   idProvince: string;
-   idDistrict: string;
-   idWard: string;
-   detailAddress: string;
-}
+import { useLocation } from "react-router-dom";
+
+import queryString from "query-string";
+
+// interface Customer {
+//    customerName: string;
+//    phone: string;
+//    email: string;
+//    birthday: string;
+//    gender: string;
+//    personalID: string;
+//    idStatus: string;
+//    idTag: string;
+//    idProvince: string;
+//    idDistrict: string;
+//    idWard: string;
+//    detailAddress: string;
+// }
 
 interface SelectType {
    id: string;
@@ -39,7 +43,7 @@ const CustomerModal: React.FC<{
    title: string;
 }> = (props) => {
    const [customerField, setCustomerField] = useState<CustomerPostData>({
-      id: "",
+      // id: "",
       customerName: "",
       phone: "",
       email: "",
@@ -61,7 +65,7 @@ const CustomerModal: React.FC<{
    const [tagList, setTagList] = useState<SelectType[]>([]);
    const [statusList, setStatusList] = useState<SelectType[]>([]);
    const dispatch = useDispatch();
-
+   const location = useLocation();
    const [loading, setLoading] = useState<boolean>(false);
 
    // const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +76,35 @@ const CustomerModal: React.FC<{
    //       };
    //    });
    // };
+   useEffect(() => {
+      const { id, edit } = queryString.parse(location.search);
+
+      const fetchData = async (id: string) => {
+         const response = await customerApi.getOne(id);
+         console.log(response.data);
+
+         // setCustomerField({
+         //    startTime: moment(new Date(response.data.startTime)).format("YYYY-MM-DDTkk:mm"),
+         //    endTime: moment(new Date(response.data.endTime)).format("YYYY-MM-DDTkk:mm"),
+         //    customerId: response.data.customer?.id || "",
+         //    tasktypeId: response.data.tasktype.id,
+         //    userId: response.data.user.id,
+         //    status: response.data.status,
+         //    taskDescription: response.data.taskDescription,
+         //    taskName: response.data.taskName,
+         // });
+
+         //    setCustomerName(response.data.customer?.customerName || "");
+         //    setEmplName(response.data.user.name);
+         // };
+         // if (edit && edit === "T") {
+         //    setButtonText("Cập nhật");
+         //    setTitle("Cập nhật công việc");
+      };
+      if (id) {
+         fetchData(id as string);
+      }
+   }, [location.search]);
 
    useEffect(() => {
       const fetchTag = async () => {
@@ -133,6 +166,7 @@ const CustomerModal: React.FC<{
          : [];
       setWardList(ward);
    }, [customerField.idProvince, customerField.idDistrict]);
+
    const onSubmitCustomerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       await setLoading(true);

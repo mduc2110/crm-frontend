@@ -8,6 +8,10 @@ const customerApi = {
       // const url = ("/customers" + queryString) as string;
       return axiosClient.get(url);
    },
+   getOne(id: string) {
+      const url = "/customers/" + id;
+      return axiosClient.get(url);
+   },
    create(data: CustomerPostData) {
       const url = "/customers";
       return axiosClient.post(url, data);

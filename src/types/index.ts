@@ -49,7 +49,7 @@ export interface UserPostData {
 }
 
 export interface CustomerPostData {
-   id: string;
+   // id: string;
    customerName: string;
    phone: string;
    email: string;

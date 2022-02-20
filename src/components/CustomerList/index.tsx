@@ -15,6 +15,7 @@ import Skeleton from "react-loading-skeleton";
 const CustomerList: React.FC<{
    onSetIdCustomerList: (e: ChangeEvent<HTMLInputElement>) => void;
    refreshCustomerCheckList: () => void;
+   onShowModal: () => void;
 }> = (props) => {
    // const [customerList2, setCustomerList2] = useState<CustomerState[]>([]);
    const customerList: CustomerState[] = useAppSelector((state) => state.customer);
@@ -33,6 +34,7 @@ const CustomerList: React.FC<{
       // dispatch(getCustomer("?page=1&limit=10"));
    }, [dispatch, location]);
    const editCustomerHandler = (id: string) => {
+      props.onShowModal();
       navigate({
          pathname: location.pathname,
          search: `?id=${id}`,
