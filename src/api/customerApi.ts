@@ -16,6 +16,10 @@ const customerApi = {
       const url = "/customers";
       return axiosClient.post(url, data);
    },
+   update(data: CustomerPostData, id: string) {
+      const url = "/customers/" + id;
+      return axiosClient.put(url, data);
+   },
    remove(data: string[]) {
       const d = {
          customerIdArray: data,

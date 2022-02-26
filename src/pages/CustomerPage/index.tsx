@@ -132,11 +132,7 @@ const CustomerPage = () => {
                <IconButton iconComponent={<AiOutlineSearch />} color="#fff" background="red" />
             </form> */}
 
-            <CustomerList
-               onShowModal={() => setModalIsShown(true)}
-               onSetIdCustomerList={changeCustomerSelectHandler}
-               refreshCustomerCheckList={refreshCustomerSelectListHandler}
-            />
+            <CustomerList onShowModal={() => setModalIsShown(true)} onSetIdCustomerList={changeCustomerSelectHandler} refreshCustomerCheckList={refreshCustomerSelectListHandler} />
          </Panel>
       </div>
    );

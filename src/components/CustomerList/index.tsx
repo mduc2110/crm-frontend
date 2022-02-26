@@ -37,7 +37,7 @@ const CustomerList: React.FC<{
       props.onShowModal();
       navigate({
          pathname: location.pathname,
-         search: `?id=${id}`,
+         search: `?id=${id}&edit=T`,
       });
    };
    const deleteCustomerHandler = (id: string) => {
@@ -106,12 +106,7 @@ const CustomerList: React.FC<{
                      return (
                         <tr key={customer.id + "_" + index}>
                            <td>
-                              <input
-                                 type="checkbox"
-                                 value={customer.id}
-                                 data-email={customer.email}
-                                 onChange={(e) => props.onSetIdCustomerList(e)}
-                              />
+                              <input type="checkbox" value={customer.id} data-email={customer.email} onChange={(e) => props.onSetIdCustomerList(e)} />
                            </td>
                            <td>{index + 1}</td>
                            <td>{customer.customerName}</td>
@@ -119,15 +114,8 @@ const CustomerList: React.FC<{
                            <td>{customer.customerstatus.status}</td>
                            <td>{customer.customertag.tagName}</td>
                            <td>
-                              <IconButton
-                                 onClick={() => editCustomerHandler(customer.id)}
-                                 iconComponent={<AiOutlineEdit />}
-                              />
-                              <IconButton
-                                 onClick={() => deleteCustomerHandler("" + customer.id)}
-                                 iconComponent={<AiOutlineDelete />}
-                                 color="red"
-                              />
+                              <IconButton onClick={() => editCustomerHandler(customer.id)} iconComponent={<AiOutlineEdit />} />
+                              <IconButton onClick={() => deleteCustomerHandler("" + customer.id)} iconComponent={<AiOutlineDelete />} color="red" />
                            </td>
                         </tr>
                      );

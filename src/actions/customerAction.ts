@@ -26,7 +26,6 @@ export const addCustomer = (data: CustomerPostData) => async (dispatch: Dispatch
       });
       toast.success("Thêm thành công");
    } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.message);
    }
 };
@@ -47,7 +46,6 @@ export const deleteCustomer = (idList: string[]) => async (dispatch: Dispatch) =
 export const uploadFileCustomer = (data: any) => async (dispatch: Dispatch) => {
    try {
       const response = await customerApi.uploads(data);
-      console.log(response);
 
       dispatch({
          type: ADD_LIST_CUSTOMER,
@@ -58,3 +56,15 @@ export const uploadFileCustomer = (data: any) => async (dispatch: Dispatch) => {
       toast.error(error.response.data.message);
    }
 };
+
+export const updateCustomer =
+   (data: CustomerPostData, id: string) => async (dispatch: Dispatch) => {
+      try {
+         const response = await customerApi.update(data, id);
+         console.log(response.data);
+
+         toast.success("Cập nhật thành công");
+      } catch (error) {
+         toast.error("Cập nhật thất bại!");
+      }
+   };

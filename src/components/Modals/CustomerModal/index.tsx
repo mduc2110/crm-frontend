@@ -13,7 +13,7 @@ import wardData from "../../../assets/address/ward.json";
 import classes from "./customerModal.module.css";
 import customerApi from "../../../api/customerApi";
 import { useDispatch } from "react-redux";
-import { addCustomer } from "../../../actions/customerAction";
+import { addCustomer, updateCustomer } from "../../../actions/customerAction";
 import { useLocation } from "react-router-dom";
 
 import queryString from "query-string";
@@ -57,6 +57,8 @@ const CustomerModal: React.FC<{
       idWard: "",
       detailAddress: "",
    });
+   const [buttonText, setButtonText] = useState<string>("Thêm");
+   const [title, setTitle] = useState<string>("Thêm khách hàng");
 
    const [provinceList, setProvinceList] = useState<SelectType[]>([]);
    const [districtList, setDistrictList] = useState<SelectType[]>([]);
@@ -82,24 +84,30 @@ const CustomerModal: React.FC<{
       const fetchData = async (id: string) => {
          const response = await customerApi.getOne(id);
          console.log(response.data);
+         const customer = response.data;
 
-         // setCustomerField({
-         //    startTime: moment(new Date(response.data.startTime)).format("YYYY-MM-DDTkk:mm"),
-         //    endTime: moment(new Date(response.data.endTime)).format("YYYY-MM-DDTkk:mm"),
-         //    customerId: response.data.customer?.id || "",
-         //    tasktypeId: response.data.tasktype.id,
-         //    userId: response.data.user.id,
-         //    status: response.data.status,
-         //    taskDescription: response.data.taskDescription,
-         //    taskName: response.data.taskName,
-         // });
+         setCustomerField({
+            customerName: customer.customerName,
+            phone: customer.phone,
+            email: customer.email,
+            birthday: moment(new Date(customer.birthday)).format("yyyy-MM-DD"),
+            gender: customer.gender,
+            personalID: customer.personalID,
+            idStatus: customer.customerstatus.id || "",
+            idTag: customer.customertag.id || "",
+            idProvince: customer.address.province ? customer.address.province.code : "",
+            idDistrict: customer.address.district ? customer.address.district.code : "",
+            idWard: customer.address.ward ? customer.address.ward.code : "",
+            detailAddress: customer.address.detailAddress ? customer.address.detailAddress : "",
+         });
 
          //    setCustomerName(response.data.customer?.customerName || "");
          //    setEmplName(response.data.user.name);
          // };
-         // if (edit && edit === "T") {
-         //    setButtonText("Cập nhật");
-         //    setTitle("Cập nhật công việc");
+         if (edit && edit === "T") {
+            setButtonText("Cập nhật");
+            setTitle("Cập nhật thông tin khách hàng");
+         }
       };
       if (id) {
          fetchData(id as string);
@@ -169,14 +177,21 @@ const CustomerModal: React.FC<{
 
    const onSubmitCustomerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      const { id, edit } = queryString.parse(location.search);
       await setLoading(true);
-      await dispatch(addCustomer(customerField));
+      if (edit && edit === "T") {
+         await dispatch(updateCustomer(customerField, id as string));
+         setButtonText("Cập nhật");
+         setTitle("Cập nhật thông tin khách hàng");
+      } else {
+         await dispatch(addCustomer(customerField));
+      }
       await setLoading(false);
       await props.onClose();
    };
    return (
       <Modal onClose={props.onClose} isLoading={loading}>
-         <h2>{props.title}</h2>
+         <h2>{title}</h2>
          <div className={classes["form-customer"]}>
             <form onSubmit={(e) => onSubmitCustomerHandler(e)}>
                <div className={classes.inputWrap}>
@@ -298,41 +313,41 @@ const CustomerModal: React.FC<{
                            />
                         </div>
                      </div>
-                  </div>
-                  <div className={classes.addressArea}>
-                     <Select
-                        options={provinceList}
-                        value={customerField.idProvince}
-                        className={classes.inputArea}
-                        labelName={"Thành phố"}
-                        onChange={(e) =>
-                           setCustomerField((prev) => {
-                              return { ...prev, idProvince: e.target.value };
-                           })
-                        }
-                     />
-                     <Select
-                        options={districtList}
-                        value={customerField.idDistrict}
-                        className={classes.inputArea}
-                        labelName={"Quận"}
-                        onChange={(e) =>
-                           setCustomerField((prev) => {
-                              return { ...prev, idDistrict: e.target.value };
-                           })
-                        }
-                     />
-                     <Select
-                        options={wardList}
-                        value={customerField.idWard}
-                        className={classes.inputArea}
-                        labelName={"Phường"}
-                        onChange={(e) =>
-                           setCustomerField((prev) => {
-                              return { ...prev, idWard: e.target.value };
-                           })
-                        }
-                     />
+                     <div className={classes.addressArea}>
+                        <Select
+                           options={provinceList}
+                           value={customerField.idProvince}
+                           className={classes.inputArea}
+                           labelName={"Thành phố"}
+                           onChange={(e) =>
+                              setCustomerField((prev) => {
+                                 return { ...prev, idProvince: e.target.value };
+                              })
+                           }
+                        />
+                        <Select
+                           options={districtList}
+                           value={customerField.idDistrict}
+                           className={classes.inputArea}
+                           labelName={"Quận"}
+                           onChange={(e) =>
+                              setCustomerField((prev) => {
+                                 return { ...prev, idDistrict: e.target.value };
+                              })
+                           }
+                        />
+                        <Select
+                           options={wardList}
+                           value={customerField.idWard}
+                           className={classes.inputArea}
+                           labelName={"Phường"}
+                           onChange={(e) =>
+                              setCustomerField((prev) => {
+                                 return { ...prev, idWard: e.target.value };
+                              })
+                           }
+                        />
+                     </div>
                      <Input
                         value={customerField.detailAddress}
                         className={classes.inputArea}
@@ -345,7 +360,7 @@ const CustomerModal: React.FC<{
                      />
                   </div>
                </div>
-               <Button type="submit">Thêm</Button>
+               <Button type="submit">{buttonText}</Button>
             </form>
 
             {/* <DatePicker 

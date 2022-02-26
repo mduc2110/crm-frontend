@@ -2,12 +2,6 @@
   width: 800px;
 }
 
-.form-customer form .inputWrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .form-customer form .inputWrap .informationArea {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -18,6 +12,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -56,11 +53,26 @@
 }
 
 .form-customer form .inputWrap .addressArea {
-  width: 100%;
-  margin-left: 30px;
+  width: 48%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.form-customer form .inputWrap .addressArea * {
-  width: 100%;
+.form-customer form .inputWrap .addressArea > .inputArea {
+  width: 30%;
+}
+
+.form-customer form button {
+  padding-left: 50px;
+  padding-right: 50px;
+  display: block;
+  margin-left: auto;
 }
 /*# sourceMappingURL=customerModal.module.css.map */

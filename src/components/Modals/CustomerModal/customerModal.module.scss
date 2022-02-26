@@ -7,9 +7,10 @@
       width: 800px;
       // justify-content: space-between;
       .inputWrap {
-         display: flex;
+         // display: flex;
          .informationArea {
             @include flex;
+            align-items: flex-start;
             flex-wrap: wrap;
             .inputArea {
                width: 48%;
@@ -31,12 +32,20 @@
             }
          }
          .addressArea {
-            width: 100%;
-            margin-left: 30px;
-            * {
-               width: 100%;
+            width: 48%;
+            // @include flex;
+            @include flex;
+            & > .inputArea {
+               width: 30%;
             }
          }
+      }
+
+      button {
+         padding-left: 50px;
+         padding-right: 50px;
+         display: block;
+         margin-left: auto;
       }
    }
 }
