@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "newTask.module.scss"
+    ],
+    "names": [],
+    "file": "newTask.module.css"
+}

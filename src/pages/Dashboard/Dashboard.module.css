@@ -64,6 +64,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   margin-top: 2rem;
 }
 
@@ -77,6 +80,10 @@
 
 .dashboard .body .w-10 {
   width: 100%;
+}
+
+.dashboard .body .w-5 {
+  width: 49%;
 }
 
 .brief {

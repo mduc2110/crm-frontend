@@ -90,6 +90,7 @@ const Sidebar = () => {
             )}
             <li>{/* <AiOutlineMail />{" "} */}</li>
          </ul>
+         <p className={classes.copyright}>Copyright © 2022 CRM<br/> All rights reserved.</p>
          {/* <div className={classes.modal}></div> */}
          {/* <button onClick={logoutHandler}>
             <AiOutlineLogout /> Đăng xuất

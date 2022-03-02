@@ -8,6 +8,7 @@
    }
    .header {
       @include flex;
+      
       .headerChild {
          width: 23%;
          .amount {
@@ -36,6 +37,7 @@
    }
    .body {
       @include flex;
+      align-items: flex-start;
       margin-top: 2rem;
       .w-4 {
          width: 34%;
@@ -46,6 +48,9 @@
       .w-10 {
          width: 100%;
          // color: rgb(48, 197, 60);
+      }
+      .w-5 {
+         width: 49%;
       }
    }
 }

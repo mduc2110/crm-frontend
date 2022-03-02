@@ -1,7 +1,9 @@
 {
    "province": {
       "0": [
+         { "name": "Thành phố Hồ Chí Minh", "code": "thanh-pho-ho-chi-minh" },
          { "name": "Thành phố Hà Nội", "code": "thanh-pho-ha-noi" },
+         { "name": "Thành phố Hải Phòng", "code": "thanh-pho-hai-phong" },
          { "name": "Tỉnh Hà Giang", "code": "tinh-ha-giang" },
          { "name": "Tỉnh Cao Bằng", "code": "tinh-cao-bang" },
          { "name": "Tỉnh Bắc Kạn", "code": "tinh-bac-kan" },
@@ -20,7 +22,6 @@
          { "name": "Tỉnh Vĩnh Phúc", "code": "tinh-vinh-phuc" },
          { "name": "Tỉnh Bắc Ninh", "code": "tinh-bac-ninh" },
          { "name": "Tỉnh Hải Dương", "code": "tinh-hai-duong" },
-         { "name": "Thành phố Hải Phòng", "code": "thanh-pho-hai-phong" },
          { "name": "Tỉnh Hưng Yên", "code": "tinh-hung-yen" },
          { "name": "Tỉnh Thái Bình", "code": "tinh-thai-binh" },
          { "name": "Tỉnh Hà Nam", "code": "tinh-ha-nam" },
@@ -50,7 +51,6 @@
          { "name": "Tỉnh Bình Dương", "code": "tinh-binh-duong" },
          { "name": "Tỉnh Đồng Nai", "code": "tinh-dong-nai" },
          { "name": "Tỉnh Bà Rịa - Vũng Tàu", "code": "tinh-ba-ria---vung-tau" },
-         { "name": "Thành phố Hồ Chí Minh", "code": "thanh-pho-ho-chi-minh" },
          { "name": "Tỉnh Long An", "code": "tinh-long-an" },
          { "name": "Tỉnh Tiền Giang", "code": "tinh-tien-giang" },
          { "name": "Tỉnh Bến Tre", "code": "tinh-ben-tre" },
