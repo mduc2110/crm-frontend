@@ -20,6 +20,7 @@ import { setPageTitle } from "../../actions/uiAction";
 import taskApi from "../../api/taskApi";
 import { useState } from "react";
 import NewTask from "../../components/Dashboard/NewTask";
+import { Oval } from "react-loader-spinner";
 ChartJS.register(
    LinearScale,
    CategoryScale,
@@ -30,7 +31,20 @@ ChartJS.register(
    Legend,
    Tooltip
 );
-const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const labels = [
+   "January",
+   "February",
+   "March",
+   "April",
+   "May",
+   "June",
+   "July",
+   "August",
+   "September",
+   "October",
+   "November",
+   "December",
+];
 const data = {
    labels,
    datasets: [
@@ -94,49 +108,50 @@ const Dashboard = () => {
    const [tasks, setTasks] = useState([]);
    const [taskChartData, setTaskChartDate] = useState({
       labels: [] as String[],
-      datasets: [] as any
+      datasets: [] as any,
    });
-
+   const [isLoadingTaskChart, setIsLoadingTaskChart] = useState<boolean>(true);
    useEffect(() => {
       dispatch(setPageTitle("Dashboard"));
    }, [dispatch]);
    useEffect(() => {
       const fetchTask = async () => {
-         const date = new Date("2022-02-01"), y = date.getFullYear(), m = date.getMonth();
+         const date = new Date("2022-02-01"),
+            y = date.getFullYear(),
+            m = date.getMonth();
          var firstDay = new Date(y, m, 1);
          var lastDay = new Date(y, m + 1, 0);
          const response = await taskApi.getAll(`?from=${firstDay}&to=${lastDay}`);
          setTasks(response.data.results);
-
+         setIsLoadingTaskChart(false);
          let doneCount = 0;
          let processingCount = 0;
          let cancelledCount = 0;
          let failCount = 0;
          let postponCount = 0;
 
-         response.data.results.forEach((element : any) => {
-
-            switch(element.status) {
+         response.data.results.forEach((element: any) => {
+            switch (element.status) {
                case "DONE":
                   doneCount += 1;
-                  break; 
+                  break;
                case "PROCESSING":
                   processingCount += 1;
-                  break; 
+                  break;
                case "POSTPONE":
                   cancelledCount += 1;
-                  break; 
+                  break;
                case "FAIL":
                   failCount += 1;
-                  break; 
+                  break;
                case "CANCELLED":
                   postponCount += 1;
                   break;
             }
          });
-         
+
          const data = {
-            labels: ["Done", "Processing", "Postpone", "Fail" , "Cancelled"],
+            labels: ["Done", "Processing", "Postpone", "Fail", "Cancelled"],
             datasets: [
                {
                   type: "doughnut" as const,
@@ -145,14 +160,14 @@ const Dashboard = () => {
                      "rgb(54, 162, 235)",
                      "rgb(255, 205, 86)",
                      "rgb(214, 56, 38)",
-                     "rgb(255, 136, 0)"
+                     "rgb(255, 136, 0)",
                   ],
-                  data: [doneCount, processingCount, cancelledCount, failCount, postponCount]
+                  data: [doneCount, processingCount, cancelledCount, failCount, postponCount],
                },
-            ]
-         }
-         setTaskChartDate(data)
-      }
+            ],
+         };
+         setTaskChartDate(data);
+      };
       fetchTask();
    }, []);
    return (
@@ -160,13 +175,24 @@ const Dashboard = () => {
          <div className={classes.header}>
             <Brief amount="10" title="Online" icon={<AiOutlineUser />} color="rgb(48, 197, 60)" />
             <Brief amount="12+" title="Khách hàng" icon={<AiOutlineHeart />} color="#177cff" />
-            <Brief amount={""+tasks.length} title="Công việc" icon={<AiOutlineForm />} color="#9766ff" />
+            <Brief
+               amount={"" + tasks.length}
+               title="Công việc"
+               icon={<AiOutlineForm />}
+               color="#9766ff"
+            />
             <Brief amount="2" title="Nhân viên" icon={<AiOutlineForm />} color="#ff8800" />
          </div>
          <div className={classes.body}>
             <Panel className={classes["w-4"]}>
                <h3 className={classes.chartTitle}>Tiến trình công việc</h3>
-               <Doughnut data={taskChartData} options={options} />
+               {isLoadingTaskChart ? (
+                  <div className="loading">
+                     <Oval color="#fff" height={50} width={50}></Oval>
+                  </div>
+               ) : (
+                  <Doughnut data={taskChartData} options={options} />
+               )}
             </Panel>
             <Panel className={classes["w-6"]}>
                <h3 className={classes.chartTitle}>Công việc</h3>

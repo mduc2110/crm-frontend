@@ -14,4 +14,8 @@
 .homePage nav {
   margin: 0 0 20px;
 }
+
+.homePage.minimize .contents {
+  margin-left: 70px;
+}
 /*# sourceMappingURL=homePage.module.css.map */

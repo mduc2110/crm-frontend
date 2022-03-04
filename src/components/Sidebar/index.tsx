@@ -3,17 +3,23 @@ import {
    AiOutlineAppstore,
    AiOutlineForm,
    AiOutlineMail,
+   AiOutlineMenu,
    AiOutlineOrderedList,
    AiOutlineStock,
    AiOutlineTeam,
    AiOutlineUser,
 } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { toggleSidebar } from "../../actions/uiAction";
 // import { logout } from "../../actions/auth";
 import { getPermission } from "../../reducers/auth";
+import { useAppSelector } from "../../store";
 import classes from "./sidebar.module.css";
 const Sidebar = () => {
+   const uiState = useAppSelector((state) => state.ui);
    const auth = getPermission();
+   const dispatch = useDispatch();
    // const {} = bindActionCreators( , dispatch);
    // const logoutHandler = () => {
    //    // dispatch(logout());
@@ -21,8 +27,13 @@ const Sidebar = () => {
    //    dispatch(logout());
    // };
    return (
-      <div className={classes.sidebar}>
-         <h1>CRM</h1>
+      <div className={`${classes.sidebar} ${uiState.toggleSideBar && classes.minimize}`}>
+         <div className={`${classes.header}`}>
+            <h1>CRM</h1>
+            <button onClick={() => dispatch(toggleSidebar())}>
+               <AiOutlineMenu />
+            </button>
+         </div>
          <ul>
             <li>
                <NavLink
@@ -30,7 +41,7 @@ const Sidebar = () => {
                   className={({ isActive }) => (isActive ? classes.active : "")}
                >
                   {/* <NavLink className={({ isActive }) => (isActive ? "active" : "")} */}
-                  <AiOutlineAppstore /> Dashboard
+                  <AiOutlineAppstore /> <span>Dashboard</span>
                </NavLink>
             </li>
             <li>
@@ -39,7 +50,7 @@ const Sidebar = () => {
                   className={({ isActive }) => (isActive ? classes.active : "")}
                >
                   <AiOutlineOrderedList />
-                  Khách hàng
+                  <span>Khách hàng</span>
                </NavLink>
             </li>
             <li>
@@ -48,7 +59,7 @@ const Sidebar = () => {
                   className={({ isActive }) => (isActive ? classes.active : "")}
                >
                   <AiOutlineMail />
-                  Gửi mail
+                  <span>Gửi mail</span>
                </NavLink>
             </li>
             {auth?.role === "ADMIN" || auth?.role === "CRM_MANAGER" ? (
@@ -58,7 +69,7 @@ const Sidebar = () => {
                      className={({ isActive }) => (isActive ? classes.active : "")}
                   >
                      <AiOutlineUser />
-                     Nhân viên
+                     <span>Nhân viên</span>
                   </NavLink>
                </li>
             ) : null}
@@ -68,13 +79,13 @@ const Sidebar = () => {
                   className={({ isActive }) => (isActive ? classes.active : "")}
                >
                   <AiOutlineStock />
-                  Thống kê
+                  <span>Thống kê</span>
                </NavLink>
             </li>
             <li>
                <NavLink to="/task" className={({ isActive }) => (isActive ? classes.active : "")}>
                   <AiOutlineForm />
-                  Công việc
+                  <span>Công việc</span>
                </NavLink>
             </li>
             {auth?.role === "ADMIN" && (
@@ -84,13 +95,16 @@ const Sidebar = () => {
                      className={({ isActive }) => (isActive ? classes.active : "")}
                   >
                      <AiOutlineTeam />
-                     Quản lý phân quyền
+                     <span>Quản lý phân quyền</span>
                   </NavLink>
                </li>
             )}
             <li>{/* <AiOutlineMail />{" "} */}</li>
          </ul>
-         <p className={classes.copyright}>Copyright © 2022 CRM<br/> All rights reserved.</p>
+         <p className={classes.copyright}>
+            Copyright © 2022 CRM
+            <br /> All rights reserved.
+         </p>
          {/* <div className={classes.modal}></div> */}
          {/* <button onClick={logoutHandler}>
             <AiOutlineLogout /> Đăng xuất

@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import TaskDetail from "../../components/TaskDetail";
 import { getPermission } from "../../reducers/auth";
+import { useAppSelector } from "../../store";
 import CampaignPage from "../CampaginPage";
 import CustomerPage from "../CustomerPage";
 import Dashboard from "../Dashboard";
@@ -13,14 +14,15 @@ import TaskPage from "../TaskPage";
 import UserPage from "../UserPage";
 import classes from "./homePage.module.css";
 const HomePage = () => {
+   const uiState = useAppSelector((state) => state.ui);
    const auth = getPermission();
 
    return (
-      <div className={classes.homePage}>
+      <div className={`${classes.homePage}   ${uiState.toggleSideBar && classes.minimize}`}>
          <Sidebar />
-         <div className={classes.contents}>
+         <div className={`${classes.contents}`}>
             <Navbar />
-            <div className={classes.inner}>
+            <div className={`${classes.inner}`}>
                <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />
                   {/* <Route path="/user" element={<UserPage />} /> */}

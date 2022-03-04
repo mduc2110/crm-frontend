@@ -1,23 +1,28 @@
 //ui
 export const SET_LOADING = "SET_LOADING";
 export const SET_PAGE_TITLE = "SET_PAGE_TITLE";
+export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
 
 export interface UIState {
    isLoading: boolean;
    pageTitle: string;
+   toggleSideBar: boolean;
 }
 
 export interface SetLoadingAction {
    type: typeof SET_LOADING;
+}
+export interface SetToggleSideBarAction {
+   type: typeof TOGGLE_SIDEBAR;
 }
 export interface SetPageTitleAction {
    type: typeof SET_PAGE_TITLE;
    payload: string;
 }
 
-export type UIActions = typeof SET_LOADING | typeof SET_PAGE_TITLE;
+export type UIActions = typeof SET_LOADING | typeof SET_PAGE_TITLE | typeof TOGGLE_SIDEBAR;
 
-export type UIActionType = SetLoadingAction | SetPageTitleAction;
+export type UIActionType = SetLoadingAction | SetPageTitleAction | SetToggleSideBarAction;
 
 //auth
 export const SIGN_IN = "SIGN_IN";

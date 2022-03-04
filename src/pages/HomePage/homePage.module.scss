@@ -13,4 +13,10 @@
    nav {
       margin: 0 0 20px;
    }
+
+   &.minimize {
+      .contents {
+         margin-left: 70px;
+      }
+   }
 }
