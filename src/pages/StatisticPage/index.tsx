@@ -51,7 +51,6 @@ const StatisticPage = () => {
    const getStatusHandler = async (email: string) => {
       try {
          const result = await serviceApi.getHistoryStatus(email);
-         console.log(result.data);
 
          const data = {
             labels: Object.keys(result.data),

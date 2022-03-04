@@ -18,6 +18,7 @@ import NewCustomer from "../../components/Dashboard/NewCustomer";
 import { useDispatch } from "react-redux";
 import { setPageTitle } from "../../actions/uiAction";
 import taskApi from "../../api/taskApi";
+import customerApi from "../../api/customerApi";
 import { useState } from "react";
 import NewTask from "../../components/Dashboard/NewTask";
 import { Oval } from "react-loader-spinner";
@@ -110,6 +111,10 @@ const Dashboard = () => {
       labels: [] as String[],
       datasets: [] as any,
    });
+   const [barChartData, setBarChartData] = useState<any>({
+      labels: [],
+      datasets: [],
+   });
    const [isLoadingTaskChart, setIsLoadingTaskChart] = useState<boolean>(true);
    useEffect(() => {
       dispatch(setPageTitle("Dashboard"));
@@ -170,6 +175,32 @@ const Dashboard = () => {
       };
       fetchTask();
    }, []);
+
+   useEffect(() => {
+      const fetchCustomer = async () => {
+         const response = await customerApi.getAll("?year=2022");
+         console.log(response.data);
+         const data = {
+            labels: labels,
+            datasets: [
+               {
+                  type: "bar" as const,
+                  label: "Khách hàng",
+                  backgroundColor: "rgb(75, 192, 192)",
+                  data: response.data.monthsIndex,
+               },
+               {
+                  type: "bar" as const,
+                  label: "Công việc",
+                  backgroundColor: "rgb(53, 162, 235)",
+                  data: response.data.monthsIndex,
+               },
+            ],
+         };
+         setBarChartData(data);
+      };
+      fetchCustomer();
+   }, []);
    return (
       <div className={classes.dashboard}>
          <div className={classes.header}>
@@ -196,7 +227,7 @@ const Dashboard = () => {
             </Panel>
             <Panel className={classes["w-6"]}>
                <h3 className={classes.chartTitle}>Công việc</h3>
-               <Chart type="bar" data={data} />
+               <Chart type="bar" data={barChartData} />
             </Panel>
          </div>
          <div className={classes.body}>
