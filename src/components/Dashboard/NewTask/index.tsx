@@ -7,8 +7,6 @@ import { useAppSelector } from "../../../store";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 
-const oneLineStyle = {};
-
 const NewTask = () => {
    const [taskList, setTaskList] = useState<TaskState[]>([]);
    const [isLoading, setIsLoading] = useState<boolean>(true);

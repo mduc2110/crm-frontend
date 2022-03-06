@@ -41,7 +41,7 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
 
    const [taskTypeList, setTaskTypeList] = useState<SelectType[]>([]);
 
-   const [statusList, setStatusList] = useState<SelectType[]>([
+   const statusList = [
       {
          id: "PROCESSING",
          name: "PROCESSING",
@@ -62,7 +62,29 @@ const TaskModal: React.FC<{ onClose: () => void; title: string; setIsFetching: (
          id: "POSTPONE",
          name: "POSTPONE",
       },
-   ]);
+   ];
+   // const [statusList, setStatusList] = useState<SelectType[]>([
+   //    {
+   //       id: "PROCESSING",
+   //       name: "PROCESSING",
+   //    },
+   //    {
+   //       id: "DONE",
+   //       name: "DONE",
+   //    },
+   //    {
+   //       id: "FAIL",
+   //       name: "FAIL",
+   //    },
+   //    {
+   //       id: "CANCELLED",
+   //       name: "CANCELLED",
+   //    },
+   //    {
+   //       id: "POSTPONE",
+   //       name: "POSTPONE",
+   //    },
+   // ]);
 
    const [buttonText, setButtonText] = useState<string>("Thêm");
    const [title, setTitle] = useState<string>("Tạo mới công việc");

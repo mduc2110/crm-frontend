@@ -13,6 +13,7 @@ import {
    Legend,
    Tooltip,
    ArcElement,
+   registerables as registerablesJS,
 } from "chart.js";
 import NewCustomer from "../../components/Dashboard/NewCustomer";
 import { useDispatch } from "react-redux";
@@ -22,6 +23,7 @@ import customerApi from "../../api/customerApi";
 import { useState } from "react";
 import NewTask from "../../components/Dashboard/NewTask";
 import { Oval } from "react-loader-spinner";
+ChartJS.register(...registerablesJS);
 ChartJS.register(
    LinearScale,
    CategoryScale,
@@ -46,33 +48,33 @@ const labels = [
    "November",
    "December",
 ];
-const data = {
-   labels,
-   datasets: [
-      // {
-      //    type: "line" as const,
-      //    label: "Dataset 1",
-      //    borderColor: "rgb(255, 99, 132)",
-      //    borderWidth: 2,
-      //    fill: false,
-      //    data: [1, 3, 5, 4, 2, 3, 4],
-      // },
-      {
-         type: "bar" as const,
-         label: "Khách hàng",
-         backgroundColor: "rgb(75, 192, 192)",
-         data: [12, 30, 52, 70, 22, 30, 41],
-         borderColor: "white",
-         borderWidth: 2,
-      },
-      {
-         type: "bar" as const,
-         label: "Công việc",
-         backgroundColor: "rgb(53, 162, 235)",
-         data: [18, 30, 15, 44, 72, 32, 14],
-      },
-   ],
-};
+// const data = {
+//    labels,
+//    datasets: [
+//       // {
+//       //    type: "line" as const,
+//       //    label: "Dataset 1",
+//       //    borderColor: "rgb(255, 99, 132)",
+//       //    borderWidth: 2,
+//       //    fill: false,
+//       //    data: [1, 3, 5, 4, 2, 3, 4],
+//       // },
+//       {
+//          type: "bar" as const,
+//          label: "Khách hàng",
+//          backgroundColor: "rgb(75, 192, 192)",
+//          data: [12, 30, 52, 70, 22, 30, 41],
+//          borderColor: "white",
+//          borderWidth: 2,
+//       },
+//       {
+//          type: "bar" as const,
+//          label: "Công việc",
+//          backgroundColor: "rgb(53, 162, 235)",
+//          data: [18, 30, 15, 44, 72, 32, 14],
+//       },
+//    ],
+// };
 
 const options = {
    legend: {
