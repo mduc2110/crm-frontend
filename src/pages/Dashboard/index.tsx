@@ -123,7 +123,7 @@ const Dashboard = () => {
    }, [dispatch]);
    useEffect(() => {
       const fetchTask = async () => {
-         const date = new Date("2022-02-01"),
+         const date = new Date(),
             y = date.getFullYear(),
             m = date.getMonth();
          var firstDay = new Date(y, m, 1);
@@ -180,8 +180,9 @@ const Dashboard = () => {
 
    useEffect(() => {
       const fetchCustomer = async () => {
-         const response = await customerApi.getAll("?year=2022");
-         console.log(response.data);
+         const currentYear = new Date().getFullYear();
+         const customerResponse = await customerApi.getAll("?year=" + currentYear);
+         const taskResponse = await taskApi.getAll("?year=" + currentYear);
          const data = {
             labels: labels,
             datasets: [
@@ -189,13 +190,13 @@ const Dashboard = () => {
                   type: "bar" as const,
                   label: "Khách hàng",
                   backgroundColor: "rgb(75, 192, 192)",
-                  data: response.data.monthsIndex,
+                  data: customerResponse.data.monthsIndex,
                },
                {
                   type: "bar" as const,
                   label: "Công việc",
                   backgroundColor: "rgb(53, 162, 235)",
-                  data: response.data.monthsIndex,
+                  data: taskResponse.data.monthsIndex,
                },
             ],
          };
