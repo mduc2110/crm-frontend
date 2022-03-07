@@ -109,6 +109,7 @@ const Brief: React.FC<{
 const Dashboard = () => {
    const dispatch = useDispatch();
    const [tasks, setTasks] = useState([]);
+   const [monthCustomerList, setMonthCustomerList] = useState([]);
    const [taskChartData, setTaskChartDate] = useState({
       labels: [] as String[],
       datasets: [] as any,
@@ -121,6 +122,20 @@ const Dashboard = () => {
    useEffect(() => {
       dispatch(setPageTitle("Dashboard"));
    }, [dispatch]);
+   useEffect(() => {
+      const fetchCustomer = async () => {
+         const date = new Date(),
+            y = date.getFullYear(),
+            m = date.getMonth();
+         var firstDay = new Date(y, m, 1);
+         var lastDay = new Date(y, m + 1, 0);
+         const response = await customerApi.getAll(`?from=${firstDay}&to=${lastDay}`);
+         console.log(response.data);
+
+         setMonthCustomerList(response.data.results);
+      };
+      fetchCustomer();
+   }, []);
    useEffect(() => {
       const fetchTask = async () => {
          const date = new Date(),
@@ -208,14 +223,19 @@ const Dashboard = () => {
       <div className={classes.dashboard}>
          <div className={classes.header}>
             <Brief amount="10" title="Online" icon={<AiOutlineUser />} color="rgb(48, 197, 60)" />
-            <Brief amount="12+" title="Khách hàng" icon={<AiOutlineHeart />} color="#177cff" />
+            <Brief
+               amount={"" + monthCustomerList.length}
+               title="Khách hàng"
+               icon={<AiOutlineHeart />}
+               color="#177cff"
+            />
             <Brief
                amount={"" + tasks.length}
                title="Công việc"
                icon={<AiOutlineForm />}
                color="#9766ff"
             />
-            <Brief amount="2" title="Nhân viên" icon={<AiOutlineForm />} color="#ff8800" />
+            <Brief amount="2" title="Nhân viên" icon={<AiOutlineUser />} color="#ff8800" />
          </div>
          <div className={classes.body}>
             <Panel className={classes["w-4"]}>
